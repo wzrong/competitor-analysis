@@ -1,0 +1,132 @@
+site_name: 竞品分析知识库
+site_description: 学科网竞品分析工作台 — 全量竞品档案、深度分析与监测追踪
+site_author: 学科网产品团队
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.code.copy
+    - content.tooltips
+    - header.autohide
+  icon:
+    logo: material/chart-box
+
+plugins:
+  - search
+  - search:
+      lang:
+        - zh
+        - en
+      separator: '[\s\u200b\-]'
+  # git-revision-date-localized 插件在本地预览时可能因新文件未提交而报错
+  # 如需显示页面最后更新时间，可取消下面注释
+  # - git-revision-date-localized:
+  #     type: date
+  #     enable_creation_date: true
+  #     fallback_to_build_date: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      title: 目录
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+nav:
+  - 首页: index.md
+  - 分析框架: framework/index.md
+  - 报告模板: report-templates/index.md
+  - 竞品库:
+    - competitors/index.md
+    - 核心直接竞品:
+      - 21世纪教育网: competitors/21cnjy/index.md
+      - 好未来-九章爱学: competitors/tal-jiuzhang/index.md
+      - 希沃: competitors/seewo/index.md
+      - 教习网: competitors/51jiaoxi/index.md
+      - 橡皮网: competitors/xiangpi/index.md
+      - 正确云: competitors/zhengqueyun/index.md
+      - 猿辅导-飞象老师: competitors/yuanfudao-feixiang/index.md
+      - 菁优网: competitors/jyeoo/index.md
+    - 直接竞品:
+      - dokie: competitors/dokie/index.md
+      - 作业帮教师版: competitors/zuoyebang-teacher/index.md
+      - 国家中小学智慧教育平台: competitors/smartedu/index.md
+      - 智学网: competitors/zhixue/index.md
+      - 猿题库: competitors/yuantiku/index.md
+      - 百度文库教育专区: competitors/baidu-wenku-edu/index.md
+    - 间接竞品:
+      - 一起教育科技: competitors/17zuoye/index.md
+      - 小盒科技: competitors/xiaohe/index.md
+      - 洋葱学园: competitors/yangcong/index.md
+      - 纳米盒: competitors/namibox/index.md
+      - 翼鸥ClassIn: competitors/classin/index.md
+      - 豆神教育: competitors/doushen/index.md
+      - 高考网: competitors/gaokao/index.md
+      - 鸿合科技: competitors/hitevision/index.md
+  - 监测日志: monitor/index.md
