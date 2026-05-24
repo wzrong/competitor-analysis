@@ -5,6 +5,7 @@ site_author: 学科网产品团队
 theme:
   name: material
   language: zh
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default

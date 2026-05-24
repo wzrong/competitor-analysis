@@ -149,6 +149,7 @@ def clean_docs():
         DOCS_ROOT.rename(old_docs)
     DOCS_ROOT.mkdir(parents=True)
     (DOCS_ROOT / "assets" / "screenshots").mkdir(parents=True)
+    (DOCS_ROOT / "assets" / "images").mkdir(parents=True)
     (DOCS_ROOT / "stylesheets").mkdir()
     (DOCS_ROOT / "javascripts").mkdir()
 
@@ -457,6 +458,7 @@ site_author: 学科网产品团队
 theme:
   name: material
   language: zh
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -589,6 +591,12 @@ def copy_extra_assets():
         shutil.copyfile(js_src, js_dst)
     else:
         js_dst.write_text("// Custom scripts will go here\n", encoding="utf-8")
+
+    # 复制公众号二维码
+    qr_src = WEBSITE_ROOT / "overrides" / "images" / "weixin.png"
+    qr_dst = DOCS_ROOT / "assets" / "images" / "weixin.png"
+    if qr_src.exists():
+        shutil.copyfile(qr_src, qr_dst)
 
 
 # ── 主入口 ────────────────────────────────────────────────────────────

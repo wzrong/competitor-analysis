@@ -12,3 +12,56 @@
 .monitor-log-list a:visited {
   color: #9e9e9e !important;
 }
+
+/* 微信公众号二维码 tooltip */
+.weixin-tooltip {
+  position: relative;
+  cursor: pointer;
+  color: #4051b5;
+  text-decoration: underline;
+}
+
+[data-md-color-scheme="slate"] .weixin-tooltip {
+  color: #5c6bc0;
+}
+
+.weixin-tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.weixin-tooltip-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+/* 小三角箭头 */
+.weixin-tooltip-content::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.weixin-tooltip:hover .weixin-tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
