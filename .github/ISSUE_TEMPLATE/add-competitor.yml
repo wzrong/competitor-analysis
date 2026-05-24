@@ -1,0 +1,48 @@
+name: 补充竞品
+description: 发现有价值的竞品未收录
+title: "[补充竞品] "
+labels: ["add-competitor"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: 竞品名称
+      placeholder: 请输入竞品名称
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: 官网 URL
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: 产品类型
+      description: 请判断该竞品的竞争关系
+      options:
+        - 🔴 核心直接竞品
+        - 🟡 直接竞品
+        - 🟢 间接竞品
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 一句话描述
+      description: 这个竞品是做什么的？
+      placeholder: 例如：面向中小学生的AI自适应学习平台...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: 关注理由
+      description: 为什么值得追踪？（选填）
+      placeholder: 请说明推荐理由...

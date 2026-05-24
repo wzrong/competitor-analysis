@@ -1,0 +1,38 @@
+name: 内容纠错
+description: 发现某竞品信息有误或过时
+title: "[内容纠错] "
+labels: ["content-fix"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: 问题位置
+      description: 请指出问题所在的页面或竞品名称
+      placeholder: 例如：竞品库 > 希沃 > profile.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: 错误描述
+      description: 当前内容哪里不对？
+      placeholder: 请描述错误内容...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 正确信息
+      description: 应该改成什么？
+      placeholder: 请提供正确的信息...
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: 信息来源
+      description: 信息来源链接或出处（如有）
+      placeholder: https://...
