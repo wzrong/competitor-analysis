@@ -336,14 +336,11 @@ def copy_competitors() -> dict:
     return categories
 
 
-def copy_monitor_logs():
-    """复制监测日志。"""
+def copy_monitor_logs() -> list:
+    """复制监测日志。返回按日期倒序排列的简报文件名列表（不含扩展名）。"""
     monitor_src = VAULT_ROOT / "监测日志"
     monitor_dst = DOCS_ROOT / "monitor"
     monitor_dst.mkdir()
-
-    # 生成监测日志索引页
-    index_lines = ["# 监测日志", "", "> 每周竞品监测简报汇总，按时间倒序排列。", ""]
 
     log_files = sorted(monitor_src.glob("*.md"), reverse=True)
     for log_file in log_files:
@@ -354,34 +351,26 @@ def copy_monitor_logs():
         content = log_file.read_text(encoding="utf-8")
         content = rewrite_image_refs(content)
 
-        # 在顶部添加返回链接（移动端需要）
-        back_link = "[:octicons-arrow-left-24: 返回监测日志](./index.md)"
         content = inject_front_matter(
             content,
             page_type="monitor_log",
             date=date_str,
             tags=["监测简报"],
         )
-        if content.startswith("---"):
-            parts = content.split("---", 2)
-            if len(parts) >= 3:
-                content = f"---{parts[1]}---\n\n{back_link}\n\n{parts[2].lstrip()}"
-        else:
-            content = f"{back_link}\n\n{content}"
 
         (monitor_dst / log_file.name).write_text(content, encoding="utf-8")
 
-    # 生成监测日志索引页（列表包裹在特定 class 的 div 中，用于已访问链接变色）
-    index_lines.append('')
-    index_lines.append('<div class="monitor-log-list" markdown>')
-    index_lines.append('')
-    for log_file in log_files:
-        index_lines.append(f"- [{log_file.stem}]({log_file.name})")
-    index_lines.append('')
-    index_lines.append('</div>')
-    index_lines.append('')
+    # index.md 使用最新一期简报的完整内容
+    if log_files:
+        latest_file = monitor_dst / log_files[0].name
+        latest_content = latest_file.read_text(encoding="utf-8")
+        (monitor_dst / "index.md").write_text(latest_content, encoding="utf-8")
+    else:
+        (monitor_dst / "index.md").write_text(
+            "# 监测日志\n\n> 暂无监测简报。\n", encoding="utf-8"
+        )
 
-    (monitor_dst / "index.md").write_text("\n".join(index_lines), encoding="utf-8")
+    return [f.stem for f in log_files]
 
 
 def generate_index(categories: dict):
@@ -449,8 +438,9 @@ hide:
     (DOCS_ROOT / "index.md").write_text(content, encoding="utf-8")
 
 
-def generate_mkdocs_yml(categories: dict):
+def generate_mkdocs_yml(categories: dict, monitor_logs: list = None):
     """根据实际竞品数据生成 mkdocs.yml 导航配置。"""
+    monitor_logs = monitor_logs or []
     nav = """site_name: 竞品分析知识库
 site_description: 学科网竞品分析工作台 — 全量竞品档案、深度分析与监测追踪
 site_author: 学科网产品团队
@@ -569,7 +559,10 @@ nav:
     for cn_name, slug in sorted(categories["间接竞品"]):
         nav += f"      - {cn_name}: competitors/{slug}/index.md\n"
 
-    nav += "  - 监测日志: monitor/index.md\n"
+    nav += "  - 监测日志:\n"
+    nav += "    - 最新监测: monitor/index.md\n"
+    for log_name in monitor_logs:
+        nav += f"    - {log_name}: monitor/{log_name}.md\n"
     nav += "  - 反馈: feedback/index.md\n"
 
     yml_path = WEBSITE_ROOT / "mkdocs.yml"
@@ -674,7 +667,7 @@ def main():
         print(f"        - {rel}: {len(items)} 家")
 
     print("[4/8] 复制监测日志...")
-    copy_monitor_logs()
+    monitor_logs = copy_monitor_logs()
 
     print("[5/8] 复制自定义样式和脚本...")
     copy_extra_assets()
@@ -686,7 +679,7 @@ def main():
     generate_index(categories)
 
     print("[8/8] 生成 mkdocs.yml...")
-    generate_mkdocs_yml(categories)
+    generate_mkdocs_yml(categories, monitor_logs)
 
     print("\n✅ 构建完成！")
     print(f"   输出目录: {DOCS_ROOT}")

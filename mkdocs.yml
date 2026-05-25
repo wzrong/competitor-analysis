@@ -128,5 +128,12 @@ nav:
       - 豆神教育: competitors/doushen/index.md
       - 高考网: competitors/gaokao/index.md
       - 鸿合科技: competitors/hitevision/index.md
-  - 监测日志: monitor/index.md
+  - 监测日志:
+    - 最新监测: monitor/index.md
+    - 2026-05-25-监测简报: monitor/2026-05-25-监测简报.md
+    - 2026-05-18-监测简报: monitor/2026-05-18-监测简报.md
+    - 2026-05-11-监测简报: monitor/2026-05-11-监测简报.md
+    - 2026-05-10-监测简报: monitor/2026-05-10-监测简报.md
+    - 2026-05-04-监测简报: monitor/2026-05-04-监测简报.md
+    - 2026-05-03-监测简报: monitor/2026-05-03-监测简报.md
   - 反馈: feedback/index.md
