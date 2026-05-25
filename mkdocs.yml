@@ -129,3 +129,4 @@ nav:
       - 高考网: competitors/gaokao/index.md
       - 鸿合科技: competitors/hitevision/index.md
   - 监测日志: monitor/index.md
+  - 反馈: feedback/index.md
