@@ -65,16 +65,3 @@
   visibility: visible;
   opacity: 1;
 }
-
-/* 反馈页面卡片响应式布局 */
-@media screen and (min-width: 45em) and (max-width: 76.24em) {
-  .feedback-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-@media screen and (min-width: 76.25em) {
-  .feedback-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
