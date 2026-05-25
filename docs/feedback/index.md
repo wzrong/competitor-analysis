@@ -38,3 +38,7 @@ hide:
 ---
 
 > 你也可以 [浏览所有反馈](https://github.com/wzrong/competitor-analysis/issues){target="_blank"}，看看其他人提出了什么建议。
+
+或者，你还可以关注我的微信公众号，直接给我反馈：
+
+![微信公众号二维码](/assets/images/weixin.png){ width="180" }
