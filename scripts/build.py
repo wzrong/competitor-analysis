@@ -570,10 +570,60 @@ nav:
         nav += f"      - {cn_name}: competitors/{slug}/index.md\n"
 
     nav += "  - 监测日志: monitor/index.md\n"
+    nav += "  - 反馈: feedback/index.md\n"
 
     yml_path = WEBSITE_ROOT / "mkdocs.yml"
     yml_path.write_text(nav, encoding="utf-8")
     print(f"Generated: {yml_path}")
+
+
+def generate_feedback_page():
+    """生成反馈页面。"""
+    feedback_dir = DOCS_ROOT / "feedback"
+    feedback_dir.mkdir(exist_ok=True)
+
+    content = """---
+hide:
+  - toc
+---
+
+# 问题反馈
+
+欢迎对竞品分析知识库提出改进建议，你的反馈会直接影响内容质量。
+
+<div class="grid cards feedback-grid" markdown>
+
+-   :octicons-issue-opened-16:{ .lg .middle } __内容纠错__
+
+    ---
+
+    发现某竞品信息有误或过时？
+
+    [:octicons-arrow-right-24: 提交纠错](https://github.com/wzrong/competitor-analysis/issues/new?template=content-fix.yml)
+
+-   :octicons-plus-16:{ .lg .middle } __补充竞品__
+
+    ---
+
+    发现有价值的竞品未收录？
+
+    [:octicons-arrow-right-24: 提交补充](https://github.com/wzrong/competitor-analysis/issues/new?template=add-competitor.yml)
+
+-   :octicons-light-bulb-16:{ .lg .middle } __功能建议__
+
+    ---
+
+    对分析维度或站点功能有想法？
+
+    [:octicons-arrow-right-24: 提交建议](https://github.com/wzrong/competitor-analysis/issues/new?template=feature-request.yml)
+
+</div>
+
+---
+
+> 你也可以 [浏览所有反馈](https://github.com/wzrong/competitor-analysis/issues){target="_blank"}，看看其他人提出了什么建议。
+"""
+    (feedback_dir / "index.md").write_text(content, encoding="utf-8")
 
 
 def copy_extra_assets():
@@ -606,29 +656,32 @@ def main():
     print("竞品分析工作台 → MkDocs 网站构建")
     print("=" * 50)
 
-    print("\n[1/7] 清理 docs/ 目录...")
+    print("\n[1/8] 清理 docs/ 目录...")
     clean_docs()
 
-    print("[2/7] 复制分析框架和报告模板...")
+    print("[2/8] 复制分析框架和报告模板...")
     copy_framework()
 
-    print("[3/7] 复制竞品数据...")
+    print("[3/8] 复制竞品数据...")
     categories = copy_competitors()
     total = sum(len(v) for v in categories.values())
     print(f"      已处理 {total} 个竞品：")
     for rel, items in categories.items():
         print(f"        - {rel}: {len(items)} 家")
 
-    print("[4/7] 复制监测日志...")
+    print("[4/8] 复制监测日志...")
     copy_monitor_logs()
 
-    print("[5/7] 复制自定义样式和脚本...")
+    print("[5/8] 复制自定义样式和脚本...")
     copy_extra_assets()
 
-    print("[6/7] 生成首页...")
+    print("[6/8] 生成反馈页面...")
+    generate_feedback_page()
+
+    print("[7/8] 生成首页...")
     generate_index(categories)
 
-    print("[7/7] 生成 mkdocs.yml...")
+    print("[8/8] 生成 mkdocs.yml...")
     generate_mkdocs_yml(categories)
 
     print("\n✅ 构建完成！")
