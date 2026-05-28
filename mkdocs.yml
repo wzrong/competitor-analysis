@@ -64,8 +64,7 @@ markdown_extensions:
       toc_depth: 3
   - pymdownx.arithmatex:
       generic: true
-  - pymdownx.betterem:
-      smart_enable: all
+  - nl2br
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
