@@ -65,3 +65,19 @@
   visibility: visible;
   opacity: 1;
 }
+
+/* ── 无序列表层级标记 ── */
+/* 一级：实心圆 */
+.md-typeset ul > li {
+  list-style-type: disc !important;
+}
+
+/* 二级：空心圆 */
+.md-typeset ul > li > ul > li {
+  list-style-type: circle !important;
+}
+
+/* 三级：实心方块 */
+.md-typeset ul > li > ul > li > ul > li {
+  list-style-type: square !important;
+}
