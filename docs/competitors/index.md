@@ -21,7 +21,7 @@ tags:
 | [正确云](./zhengqueyun/index.md) | 🔴 | 备课/备授课 | 北京正确教育 | [https://www.zhengqueyun.com](https://www.zhengqueyun.com) | [2026-05-23 四维度深度分析](./zhengqueyun/analyses/2026-05-23-四维度深度分析.md) | 2026-05-25 |
 | [希沃](./seewo/index.md) | 🔴 | 教育硬件、AI备课/课件 | 视源股份 | [https://www.seewo.com/](https://www.seewo.com/) | [2026-05-23 四维度深度分析（世数会全场景方案）](./seewo/analyses/2026-05-23-世数会全场景方案深度分析.md) | 2026-05-25 |
 | [好未来-九章爱学](./tal-jiuzhang/index.md) | 🔴 | AI备课/课件 | 好未来 | [https://www.laoshibang.com/](https://www.laoshibang.com/) | [2026-05-23 四维度深度分析（世数会方案）](./tal-jiuzhang/analyses/2026-05-23-世数会方案深度分析.md) | 2026-05-25 |
-| [猿辅导-飞象老师](./yuanfudao-feixiang/index.md) | 🔴 | AI备课/课件 | 猿力科技 | [https://www.feixianglaoshi.com/](https://www.feixianglaoshi.com/) | [2026-05-27 站内数据深潜（各学科Top资源浏览量/收藏量实测）](./yuanfudao-feixiang/analyses/2026-05-27-2.0深度分析.md) | 2026-05-27 |
+| 猿辅导-飞象老师    | 🔴    | AI备课/课件      | 猿力科技        | https://www.feixianglaoshi.com/ | 2026-05-28 全学科社区数据实测（11学科完整总量+Top10排行+功能详情）| 2026-05-28 |
 | [猿题库](./yuantiku/index.md) | 🟡 | AI精准教学、题库 | 猿力科技 | [https://www.yuantiku.com](https://www.yuantiku.com) | [2026-05-23 四维度深度分析](./yuantiku/analyses/2026-05-23-四维度深度分析.md) | 2026-05-25 |
 | [作业帮教师版](./zuoyebang-teacher/index.md) | 🟡 | AI精准教学、资源/题库 | 作业帮 | [https://www.zuoyebang.com/](https://www.zuoyebang.com/) | [2026-05-23 四维度深度分析](./zuoyebang-teacher/analyses/2026-05-23-四维度深度分析.md) | 2026-05-25 |
 | [智学网](./zhixue/index.md) | 🟡→🔴 | AI精准教学 | 科大讯飞 | [https://www.zhixue.com/](https://www.zhixue.com/) | [2026-05-23 四维度深度分析（世数会成果+数据披露）](./zhixue/analyses/2026-05-23-世数会成果深度分析.md) | 2026-05-25 |
