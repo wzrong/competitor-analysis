@@ -1,5 +1,5 @@
-site_name: 竞品分析知识库
-site_description: 学科网竞品分析工作台 — 全量竞品档案、深度分析与监测追踪
+site_name: 学科网战略情报系统
+site_description: 行业分析、竞争分析、政策分析、市场监测与应对建议门户
 site_author: 学科网产品团队
 
 theme:
@@ -44,12 +44,6 @@ plugins:
         - zh
         - en
       separator: '[\s\u200b\-]'
-  # git-revision-date-localized 插件在本地预览时可能因新文件未提交而报错
-  # 如需显示页面最后更新时间，可取消下面注释
-  # - git-revision-date-localized:
-  #     type: date
-  #     enable_creation_date: true
-  #     fallback_to_build_date: true
 
 markdown_extensions:
   - abbr
@@ -98,42 +92,126 @@ extra_javascript:
 
 nav:
   - 首页: index.md
-  - 分析框架: framework/index.md
-  - 报告模板: report-templates/index.md
-  - 竞品库:
-    - competitors/index.md
-    - 核心直接竞品:
+  - 行业分析:
+    - 总览: industry/index.md
+    - 2026-06-02-情报简报: industry/日情报/2026-06-02-情报简报.md
+    - 2026-06-01-情报简报: industry/日情报/2026-06-01-情报简报.md
+    - 2026-05-31-情报简报: industry/日情报/2026-05-31-情报简报.md
+  - 竞品分析:
+    - 竞品库总览: competitors/index.md
+    - Tier 1:
       - 21世纪教育网: competitors/21cnjy/index.md
-      - 好未来-九章爱学: competitors/tal-jiuzhang/index.md
-      - 希沃: competitors/seewo/index.md
-      - 教习网: competitors/51jiaoxi/index.md
-      - 橡皮网: competitors/xiangpi/index.md
-      - 正确云: competitors/zhengqueyun/index.md
-      - 猿辅导-飞象老师: competitors/yuanfudao-feixiang/index.md
       - 菁优网: competitors/jyeoo/index.md
-    - 直接竞品:
-      - dokie: competitors/dokie/index.md
-      - 作业帮教师版: competitors/zuoyebang-teacher/index.md
-      - 国家中小学智慧教育平台: competitors/smartedu/index.md
+      - 橡皮网: competitors/xiangpi/index.md
+      - 教习网: competitors/51jiaoxi/index.md
+      - 正确云: competitors/zhengqueyun/index.md
+      - 希沃: competitors/seewo/index.md
+      - 好未来-九章爱学: competitors/tal-jiuzhang/index.md
+      - 猿辅导-飞象老师: competitors/yuanfudao-feixiang/index.md
       - 智学网: competitors/zhixue/index.md
+      - 作业帮教师版: competitors/zuoyebang-teacher/index.md
+      - 金太阳·中课云: competitors/jintaiyang-zhongkeyun/index.md
+    - Tier 2:
       - 猿题库: competitors/yuantiku/index.md
       - 百度文库教育专区: competitors/baidu-wenku-edu/index.md
-    - 间接竞品:
-      - 一起教育科技: competitors/17zuoye/index.md
+      - 国家中小学智慧教育平台: competitors/smartedu/index.md
+      - dokie: competitors/dokie/index.md
       - 小盒科技: competitors/xiaohe/index.md
-      - 洋葱学园: competitors/yangcong/index.md
-      - 纳米盒: competitors/namibox/index.md
+      - 一起教育科技: competitors/17zuoye/index.md
       - 翼鸥ClassIn: competitors/classin/index.md
-      - 豆神教育: competitors/doushen/index.md
-      - 飞象老师: competitors/飞象老师/index.md
-      - 高考网: competitors/gaokao/index.md
+      - 洋葱学园: competitors/yangcong/index.md
       - 鸿合科技: competitors/hitevision/index.md
+      - 高考网: competitors/gaokao/index.md
+      - 豆神教育: competitors/doushen/index.md
+      - 纳米盒: competitors/namibox/index.md
+      - 安徽智慧皆成数字技术: competitors/anhui-zhihui-jiecheng/index.md
+      - 成都爱易佰网络科技: competitors/chengdu-aiyibai/index.md
+      - 同方知网数字科技: competitors/tongfang-cnki-digital/index.md
+      - 北京简单科技: competitors/beijing-jiandan/index.md
+      - 山东浩学信息科技: competitors/shandong-haoxue/index.md
+      - 北京三海教育科技: competitors/beijing-sanhai/index.md
+      - 化育学川（江西）数字科技: competitors/huayuxuechuan/index.md
+      - 河北习知软件科技: competitors/hebei-xizhi/index.md
+      - 福建天启智汇科技: competitors/fujian-tianqi-zhihui/index.md
+      - 北京世纪超星: competitors/beijing-shiji-chaoxing/index.md
+      - 广州中金育能科技: competitors/guangzhou-zhongjin-yuneng/index.md
+  - 政策分析:
+    - 政策时间轴: policy/index.md
+    - 区域政策对比-2026Q1Q2: policy/解读/区域政策对比-2026Q1Q2.md
+    - 2026-04-人工智能+教育行动计划: policy/解读/2026-04-人工智能+教育行动计划.md
+  - 市场监测:
+    - 总览: market/index.md
+    - 周报:
+      - 2026-06-02-市场监测周报: market/周报/2026-06-02-市场监测周报.md
+    - 招投标数据:
+      - 2026-06-02-首轮外部搜索: market/招投标数据/2026-06-02-首轮外部搜索.md
+      - 基线-2026-06-01: market/招投标数据/基线-2026-06-01.md
+      - 监测对象清单: market/监测对象清单.md
+  - 应对建议:
+    - 总览: actions/index.md
+    - 决策层简报:
+      - 总览: actions/executive-briefs/index.md
+      - 飞象老师-战略简报-2026Q2: actions/executive-briefs/飞象老师-战略简报-2026Q2.md
+      - 金太阳中课云-战略简报-2026Q2: actions/executive-briefs/金太阳中课云-战略简报-2026Q2.md
+      - 菁优网-战略简报-2026Q2: actions/executive-briefs/菁优网-战略简报-2026Q2.md
+      - 正确云-战略简报-2026Q2: actions/executive-briefs/正确云-战略简报-2026Q2.md
+      - 橡皮网-战略简报-2026Q2: actions/executive-briefs/橡皮网-战略简报-2026Q2.md
+      - 智学网-战略简报-2026Q2: actions/executive-briefs/智学网-战略简报-2026Q2.md
+      - 教习网-战略简报-2026Q2: actions/executive-briefs/教习网-战略简报-2026Q2.md
+      - 希沃-战略简报-2026Q2: actions/executive-briefs/希沃-战略简报-2026Q2.md
+      - 作业帮教师版-战略简报-2026Q2: actions/executive-briefs/作业帮教师版-战略简报-2026Q2.md
+      - 九章爱学-战略简报-2026Q2: actions/executive-briefs/九章爱学-战略简报-2026Q2.md
+      - 21世纪教育网-战略简报-2026Q2: actions/executive-briefs/21世纪教育网-战略简报-2026Q2.md
+    - Battlecard:
+      - 总览: actions/battlecards/index.md
+      - 飞象老师-Battlecard-202606: actions/battlecards/飞象老师-Battlecard-202606.md
+      - 金太阳中课云-Battlecard-202606: actions/battlecards/金太阳中课云-Battlecard-202606.md
+      - 菁优网-Battlecard-202606: actions/battlecards/菁优网-Battlecard-202606.md
+      - 正确云-Battlecard-202606: actions/battlecards/正确云-Battlecard-202606.md
+      - 橡皮网-Battlecard-202606: actions/battlecards/橡皮网-Battlecard-202606.md
+      - 智学网-Battlecard-202606: actions/battlecards/智学网-Battlecard-202606.md
+      - 教习网-Battlecard-202606: actions/battlecards/教习网-Battlecard-202606.md
+      - 希沃-Battlecard-202606: actions/battlecards/希沃-Battlecard-202606.md
+      - 作业帮教师版-Battlecard-202606: actions/battlecards/作业帮教师版-Battlecard-202606.md
+      - 九章爱学-Battlecard-202606: actions/battlecards/九章爱学-Battlecard-202606.md
+      - 21世纪教育网-Battlecard-202606: actions/battlecards/21世纪教育网-Battlecard-202606.md
+    - 销售话术卡:
+      - 总览: actions/sales-cards/index.md
+      - 飞象老师-销售话术卡-202606: actions/sales-cards/飞象老师-销售话术卡-202606.md
+      - 金太阳中课云-销售话术卡-202606: actions/sales-cards/金太阳中课云-销售话术卡-202606.md
+      - 菁优网-销售话术卡-202606: actions/sales-cards/菁优网-销售话术卡-202606.md
+      - 正确云-销售话术卡-202606: actions/sales-cards/正确云-销售话术卡-202606.md
+      - 橡皮网-销售话术卡-202606: actions/sales-cards/橡皮网-销售话术卡-202606.md
+      - 智学网-销售话术卡-202606: actions/sales-cards/智学网-销售话术卡-202606.md
+      - 教习网-销售话术卡-202606: actions/sales-cards/教习网-销售话术卡-202606.md
+      - 希沃-销售话术卡-202606: actions/sales-cards/希沃-销售话术卡-202606.md
+      - 作业帮教师版-销售话术卡-202606: actions/sales-cards/作业帮教师版-销售话术卡-202606.md
+      - 九章爱学-销售话术卡-202606: actions/sales-cards/九章爱学-销售话术卡-202606.md
+      - 21世纪教育网-销售话术卡-202606: actions/sales-cards/21世纪教育网-销售话术卡-202606.md
+    - 教研参考卡:
+      - 总览: actions/teaching-cards/index.md
+      - 金太阳-中课云-教研参考卡-202605: actions/teaching-cards/金太阳-中课云-教研参考卡-202605.md
+      - 行动计划-教研线解读-202605: actions/teaching-cards/行动计划-教研线解读-202605.md
+      - 猿辅导-飞象老师-教研参考卡-202605: actions/teaching-cards/猿辅导-飞象老师-教研参考卡-202605.md
+      - 智学网-教研参考卡-202606: actions/teaching-cards/智学网-教研参考卡-202606.md
+      - 教研线激活方案: actions/teaching-cards/教研线激活方案.md
+      - 希沃-教研参考卡-202606: actions/teaching-cards/希沃-教研参考卡-202606.md
+      - 好未来-九章爱学-教研参考卡-202605: actions/teaching-cards/好未来-九章爱学-教研参考卡-202605.md
+    - 运营参考卡:
+      - 总览: actions/operation-cards/index.md
+      - 飞象老师-运营参考卡-202606: actions/operation-cards/飞象老师-运营参考卡-202606.md
+      - 金太阳中课云-运营参考卡-202606: actions/operation-cards/金太阳中课云-运营参考卡-202606.md
+      - 运营参考卡方案: actions/operation-cards/运营参考卡方案.md
+      - 菁优网-运营参考卡-202606: actions/operation-cards/菁优网-运营参考卡-202606.md
+      - 21世纪教育网-运营参考卡-202606: actions/operation-cards/21世纪教育网-运营参考卡-202606.md
   - 监测日志:
     - 最新监测: monitor/index.md
+    - 2026-06-01-监测简报: monitor/2026-06-01-监测简报.md
     - 2026-05-25-监测简报: monitor/2026-05-25-监测简报.md
     - 2026-05-18-监测简报: monitor/2026-05-18-监测简报.md
     - 2026-05-11-监测简报: monitor/2026-05-11-监测简报.md
     - 2026-05-10-监测简报: monitor/2026-05-10-监测简报.md
     - 2026-05-04-监测简报: monitor/2026-05-04-监测简报.md
     - 2026-05-03-监测简报: monitor/2026-05-03-监测简报.md
+    - 周监测框架升级审查-2026-06-01: monitor/周监测框架升级审查-2026-06-01.md
   - 反馈: feedback/index.md

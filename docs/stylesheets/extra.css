@@ -8,6 +8,99 @@
   color: #fff !important;
 }
 
+/* 首页战略情报卡片 */
+.intelligence-grid .card,
+.md-typeset .grid.cards > ul > li {
+  border-radius: 12px;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 6px 18px rgba(64, 81, 181, 0.16);
+  transform: translateY(-1px);
+  transition: box-shadow 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+}
+
+/* 状态 / Tier / 来源质量徽章 */
+.intel-badge {
+  display: inline-block;
+  padding: 0.08rem 0.42rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.intel-badge--green,
+.intel-badge--t1 {
+  color: #0f5132;
+  background: #d1e7dd;
+}
+
+.intel-badge--yellow,
+.intel-badge--t2 {
+  color: #664d03;
+  background: #fff3cd;
+}
+
+.intel-badge--red,
+.intel-badge--t3 {
+  color: #842029;
+  background: #f8d7da;
+}
+
+.intel-badge--blue,
+.intel-badge--tier {
+  color: #084298;
+  background: #cfe2ff;
+}
+
+[data-md-color-scheme="slate"] .intel-badge--green,
+[data-md-color-scheme="slate"] .intel-badge--t1 {
+  color: #b7f7d0;
+  background: rgba(25, 135, 84, 0.25);
+}
+
+[data-md-color-scheme="slate"] .intel-badge--yellow,
+[data-md-color-scheme="slate"] .intel-badge--t2 {
+  color: #ffe69c;
+  background: rgba(255, 193, 7, 0.22);
+}
+
+[data-md-color-scheme="slate"] .intel-badge--red,
+[data-md-color-scheme="slate"] .intel-badge--t3 {
+  color: #f5b5bb;
+  background: rgba(220, 53, 69, 0.25);
+}
+
+[data-md-color-scheme="slate"] .intel-badge--blue,
+[data-md-color-scheme="slate"] .intel-badge--tier {
+  color: #b8daff;
+  background: rgba(13, 110, 253, 0.25);
+}
+
+/* 表格中的战略状态更易扫读 */
+.md-typeset table td:has(.intel-badge) {
+  white-space: nowrap;
+}
+
+/* CSV 表格横向滚动 */
+.table-scroll {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.table-scroll table {
+  min-width: 960px;
+  white-space: nowrap;
+}
+
+.table-scroll th,
+.table-scroll td {
+  vertical-align: top;
+}
+
 /* 监测日志列表页的已访问链接变灰 */
 .monitor-log-list a:visited {
   color: #9e9e9e !important;

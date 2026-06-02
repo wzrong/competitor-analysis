@@ -5,7 +5,7 @@ hide:
 
 # 问题反馈
 
-欢迎对竞品分析知识库提出改进建议，你的反馈会直接影响内容质量。
+欢迎对战略情报系统提出改进建议，你的反馈会直接影响内容质量。
 
 <div class="grid cards feedback-grid" markdown>
 
@@ -13,7 +13,7 @@ hide:
 
     ---
 
-    发现某竞品信息有误或过时？
+    发现某条竞品、政策、行业或市场信息有误？
 
     [:octicons-arrow-right-24: 提交纠错](https://github.com/wzrong/competitor-analysis/issues/new?template=content-fix.yml)
 
