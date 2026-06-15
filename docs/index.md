@@ -68,7 +68,7 @@ hide:
 
     ---
 
-    最新周监测：2026-06-08-监测简报
+    最新周监测：2026-06-15-监测简报
 
     [:octicons-arrow-right-24: 查看监测日志](monitor/index.md)
 
