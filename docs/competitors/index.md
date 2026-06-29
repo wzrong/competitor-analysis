@@ -12,17 +12,17 @@ tags:
 
 | 竞品名 | 竞争关系 | 赛道 | 所属公司 | URL | 最新分析 | 最后更新 |
 |---|---|---|---|---|---|---|
-| [21世纪教育网](./21cnjy/index.md) | 🔴 | 资源/题库 | 深圳二一教育 | [https://www.21cnjy.com/](https://www.21cnjy.com/) | [2026-05-23 四维度深度分析](./21cnjy/analyses/2026-05-23-四维度深度分析.md) | 2026-06-22 |
-| [菁优网](./jyeoo/index.md) | 🔴 | 资源/题库 | 菁优智慧教育 | [https://www.jyeoo.com/](https://www.jyeoo.com/) | [2026-05-23 四维度深度分析](./jyeoo/analyses/2026-05-23-四维度深度分析.md) | 2026-06-22 |
-| [橡皮网](./xiangpi/index.md) | 🔴 | 资源/题库 | 北京正确教育 | [https://www.xiangpi.com](https://www.xiangpi.com) | [2026-05-23 四维度深度分析](./xiangpi/analyses/2026-05-23-四维度深度分析.md) | 2026-06-22 |
-| [教习网](./51jiaoxi/index.md) | 🔴 | 资源/题库 | 深圳教习网 | [https://www.51jiaoxi.com](https://www.51jiaoxi.com) | [2026-05-23 四维度深度分析](./51jiaoxi/analyses/2026-05-23-四维度深度分析.md) | 2026-06-22 |
-| [正确云](./zhengqueyun/index.md) | 🔴 | 备课/备授课 | 北京正确教育 | [https://www.zqy.com](https://www.zqy.com) | [2026-05-23 四维度深度分析](./zhengqueyun/analyses/2026-05-23-四维度深度分析.md) | 2026-06-22 |
-| [希沃](./seewo/index.md) | 🔴 | 硬件+AI备课/课堂 | 视源股份 | [https://www.seewo.com/](https://www.seewo.com/) | [2026-06-15 AI规模数据更新（AI备课>100万用户，魔方基座>1万学校）](./seewo/analyses/2026-05-23-世数会全场景方案深度分析.md) | 2026-06-22 |
-| [好未来-九章爱学](./tal-jiuzhang/index.md) | 🔴 | AI备课/课件 | 好未来 | [https://www.laoshibang.com/](https://www.laoshibang.com/) | [2026-05-23 四维度深度分析](./tal-jiuzhang/analyses/2026-05-23-世数会方案深度分析.md) | 2026-06-22 |
-| [猿辅导-飞象老师](./yuanfudao-feixiang/index.md) | 🔴 | AI备课/课件 | 猿力科技 | [https://www.feixianglaoshi.com/](https://www.feixianglaoshi.com/) | [2026-05-26 2.0版本发布（课堂运行系统）](./yuanfudao-feixiang/analyses/2026-05-28-全学科社区数据实测.md) | 2026-06-22 |
-| [智学网](./zhixue/index.md) | 🔴 | AI精准教学 | 科大讯飞 | [https://www.zhixue.com/](https://www.zhixue.com/) | [2026-05-23 四维度深度分析](./zhixue/analyses/2026-05-23-世数会成果深度分析.md) | 2026-06-22 |
-| [作业帮教师版](./zuoyebang-teacher/index.md) | 🔴 | AI精准教学/资源 | 作业帮 | [https://www.zuoyebang.com/](https://www.zuoyebang.com/) | [2026-05-23 四维度深度分析](./zuoyebang-teacher/analyses/2026-05-23-四维度深度分析.md) | 2026-06-22 |
-| [金太阳·中课云](./jintaiyang-zhongkeyun/index.md) | 🔴 | 综合平台/资源 | 江西三端科技 | — | [王慧调研报告（见参考资料）](./jintaiyang-zhongkeyun/analyses/2026-06-01-9层深度分析.md) | 2026-06-22 |
+| [21世纪教育网](./21cnjy/index.md) | 🔴 | 资源/题库 | 深圳二一教育 | [https://www.21cnjy.com/](https://www.21cnjy.com/) | [2026-05-23 四维度深度分析](./21cnjy/analyses/2026-05-23-四维度深度分析.md) | 2026-06-29 |
+| [菁优网](./jyeoo/index.md) | 🔴 | 资源/题库 | 菁优智慧教育 | [https://www.jyeoo.com/](https://www.jyeoo.com/) | [2026-05-23 四维度深度分析](./jyeoo/analyses/2026-05-23-四维度深度分析.md) | 2026-06-29 |
+| [橡皮网](./xiangpi/index.md) | 🔴 | 资源/题库 | 北京正确教育 | [https://www.xiangpi.com](https://www.xiangpi.com) | [2026-05-23 四维度深度分析](./xiangpi/analyses/2026-05-23-四维度深度分析.md) | 2026-06-29 |
+| [教习网](./51jiaoxi/index.md) | 🔴 | 资源/题库 | 深圳教习网 | [https://www.51jiaoxi.com](https://www.51jiaoxi.com) | [2026-05-23 四维度深度分析](./51jiaoxi/analyses/2026-05-23-四维度深度分析.md) | 2026-06-29 |
+| [正确云](./zhengqueyun/index.md) | 🔴 | 备课/备授课 | 北京正确教育 | [https://www.zqy.com](https://www.zqy.com) | [2026-05-23 四维度深度分析](./zhengqueyun/analyses/2026-05-23-四维度深度分析.md) | 2026-06-29 |
+| [希沃](./seewo/index.md) | 🔴 | 硬件+AI备课/课堂 | 视源股份 | [https://www.seewo.com/](https://www.seewo.com/) | [2026-06-15 AI规模数据更新（AI备课>100万用户，魔方基座>1万学校）](./seewo/analyses/2026-05-23-世数会全场景方案深度分析.md) | 2026-06-29 |
+| [好未来-九章爱学](./tal-jiuzhang/index.md) | 🔴 | AI备课/课件 | 好未来 | [https://www.laoshibang.com/](https://www.laoshibang.com/) | [2026-05-23 四维度深度分析](./tal-jiuzhang/analyses/2026-05-23-世数会方案深度分析.md) | 2026-06-29 |
+| [猿辅导-飞象老师](./yuanfudao-feixiang/index.md) | 🔴 | AI备课/课件 | 猿力科技 | [https://www.feixianglaoshi.com/](https://www.feixianglaoshi.com/) | [2026-05-26 2.0版本发布（课堂运行系统）](./yuanfudao-feixiang/analyses/2026-05-28-全学科社区数据实测.md) | 2026-06-29 |
+| [智学网](./zhixue/index.md) | 🔴 | AI精准教学 | 科大讯飞 | [https://www.zhixue.com/](https://www.zhixue.com/) | [2026-05-23 四维度深度分析](./zhixue/analyses/2026-05-23-世数会成果深度分析.md) | 2026-06-29 |
+| [作业帮教师版](./zuoyebang-teacher/index.md) | 🔴 | AI精准教学/资源 | 作业帮 | [https://www.zuoyebang.com/](https://www.zuoyebang.com/) | [2026-05-23 四维度深度分析](./zuoyebang-teacher/analyses/2026-05-23-四维度深度分析.md) | 2026-06-29 |
+| [金太阳·中课云](./jintaiyang-zhongkeyun/index.md) | 🔴 | 综合平台/资源 | 江西三端科技 | — | [王慧调研报告（见参考资料）](./jintaiyang-zhongkeyun/analyses/2026-06-01-9层深度分析.md) | 2026-06-29 |
 
 ## Tier 2
 
