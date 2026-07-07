@@ -285,6 +285,35 @@
   color: #202938;
 }
 
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7rem;
+  margin-right: 0.34rem;
+  padding: 0.05rem 0.28rem;
+  border-radius: 999px;
+  font-size: 0.55rem;
+  font-weight: 760;
+  line-height: 1.2;
+  vertical-align: 0.08rem;
+}
+
+.section-kicker--new {
+  color: #b42336;
+  background: #ffe4e8;
+}
+
+.section-kicker--focus {
+  color: #155eef;
+  background: #e8f0ff;
+}
+
+.section-kicker--threat {
+  color: #a45105;
+  background: #fff0d9;
+}
+
 .latest-output > p,
 .focus-panel > p,
 .threat-panel > p {
@@ -759,6 +788,21 @@
 [data-md-color-scheme="slate"] .home-danger,
 [data-md-color-scheme="slate"] .home-danger-label {
   color: #ff6b7a;
+}
+
+[data-md-color-scheme="slate"] .section-kicker--new {
+  color: #ff9aa7;
+  background: rgba(215, 58, 73, 0.18);
+}
+
+[data-md-color-scheme="slate"] .section-kicker--focus {
+  color: #9db8ff;
+  background: rgba(56, 103, 214, 0.22);
+}
+
+[data-md-color-scheme="slate"] .section-kicker--threat {
+  color: #ffd38a;
+  background: rgba(198, 106, 20, 0.22);
 }
 
 [data-md-color-scheme="slate"] .role-card {

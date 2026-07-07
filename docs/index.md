@@ -26,7 +26,7 @@ hide:
 
 <div class="home-side-stack" markdown>
 <section class="home-panel latest-output" markdown>
-## 最新产出
+## <span class="section-kicker section-kicker--new">NEW</span> 最新产出
 
 <a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-06-情报简报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
@@ -62,7 +62,7 @@ hide:
 
 <div class="home-side-stack" markdown>
 <section class="home-panel focus-panel" markdown>
-## 本周重点关注
+## <span class="section-kicker section-kicker--focus">重点</span> 本周重点关注
 
 <div class="focus-list">
 
@@ -102,7 +102,7 @@ hide:
 
 <section class="home-panel threat-panel" markdown>
 <div class="home-panel-header" markdown>
-## 重点竞品威胁看板
+## <span class="section-kicker section-kicker--threat">威胁</span> 重点竞品威胁看板
 
 [查看全部 →](competitors/index.md)
 </div>
