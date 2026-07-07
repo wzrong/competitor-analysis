@@ -11,11 +11,18 @@ from datetime import datetime
 from pathlib import Path
 
 VAULT_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/竞品分析工作台")
+AI_BRIEFING_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/AI信息聚合")
 WEBSITE_ROOT = Path(__file__).parent.parent
 DOCS_ROOT = WEBSITE_ROOT / "docs"
 
 SITE_NAME = "学科网战略情报系统"
 SITE_DESCRIPTION = "行业分析、竞争分析、政策分析、市场监测与应对建议门户"
+
+INTERNAL_SECTION_HEADINGS = {
+    "L9 触发建议汇总",
+    "联动建议",
+    "联动出口",
+}
 
 SLUG_MAP = {
     "21世纪教育网": "21cnjy",
@@ -52,6 +59,12 @@ SLUG_MAP = {
     "河北习知软件科技": "hebei-xizhi",
     "福建天启智汇科技": "fujian-tianqi-zhihui",
     "北京世纪超星": "beijing-shiji-chaoxing",
+    "理想众望": "item-221d239f",
+    "理想众望（试题网）": "item-221d239f",
+}
+
+COMPETITOR_NAME_ALIASES = {
+    "理想众望（试题网）": "理想众望",
 }
 
 ACTION_DIRS = {
@@ -79,6 +92,10 @@ def slugify(name: str) -> str:
         return ascii_slug
     digest = hashlib.md5(name.encode("utf-8")).hexdigest()[:8]
     return f"item-{digest}"
+
+
+def canonical_competitor_name(name: str) -> str:
+    return COMPETITOR_NAME_ALIASES.get(name, name)
 
 
 def clean_docs():
@@ -165,8 +182,22 @@ def rewrite_obsidian_link(target: str, dst: Path) -> str:
     if decoded.startswith("../监测日志/") or decoded.startswith("../../监测日志/"):
         filename = decoded.rsplit("/", 1)[1]
         return f"{site_relative(dst, f'monitor/{filename}')}{anchor}"
-    if decoded.startswith("../政策分析/"):
+    if decoded in ("../政策分析/解读/", "../../政策分析/解读/", "政策分析/解读/"):
         return f"{site_relative(dst, 'policy/index.md')}{anchor}"
+    if decoded.startswith(("../政策分析/解读/", "../../政策分析/解读/", "政策分析/解读/")):
+        filename = decoded.rsplit("/", 1)[1]
+        return f"{site_relative(dst, f'policy/解读/{filename}')}{anchor}"
+    if decoded.startswith(("../行业分析/日情报/", "../../行业分析/日情报/", "行业分析/日情报/")):
+        filename = decoded.rsplit("/", 1)[1]
+        return f"{site_relative(dst, f'industry/日情报/{filename}')}{anchor}"
+    if decoded.startswith("../政策分析/") or decoded.startswith("../../政策分析/"):
+        return f"{site_relative(dst, 'policy/index.md')}{anchor}"
+    if decoded.startswith(("../profile.md", "./profile.md")):
+        return "../index.md"
+    if decoded.startswith(("../理想众望/analyses/", "../../理想众望/analyses/", "理想众望/analyses/")):
+        filename = decoded.rsplit("/", 1)[1]
+        competitor_slug = slugify("理想众望")
+        return f"{site_relative(dst, f'competitors/{competitor_slug}/analyses/{filename}')}{anchor}"
     if decoded.startswith("../竞品库/INDEX.md"):
         return f"{site_relative(dst, 'competitors/index.md')}{anchor}"
     if decoded.startswith("../竞品库/") or decoded.startswith("../../竞品库/"):
@@ -197,6 +228,8 @@ def rewrite_obsidian_link(target: str, dst: Path) -> str:
         slug = slugify(parts[idx + 1])
         filename = parts[-1]
         return f"{site_relative(dst, f'assets/screenshots/{slug}/{filename}')}{anchor}"
+    if dst.is_relative_to(DOCS_ROOT / "ai-briefings") and decoded.startswith("briefings/"):
+        return f"{decoded.split('/', 1)[1]}{anchor}"
     return target
 
 
@@ -204,6 +237,16 @@ def normalize_links(content: str, dst: Path) -> str:
     def repl(match):
         label = match.group(1)
         target = match.group(2)
+        if (
+            dst.is_relative_to(DOCS_ROOT / "ai-briefings")
+            and (
+                target == "#深度阅读推荐"
+                or target.startswith("#-")
+                or target.startswith("#⭐")
+                or (target.startswith("#") and ("深度推荐" in label or "深度阅读" in label))
+            )
+        ):
+            return f"[{label}](#_2)"
         if target.startswith(("http://", "https://", "mailto:", "#", "/assets/")):
             return match.group(0)
         return f"[{label}]({rewrite_obsidian_link(target, dst)})"
@@ -211,9 +254,63 @@ def normalize_links(content: str, dst: Path) -> str:
     return re.sub(r"\[([^\]]+)\]\(([^)]+)\)", repl, content)
 
 
+def strip_internal_sections(content: str) -> str:
+    """移除仅供内部协作使用、不适合站点公开展示的章节。"""
+    lines = content.splitlines()
+    kept = []
+    skip_level = None
+    for line in lines:
+        heading = re.match(r"^(#{2,6})\s+(.+?)\s*$", line)
+        if heading:
+            level = len(heading.group(1))
+            title = heading.group(2).strip()
+            if skip_level is not None and level <= skip_level:
+                skip_level = None
+            normalized_title = re.sub(r"[：:].*$", "", title).strip()
+            is_internal_heading = (
+                normalized_title in INTERNAL_SECTION_HEADINGS
+                or "联动建议" in normalized_title
+                or "联动出口" in normalized_title
+                or normalized_title.startswith("L9 触发建议")
+            )
+            if is_internal_heading:
+                skip_level = level
+                continue
+        if skip_level is not None:
+            continue
+        kept.append(line)
+    return "\n".join(kept).rstrip() + "\n"
+
+
+def sanitize_public_text(content: str) -> str:
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*status/[^)]+\)", r"\1", content)
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*系统状态/[^)]+\)", r"\1", content)
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*学科网/教辅出版威胁地图-2026-07\.md\)", r"\1", content)
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*理想众望竞争分析_V3_20260616\.docx\)", r"\1", content)
+    content = re.sub(r"\[((?:\.\./)*政策分析/解读/)\]", "[政策解读]", content)
+    content = content.replace("../../学科网/教辅出版威胁地图-2026-07.md", "教辅出版威胁地图-2026-07")
+    content = content.replace("../../../理想众望竞争分析_V3_20260616.docx", "理想众望竞争分析_V3_20260616.docx")
+    lines = []
+    skip_phrases = [
+        "联动待办池",
+        "联动建议",
+        "LNK-",
+        "按 L9 规则判断是否触发应对建议产出",
+        "按 L9 规则判断是否触发",
+    ]
+    for line in content.splitlines():
+        if any(phrase in line for phrase in skip_phrases):
+            continue
+        line = line.replace("行业分析/应对建议", "行业分析")
+        lines.append(line)
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def write_markdown(src: Path, dst: Path, **front_matter):
     content = src.read_text(encoding="utf-8")
     content = rewrite_image_refs(content)
+    content = strip_internal_sections(content)
+    content = sanitize_public_text(content)
     if dst == DOCS_ROOT / "industry" / "index.md":
         content = re.sub(r"\n> .*?(CLAUDE\.md|实施方案).*", "", content)
     if dst == DOCS_ROOT / "market" / "index.md":
@@ -229,6 +326,17 @@ def write_markdown(src: Path, dst: Path, **front_matter):
     content = inject_front_matter(content, **front_matter)
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(content, encoding="utf-8")
+
+
+def add_intro_after_title(dst: Path, intro: str):
+    content = dst.read_text(encoding="utf-8")
+    lines = content.splitlines()
+    for index, line in enumerate(lines):
+        if re.match(r"^#\s+", line):
+            lines[index + 1:index + 1] = ["", intro]
+            dst.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+            return
+    dst.write_text(f"{intro}\n\n{content}", encoding="utf-8")
 
 
 def parse_competitor_index() -> dict:
@@ -291,7 +399,9 @@ def copy_framework():
 
 def copy_industry_analysis():
     dst_dir = DOCS_ROOT / "industry"
-    write_markdown(VAULT_ROOT / "行业分析" / "INDEX.md", dst_dir / "index.md", page_type="industry_index", tags=["行业分析"])
+    index_dst = dst_dir / "index.md"
+    write_markdown(VAULT_ROOT / "行业分析" / "INDEX.md", index_dst, page_type="industry_index", tags=["行业分析"])
+    add_intro_after_title(index_dst, "> 趋势判断：风向往哪吹。聚合 AI+教育行业日情报、关键信号和对学科网的影响分析。")
     nav_files = []
     for subdir in ["日情报", "素材池"]:
         src_subdir = VAULT_ROOT / "行业分析" / subdir
@@ -306,7 +416,9 @@ def copy_industry_analysis():
 
 def copy_policy_analysis():
     dst_dir = DOCS_ROOT / "policy"
-    write_markdown(VAULT_ROOT / "政策分析" / "policy_timeline.md", dst_dir / "index.md", page_type="policy_timeline", tags=["政策分析"])
+    index_dst = dst_dir / "index.md"
+    write_markdown(VAULT_ROOT / "政策分析" / "policy_timeline.md", index_dst, page_type="policy_timeline", tags=["政策分析"])
+    add_intro_after_title(index_dst, "> 合规与机会：政策风怎么吹。跟踪教育政策、AI 监管与区域政策变化，提炼机会和风险。")
     nav_files = []
     src_interpretations = VAULT_ROOT / "政策分析" / "解读"
     if src_interpretations.exists():
@@ -356,7 +468,9 @@ def csv_to_table_page(src: Path, dst: Path):
 
 def copy_market_monitoring():
     dst_dir = DOCS_ROOT / "market"
-    write_markdown(VAULT_ROOT / "市场监测" / "INDEX.md", dst_dir / "index.md", page_type="market_index", tags=["市场监测"])
+    index_dst = dst_dir / "index.md"
+    write_markdown(VAULT_ROOT / "市场监测" / "INDEX.md", index_dst, page_type="market_index", tags=["市场监测"])
+    add_intro_after_title(index_dst, "> 资金流向：钱往哪里流。跟踪招投标、采购与区域市场信号，用于判断机会窗口。")
     nav_files = []
 
     weekly_src = VAULT_ROOT / "市场监测" / "周报"
@@ -405,8 +519,7 @@ def copy_monitor_logs():
     monitor_dst = DOCS_ROOT / "monitor"
     monitor_dst.mkdir(parents=True, exist_ok=True)
     dated_logs = [src for src in monitor_src.glob("*.md") if re.match(r"\d{4}-\d{2}-\d{2}-", src.stem)]
-    other_logs = [src for src in monitor_src.glob("*.md") if src not in dated_logs]
-    log_files = sort_markdown_by_date(dated_logs) + sorted(other_logs, reverse=True)
+    log_files = sort_markdown_by_date(dated_logs)
     for src in log_files:
         date_match = re.match(r"(\d{4}-\d{2}-\d{2})-", src.stem)
         write_markdown(src, monitor_dst / src.name, page_type="monitor_log", date=date_match.group(1) if date_match else src.stem, tags=["竞争监测"])
@@ -426,7 +539,14 @@ def build_competitor_index(tiers: dict, analysis_map: dict) -> str:
     lines = [
         "# 竞争分析 · 竞品库",
         "",
+        "> 竞品洞察：看清谁在威胁我们、谁在改变赛道。Tier 1/2 进入持续跟踪，观察池用于捕捉潜在变量。",
+        "",
         "> 按新版战略情报系统分层展示。Tier 1 执行完整9层分析，Tier 2 执行 L1-L5，Tier 3 进入观察池。",
+        "",
+        "## 快速入口",
+        "",
+        "- [深度分析索引](analyses/index.md)",
+        "- [竞品监测日志](../monitor/index.md)",
         "",
     ]
     for tier, items in tiers.items():
@@ -438,9 +558,11 @@ def build_competitor_index(tiers: dict, analysis_map: dict) -> str:
             url = item["url"]
             url_link = "—" if url == "—" else f"[{url}]({url})"
             latest = item["latest"]
-            if item["name"] in analysis_map and analysis_map[item["name"]]:
-                latest_file = analysis_map[item["name"]][-1]
-                latest = f"[{latest}](./{item['slug']}/analyses/{latest_file})"
+            analysis_key = canonical_competitor_name(item["name"])
+            if analysis_key in analysis_map and analysis_map[analysis_key]:
+                latest_file = analysis_map[analysis_key][-1]
+                latest_label = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", latest)
+                latest = f"[{latest_label}](./{item['slug']}/analyses/{latest_file})"
             lines.append(f"| {name_link} | {item['relation']} | {item['track']} | {item['company']} | {url_link} | {latest} | {item['updated']} |")
         lines.append("")
     lines.extend([
@@ -450,6 +572,31 @@ def build_competitor_index(tiers: dict, analysis_map: dict) -> str:
         "",
         "完整观察池见源文件 `竞品库/观察池/INDEX.md`。",
     ])
+    return "\n".join(lines) + "\n"
+
+
+def build_analysis_index(analysis_entries: list[dict]) -> str:
+    lines = [
+        "---",
+        "page_type: analysis_index",
+        "tags:",
+        "  - 竞争分析",
+        "  - 深度分析",
+        "---",
+        "# 竞争分析 · 深度分析索引",
+        "",
+        "> 汇总所有竞品深度分析，按时间倒序排列。用于快速查找专题分析，不需要先进入具体竞品档案。",
+        "",
+        "| 日期 | 竞品 | 分析主题 | 层级 |",
+        "|---|---|---|---|",
+    ]
+    if not analysis_entries:
+        lines.append("| — | — | 暂无深度分析 | — |")
+    for entry in sorted(analysis_entries, key=lambda item: (item["date"], item["competitor"], item["title"]), reverse=True):
+        lines.append(
+            f"| {entry['date']} | [{entry['competitor']}](../{entry['slug']}/index.md) | "
+            f"[{entry['title']}](../{entry['slug']}/analyses/{entry['filename']}) | {entry['tier']} |"
+        )
     return "\n".join(lines) + "\n"
 
 
@@ -467,7 +614,12 @@ def copy_competitors(tiers: dict):
     index_content = inject_front_matter(index_content, page_type="competitor_index", tags=["竞争分析", "竞品库"])
     (competitors_dir / "index.md").write_text(index_content, encoding="utf-8")
 
-    tier_by_name = {item["name"]: tier for tier, items in tiers.items() for item in items}
+    tier_by_name = {}
+    for tier, items in tiers.items():
+        for item in items:
+            tier_by_name[item["name"]] = tier
+            tier_by_name[canonical_competitor_name(item["name"])] = tier
+    analysis_entries = []
     for item in sorted(lib_root.iterdir()):
         if not item.is_dir() or item.name.startswith("."):
             continue
@@ -480,7 +632,7 @@ def copy_competitors(tiers: dict):
         if profile_src.exists():
             content = profile_src.read_text(encoding="utf-8")
             dst = comp_dir / "index.md"
-            content = normalize_links(rewrite_image_refs(content), dst)
+            content = sanitize_public_text(strip_internal_sections(normalize_links(rewrite_image_refs(content), dst)))
             sections = []
             if analysis_map.get(cn_name):
                 sections.append("## 深度分析\n")
@@ -502,19 +654,28 @@ def copy_competitors(tiers: dict):
             for src in sorted(analyses_src.glob("*.md")):
                 content = src.read_text(encoding="utf-8")
                 dst = comp_dir / "analyses" / src.name
-                content = normalize_links(rewrite_image_refs(content), dst)
+                content = sanitize_public_text(strip_internal_sections(normalize_links(rewrite_image_refs(content), dst)))
                 back_link = f"[:octicons-arrow-left-24: 返回 {cn_name} 档案](../index.md)"
                 content = inject_front_matter(content, page_type="analysis", competitor_name=cn_name, tier=tier, tags=["深度分析", cn_name, tier])
                 content = insert_after_front_matter(content, back_link)
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 dst.write_text(content, encoding="utf-8")
+                date_match = re.match(r"(\d{4}-\d{2}-\d{2})-", src.stem)
+                analysis_entries.append({
+                    "date": date_match.group(1) if date_match else "未标注",
+                    "competitor": cn_name,
+                    "slug": slug,
+                    "title": src.stem,
+                    "filename": src.name,
+                    "tier": tier,
+                })
 
         releases_src = item / "发版追踪"
         if releases_src.exists():
             for src in sorted(releases_src.glob("*.md")):
                 content = src.read_text(encoding="utf-8")
                 dst = comp_dir / "releases" / src.name
-                content = normalize_links(rewrite_image_refs(content), dst)
+                content = sanitize_public_text(strip_internal_sections(normalize_links(rewrite_image_refs(content), dst)))
                 back_link = f"[:octicons-arrow-left-24: 返回 {cn_name} 档案](../index.md)"
                 content = inject_front_matter(content, page_type="release_tracking", competitor_name=cn_name, tier=tier, tags=["发版追踪", cn_name, tier])
                 content = insert_after_front_matter(content, back_link)
@@ -528,6 +689,9 @@ def copy_competitors(tiers: dict):
             for img in screenshots_src.iterdir():
                 if img.is_file():
                     shutil.copyfile(img, screenshots_dst / img.name)
+    analyses_index = competitors_dir / "analyses" / "index.md"
+    analyses_index.parent.mkdir(parents=True, exist_ok=True)
+    analyses_index.write_text(build_analysis_index(analysis_entries), encoding="utf-8")
     return analysis_map
 
 
@@ -581,6 +745,60 @@ def copy_response_outputs():
     return nav
 
 
+def copy_ai_briefings():
+    src_dir = AI_BRIEFING_ROOT / "briefings"
+    dst_dir = DOCS_ROOT / "ai-briefings"
+    dst_dir.mkdir(parents=True, exist_ok=True)
+
+    files = sort_markdown_by_date(list(src_dir.glob("*.md"))) if src_dir.exists() else []
+    nav = []
+    for src in files:
+        report_type = "周末汇总" if "周末汇总" in src.stem else "每日简报"
+        write_markdown(src, dst_dir / src.name, page_type="ai_briefing", tags=["AI简报", report_type])
+        nav.append((src.stem, f"ai-briefings/{src.name}", report_type))
+
+    latest_title = "暂无"
+    latest_path = "ai-briefings/index.md"
+    if files:
+        latest = files[0]
+        latest_title = latest.stem
+        latest_path = f"ai-briefings/{latest.name}"
+        latest_content = (dst_dir / latest.name).read_text(encoding="utf-8")
+        (dst_dir / "latest.md").write_text(latest_content, encoding="utf-8")
+
+    index_lines = [
+        "---",
+        "page_type: ai_briefing_index",
+        "tags:",
+        "  - AI简报",
+        "---",
+        "# AI 简报归档",
+        "",
+        "> AI 行业动态雷达：跟踪大模型、AI 产品、研究前沿与产业变化，帮助同事快速把握外部技术风向。",
+        "",
+        "> 汇总 AI 信息聚合项目的每日简报与周末汇总。这里只展示成品简报，不展示信源配置、抓取日志和推送维护材料。",
+        "",
+        f"最新简报：[最新简报](latest.md)（{latest_title}）",
+        "",
+        "| 日期 | 类型 | 简报 |",
+        "|---|---|---|",
+    ]
+    if not nav:
+        index_lines.append("| — | — | 暂无简报 |")
+    for title, path, report_type in nav:
+        date_match = re.match(r"(\d{4}-\d{2}-\d{2})-", title)
+        date = date_match.group(1) if date_match else "未标注"
+        filename = Path(path).name
+        index_lines.append(f"| {date} | {report_type} | [{title}]({filename}) |")
+    (dst_dir / "index.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")
+
+    return {
+        "items": nav,
+        "latest_title": latest_title,
+        "latest_path": latest_path,
+    }
+
+
 def generate_feedback_page():
     feedback_dir = DOCS_ROOT / "feedback"
     feedback_dir.mkdir(parents=True, exist_ok=True)
@@ -632,108 +850,158 @@ hide:
     (feedback_dir / "index.md").write_text(content, encoding="utf-8")
 
 
-def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict, monitor_logs: list):
-    today = datetime.now().strftime("%Y-%m-%d")
+def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict, monitor_logs: list, ai_nav: dict):
     tier1 = len(tiers.get("Tier 1", []))
     tier2 = len(tiers.get("Tier 2", []))
     action_count = sum(len(items) for items in action_nav.values())
+    competitor_total = tier1 + tier2 + 150
+    policy_count = len(policy_nav)
+    executive_count = len(action_nav.get("决策层简报", []))
+    battlecard_count = len(action_nav.get("Battlecard", []))
+    sales_count = len(action_nav.get("销售话术卡", []))
+    teaching_count = len(action_nav.get("教研参考卡", []))
+    operation_count = len(action_nav.get("运营参考卡", []))
     latest_industry = industry_nav[0][1] if industry_nav else "暂无"
+    latest_industry_path = industry_nav[0][2] if industry_nav else "industry/index.md"
     latest_policy = policy_nav[0][0] if policy_nav else "政策时间轴"
+    latest_policy_path = policy_nav[0][1] if policy_nav else "policy/index.md"
     latest_monitor = monitor_logs[0] if monitor_logs else "暂无"
+    latest_market = next((item for item in market_nav if item[0] == "周报"), None)
+    latest_market_title = latest_market[1] if latest_market else "市场监测总览"
+    latest_market_path = latest_market[2] if latest_market else "market/index.md"
+    latest_ai = ai_nav.get("latest_title", "暂无")
+    latest_ai_path = ai_nav.get("latest_path", "ai-briefings/latest.md")
     content = f"""---
 hide:
   - navigation
   - toc
 ---
 
-# 学科网战略情报系统
+<div class="home-dashboard" markdown>
 
-> 学科网的战略导航仪：回答「风向往哪吹、钱往哪里流、我们往哪打」。
+# 情报总览
 
-<div class="grid cards intelligence-grid" markdown>
+> 2026-07-06 · 最新监测简报：2026-06-29（覆盖 06-22 至 06-28）
 
--   :material-weather-windy:{{ .lg .middle }} __行业分析__
+<div class="home-metrics" markdown>
 
-    ---
+[:material-database-search: __竞品库__<br><span class="home-metric-number">{competitor_total}</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · {tier1} / Tier 2 · {tier2} / 观察池 · 150+</span>](competitors/index.md)
 
-    趋势判断：风向往哪吹。最新：{latest_industry}
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">{2}</span> <span class="home-danger-label">个上升</span><br><span class="home-muted">金太阳·中课云 / 猿辅导-飞象老师</span>](monitor/index.md)
 
-    [:octicons-arrow-right-24: 查看行业分析](industry/index.md)
+[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">{action_count}</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 {executive_count} · Battlecard {battlecard_count} · 话术 {sales_count} · 教研 {teaching_count} · 运营 {operation_count}</span>](actions/index.md)
 
--   :material-sword-cross:{{ .lg .middle }} __竞争分析__
-
-    ---
-
-    竞品洞察：Tier 1 {tier1} 家，Tier 2 {tier2} 家。
-
-    [:octicons-arrow-right-24: 查看竞品库](competitors/index.md)
-
--   :material-bank:{{ .lg .middle }} __政策分析__
-
-    ---
-
-    合规与机会：政策风怎么吹。最新：{latest_policy}
-
-    [:octicons-arrow-right-24: 查看政策分析](policy/index.md)
-
--   :material-cash-multiple:{{ .lg .middle }} __市场监测__
-
-    ---
-
-    资金流向：钱往哪里流。
-
-    [:octicons-arrow-right-24: 查看市场监测](market/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">{policy_count}</span> <span class="home-muted">份</span><br><span class="home-muted">最新：{latest_policy}</span>](policy/index.md)
 
 </div>
 
-## 关键输出
+<div class="home-workbench home-workbench--threat" markdown>
 
-<div class="grid cards" markdown>
+<section class="home-panel threat-panel" markdown>
+<div class="home-panel-header" markdown>
+## Tier 1 威胁看板
 
--   __系统状态__
-
-    ---
-
-    当前事实入口，包含模块状态、阻塞项和下一步行动。
-
-    [:octicons-arrow-right-24: 打开状态看板](status/index.md)
-
--   __应对建议__
-
-    ---
-
-    已沉淀 {action_count} 份 L9 输出，覆盖决策层、产品线、市场线、教研线、运营线。
-
-    [:octicons-arrow-right-24: 查看应对建议](actions/index.md)
-
--   __竞争监测__
-
-    ---
-
-    最新周监测：{latest_monitor}
-
-    [:octicons-arrow-right-24: 查看监测日志](monitor/index.md)
-
--   __方法框架__
-
-    ---
-
-    9层分析框架、数据质量规范和 L9 输出规范。
-
-    [:octicons-arrow-right-24: 查看框架](framework/index.md)
-
+[进入竞品库 →](competitors/index.md)
 </div>
 
-## 模块状态
+<a class="threat-row" href="competitors/jintaiyang-zhongkeyun/index.md">
+  <span class="threat-avatar">金</span>
+  <span class="threat-body"><strong>金太阳·中课云</strong><small>综合平台/资源 · 江西三端科技<br>9层深度分析 · AI平台转型完成</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
+</a>
 
-| 模块 | 状态 | 入口 |
-|---|---|---|
-| 行业分析 | 🟡 试运行 | [行业分析](industry/index.md) |
-| 竞争分析 | 🟢 运行中 | [竞争分析](competitors/index.md) |
-| 政策分析 | 🟢 运行中 | [政策分析](policy/index.md) |
-| 市场监测 | 🟡 起步 | [市场监测](market/index.md) |
+<a class="threat-row" href="competitors/yuanfudao-feixiang/index.md">
+  <span class="threat-avatar">猿</span>
+  <span class="threat-body"><strong>猿辅导-飞象老师</strong><small>AI备课/课件 · 猿力科技<br>2.0 发布 · 课堂运行系统上线</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
+</a>
 
-> 最后更新：{today}
+<a class="threat-row" href="competitors/seewo/index.md">
+  <span class="threat-avatar">希</span>
+  <span class="threat-body"><strong>希沃</strong><small>硬件+AI备课/课堂 · 视源股份<br>AI备课&gt;100万用户 · 魔方基座&gt;1万校</small></span>
+  <span class="threat-level threat-level--medium">中 ↑</span>
+</a>
+
+<a class="threat-row" href="competitors/zhixue/index.md">
+  <span class="threat-avatar">智</span>
+  <span class="threat-body"><strong>智学网</strong><small>AI精准教学 · 科大讯飞<br>四维度深度分析 · 教研参考卡已出</small></span>
+  <span class="threat-level threat-level--medium">中 →</span>
+</a>
+
+<a class="threat-row" href="competitors/tal-jiuzhang/index.md">
+  <span class="threat-avatar">好</span>
+  <span class="threat-body"><strong>好未来-九章爱学</strong><small>AI备课/课件 · 好未来<br>会员内购价格已补证 · 标杆校线索</small></span>
+  <span class="threat-level threat-level--medium">中 →</span>
+</a>
+
+[查看全部 11 家 →](competitors/index.md)
+</section>
+
+<div class="home-side-stack" markdown>
+<section class="home-panel latest-output" markdown>
+## 最新产出
+
+<a class="home-feed-item" href="{latest_industry_path}">
+  <span class="home-feed-tag home-feed-tag--blue">行业</span>
+  <span class="home-feed-body"><strong>{latest_industry}</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="monitor/index.md">
+  <span class="home-feed-tag">监测</span>
+  <span class="home-feed-body"><strong>{latest_monitor}</strong><small>竞争分析 / 监测日志</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="{latest_policy_path}">
+  <span class="home-feed-tag">政策</span>
+  <span class="home-feed-body"><strong>{latest_policy}</strong><small>政策解读 · 机会 / 风险已提炼</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="{latest_market_path}">
+  <span class="home-feed-tag">市场</span>
+  <span class="home-feed-body"><strong>{latest_market_title}</strong><small>市场监测 · 招投标线索</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="{latest_ai_path}">
+  <span class="home-feed-tag">AI</span>
+  <span class="home-feed-body"><strong>{latest_ai}</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+</section>
+
+<section class="home-panel focus-panel" markdown>
+## 本周重点关注
+
+<div class="focus-list" markdown>
+
+- 通用大模型价格与 Agent 能力变化，继续评估题库/资源型入口替代风险
+- AI 学伴合规边界已澄清，重点观察产品是否强调情感陪伴设计
+- Tier 1 暑期动作持续跟踪，优先看金太阳·中课云、飞象老师、希沃
+
+</div>
+</section>
+
+<section class="home-panel role-access" markdown>
+## 按角色取用
+
+<div class="role-grid" markdown>
+
+[__决策层__<br><span>战略简报 2026Q2 · {executive_count} 份</span>](actions/executive-briefs/index.md)
+
+[__产品线__<br><span>Battlecard 202606 · {battlecard_count} 份</span>](actions/battlecards/index.md)
+
+[__市场 / 销售__<br><span>销售话术卡 · {sales_count} 份</span>](actions/sales-cards/index.md)
+
+[__教研 / 运营__<br><span>参考卡 {teaching_count} + {operation_count} 份</span>](actions/teaching-cards/index.md)
+
+</div>
+</section>
+</div>
+
+</div>
 """
     (DOCS_ROOT / "index.md").write_text(content, encoding="utf-8")
 
@@ -742,7 +1010,7 @@ def nav_item(title: str, path: str, indent: int = 2) -> str:
     return f"{' ' * indent}- {title}: {path}\n"
 
 
-def generate_mkdocs_yml(tiers: dict, industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict, monitor_logs: list):
+def generate_mkdocs_yml(tiers: dict, industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict, monitor_logs: list, ai_nav: dict):
     nav = f"""site_name: {SITE_NAME}
 site_description: {SITE_DESCRIPTION}
 site_author: 学科网产品团队
@@ -843,7 +1111,9 @@ nav:
     for subdir, title, path in industry_nav:
         nav += nav_item(title, path, 4)
 
-    nav += "  - 竞品分析:\n    - 竞品库总览: competitors/index.md\n"
+    nav += "  - 竞品分析:\n    - 竞品库总览: competitors/index.md\n    - 深度分析: competitors/analyses/index.md\n    - 竞品监测:\n      - 最新监测: monitor/index.md\n"
+    for log_name in monitor_logs:
+        nav += nav_item(log_name, f"monitor/{log_name}.md", 6)
     for tier in ["Tier 1", "Tier 2"]:
         items = tiers.get(tier, [])
         if items:
@@ -869,10 +1139,10 @@ nav:
         for title, path in action_nav.get(name, []):
             nav += nav_item(title, path, 6)
 
-    nav += "  - 监测日志:\n    - 最新监测: monitor/index.md\n"
-    for log_name in monitor_logs:
-        nav += nav_item(log_name, f"monitor/{log_name}.md", 4)
-    nav += "  - 反馈: feedback/index.md\n"
+    nav += "  - AI简报:\n    - 最新简报: ai-briefings/latest.md\n    - 简报归档: ai-briefings/index.md\n"
+    for title, path, _report_type in ai_nav.get("items", []):
+        nav += nav_item(title, path, 4)
+
     (WEBSITE_ROOT / "mkdocs.yml").write_text(nav, encoding="utf-8")
 
 
@@ -883,7 +1153,6 @@ def main():
     clean_docs()
     tiers = parse_competitor_index()
     copy_extra_assets()
-    copy_system_status()
     copy_framework()
     industry_nav = copy_industry_analysis()
     policy_nav = copy_policy_analysis()
@@ -891,9 +1160,10 @@ def main():
     copy_competitors(tiers)
     monitor_logs = copy_monitor_logs()
     action_nav = copy_response_outputs()
+    ai_nav = copy_ai_briefings()
     generate_feedback_page()
-    generate_home(tiers, industry_nav, policy_nav, market_nav, action_nav, monitor_logs)
-    generate_mkdocs_yml(tiers, industry_nav, policy_nav, market_nav, action_nav, monitor_logs)
+    generate_home(tiers, industry_nav, policy_nav, market_nav, action_nav, monitor_logs, ai_nav)
+    generate_mkdocs_yml(tiers, industry_nav, policy_nav, market_nav, action_nav, monitor_logs, ai_nav)
     print("\n✅ 构建完成！")
     print(f"   输出目录: {DOCS_ROOT}")
     print(f"   下一步: cd {WEBSITE_ROOT} && mkdocs serve")

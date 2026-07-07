@@ -6,7 +6,14 @@ tags:
 ---
 # 竞争分析 · 竞品库
 
+> 竞品洞察：看清谁在威胁我们、谁在改变赛道。Tier 1/2 进入持续跟踪，观察池用于捕捉潜在变量。
+
 > 按新版战略情报系统分层展示。Tier 1 执行完整9层分析，Tier 2 执行 L1-L5，Tier 3 进入观察池。
+
+## 快速入口
+
+- [深度分析索引](analyses/index.md)
+- [竞品监测日志](../monitor/index.md)
 
 ## Tier 1
 
@@ -51,6 +58,7 @@ tags:
 | [福建天启智汇科技](./fujian-tianqi-zhihui/index.md) | 🟢 | 精准教学（互动课堂） | 天启智汇 | — | 展会发现，待建档 | 2026-05-31 |
 | [北京世纪超星](./beijing-shiji-chaoxing/index.md) | 🟢 | 精准教学（阅读+互动教学） | 超星 | — | 展会发现，待建档 | 2026-05-31 |
 | [广州中金育能科技](./guangzhou-zhongjin-yuneng/index.md) | 🟢 | 智慧体育教育 | 广州中金育能 | [https://www.gebpm.com](https://www.gebpm.com) | 2026-05-31 建档（智慧体育赛道，非学术直接竞品） | 2026-06-01 |
+| [理想众望（试题网）](./item-221d239f/index.md) | 🟡 | 资源/题库+教辅出版 | 理想众望教育科技（北京） | [https://www.stzy.com](https://www.stzy.com) | [2026-06-16 V3 调研（含离职员工访谈）](./item-221d239f/analyses/2026-06-16-V3调研报告.md) | 2026-07-07 |
 
 ---
 

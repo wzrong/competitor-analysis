@@ -126,6 +126,21 @@ nav:
     - 2026-05-31-情报简报: industry/日情报/2026-05-31-情报简报.md
   - 竞品分析:
     - 竞品库总览: competitors/index.md
+    - 深度分析: competitors/analyses/index.md
+    - 竞品监测:
+      - 最新监测: monitor/index.md
+      - 2026-07-06-监测简报: monitor/2026-07-06-监测简报.md
+      - 2026-06-29-监测简报: monitor/2026-06-29-监测简报.md
+      - 2026-06-22-监测简报: monitor/2026-06-22-监测简报.md
+      - 2026-06-15-监测简报: monitor/2026-06-15-监测简报.md
+      - 2026-06-08-监测简报: monitor/2026-06-08-监测简报.md
+      - 2026-06-01-监测简报: monitor/2026-06-01-监测简报.md
+      - 2026-05-25-监测简报: monitor/2026-05-25-监测简报.md
+      - 2026-05-18-监测简报: monitor/2026-05-18-监测简报.md
+      - 2026-05-11-监测简报: monitor/2026-05-11-监测简报.md
+      - 2026-05-10-监测简报: monitor/2026-05-10-监测简报.md
+      - 2026-05-04-监测简报: monitor/2026-05-04-监测简报.md
+      - 2026-05-03-监测简报: monitor/2026-05-03-监测简报.md
     - Tier 1:
       - 21世纪教育网: competitors/21cnjy/index.md
       - 菁优网: competitors/jyeoo/index.md
@@ -162,10 +177,14 @@ nav:
       - 福建天启智汇科技: competitors/fujian-tianqi-zhihui/index.md
       - 北京世纪超星: competitors/beijing-shiji-chaoxing/index.md
       - 广州中金育能科技: competitors/guangzhou-zhongjin-yuneng/index.md
+      - 理想众望（试题网）: competitors/item-221d239f/index.md
   - 政策分析:
     - 政策时间轴: policy/index.md
     - 区域政策对比-2026Q1Q2: policy/解读/区域政策对比-2026Q1Q2.md
+    - 2026-06-黑龙江省AI教育行动方案: policy/解读/2026-06-黑龙江省AI教育行动方案.md
+    - 2026-06-智能体规范应用与创新发展实施意见: policy/解读/2026-06-智能体规范应用与创新发展实施意见.md
     - 2026-06-教育发展十五五规划: policy/解读/2026-06-教育发展十五五规划.md
+    - 2026-04-拟人化互动服务管理暂行办法: policy/解读/2026-04-拟人化互动服务管理暂行办法.md
     - 2026-04-人工智能+教育行动计划: policy/解读/2026-04-人工智能+教育行动计划.md
   - 市场监测:
     - 总览: market/index.md
@@ -212,6 +231,7 @@ nav:
       - 橡皮网-销售话术卡-202606: actions/sales-cards/橡皮网-销售话术卡-202606.md
       - 智学网-销售话术卡-202606: actions/sales-cards/智学网-销售话术卡-202606.md
       - 教习网-销售话术卡-202606: actions/sales-cards/教习网-销售话术卡-202606.md
+      - 政策合规差异化-销售话术总卡-202607: actions/sales-cards/政策合规差异化-销售话术总卡-202607.md
       - 希沃-销售话术卡-202606: actions/sales-cards/希沃-销售话术卡-202606.md
       - 作业帮教师版-销售话术卡-202606: actions/sales-cards/作业帮教师版-销售话术卡-202606.md
       - 九章爱学-销售话术卡-202606: actions/sales-cards/九章爱学-销售话术卡-202606.md
@@ -232,19 +252,64 @@ nav:
       - 运营参考卡方案: actions/operation-cards/运营参考卡方案.md
       - 菁优网-运营参考卡-202606: actions/operation-cards/菁优网-运营参考卡-202606.md
       - 21世纪教育网-运营参考卡-202606: actions/operation-cards/21世纪教育网-运营参考卡-202606.md
-  - 监测日志:
-    - 最新监测: monitor/index.md
-    - 2026-07-06-监测简报: monitor/2026-07-06-监测简报.md
-    - 2026-06-29-监测简报: monitor/2026-06-29-监测简报.md
-    - 2026-06-22-监测简报: monitor/2026-06-22-监测简报.md
-    - 2026-06-15-监测简报: monitor/2026-06-15-监测简报.md
-    - 2026-06-08-监测简报: monitor/2026-06-08-监测简报.md
-    - 2026-06-01-监测简报: monitor/2026-06-01-监测简报.md
-    - 2026-05-25-监测简报: monitor/2026-05-25-监测简报.md
-    - 2026-05-18-监测简报: monitor/2026-05-18-监测简报.md
-    - 2026-05-11-监测简报: monitor/2026-05-11-监测简报.md
-    - 2026-05-10-监测简报: monitor/2026-05-10-监测简报.md
-    - 2026-05-04-监测简报: monitor/2026-05-04-监测简报.md
-    - 2026-05-03-监测简报: monitor/2026-05-03-监测简报.md
-    - 周监测框架升级审查-2026-06-01: monitor/周监测框架升级审查-2026-06-01.md
-  - 反馈: feedback/index.md
+  - AI简报:
+    - 最新简报: ai-briefings/latest.md
+    - 简报归档: ai-briefings/index.md
+    - 2026-07-07-AI每日简报: ai-briefings/2026-07-07-AI每日简报.md
+    - 2026-07-06-AI每日简报: ai-briefings/2026-07-06-AI每日简报.md
+    - 2026-07-03-AI每日简报: ai-briefings/2026-07-03-AI每日简报.md
+    - 2026-07-02-AI每日简报: ai-briefings/2026-07-02-AI每日简报.md
+    - 2026-07-01-AI每日简报: ai-briefings/2026-07-01-AI每日简报.md
+    - 2026-06-30-AI每日简报: ai-briefings/2026-06-30-AI每日简报.md
+    - 2026-06-29-AI每日简报: ai-briefings/2026-06-29-AI每日简报.md
+    - 2026-06-26-AI每日简报: ai-briefings/2026-06-26-AI每日简报.md
+    - 2026-06-25-AI每日简报: ai-briefings/2026-06-25-AI每日简报.md
+    - 2026-06-24-AI每日简报: ai-briefings/2026-06-24-AI每日简报.md
+    - 2026-06-23-AI每日简报: ai-briefings/2026-06-23-AI每日简报.md
+    - 2026-06-22-AI每日简报: ai-briefings/2026-06-22-AI每日简报.md
+    - 2026-06-22-AI周末汇总: ai-briefings/2026-06-22-AI周末汇总.md
+    - 2026-06-18-AI每日简报: ai-briefings/2026-06-18-AI每日简报.md
+    - 2026-06-17-AI每日简报: ai-briefings/2026-06-17-AI每日简报.md
+    - 2026-06-16-AI每日简报: ai-briefings/2026-06-16-AI每日简报.md
+    - 2026-06-15-AI每日简报: ai-briefings/2026-06-15-AI每日简报.md
+    - 2026-06-14-AI每日简报: ai-briefings/2026-06-14-AI每日简报.md
+    - 2026-06-12-AI每日简报: ai-briefings/2026-06-12-AI每日简报.md
+    - 2026-06-11-AI每日简报: ai-briefings/2026-06-11-AI每日简报.md
+    - 2026-06-10-AI每日简报: ai-briefings/2026-06-10-AI每日简报.md
+    - 2026-06-09-AI每日简报: ai-briefings/2026-06-09-AI每日简报.md
+    - 2026-06-08-AI每日简报: ai-briefings/2026-06-08-AI每日简报.md
+    - 2026-06-07-AI每日简报: ai-briefings/2026-06-07-AI每日简报.md
+    - 2026-06-07-AI周末汇总: ai-briefings/2026-06-07-AI周末汇总.md
+    - 2026-06-06-AI每日简报: ai-briefings/2026-06-06-AI每日简报.md
+    - 2026-06-05-AI每日简报: ai-briefings/2026-06-05-AI每日简报.md
+    - 2026-06-04-AI每日简报: ai-briefings/2026-06-04-AI每日简报.md
+    - 2026-06-03-AI每日简报: ai-briefings/2026-06-03-AI每日简报.md
+    - 2026-06-02-AI每日简报: ai-briefings/2026-06-02-AI每日简报.md
+    - 2026-06-01-AI每日简报: ai-briefings/2026-06-01-AI每日简报.md
+    - 2026-05-31-AI每日简报: ai-briefings/2026-05-31-AI每日简报.md
+    - 2026-05-31-AI周末汇总: ai-briefings/2026-05-31-AI周末汇总.md
+    - 2026-05-29-AI每日简报: ai-briefings/2026-05-29-AI每日简报.md
+    - 2026-05-28-AI每日简报: ai-briefings/2026-05-28-AI每日简报.md
+    - 2026-05-27-AI每日简报: ai-briefings/2026-05-27-AI每日简报.md
+    - 2026-05-26-AI每日简报: ai-briefings/2026-05-26-AI每日简报.md
+    - 2026-05-25-AI每日简报: ai-briefings/2026-05-25-AI每日简报.md
+    - 2026-05-24-AI每日简报: ai-briefings/2026-05-24-AI每日简报.md
+    - 2026-05-24-AI周末汇总: ai-briefings/2026-05-24-AI周末汇总.md
+    - 2026-05-23-AI每日简报: ai-briefings/2026-05-23-AI每日简报.md
+    - 2026-05-22-AI每日简报: ai-briefings/2026-05-22-AI每日简报.md
+    - 2026-05-21-AI每日简报: ai-briefings/2026-05-21-AI每日简报.md
+    - 2026-05-19-AI每日简报: ai-briefings/2026-05-19-AI每日简报.md
+    - 2026-05-18-AI每日简报: ai-briefings/2026-05-18-AI每日简报.md
+    - 2026-05-17-AI每日简报: ai-briefings/2026-05-17-AI每日简报.md
+    - 2026-05-16-AI每日简报: ai-briefings/2026-05-16-AI每日简报.md
+    - 2026-05-15-AI每日简报: ai-briefings/2026-05-15-AI每日简报.md
+    - 2026-05-14-AI每日简报: ai-briefings/2026-05-14-AI每日简报.md
+    - 2026-05-13-AI每日简报: ai-briefings/2026-05-13-AI每日简报.md
+    - 2026-05-12-AI每日简报: ai-briefings/2026-05-12-AI每日简报.md
+    - 2026-05-11-AI每日简报: ai-briefings/2026-05-11-AI每日简报.md
+    - 2026-05-10-AI每日简报: ai-briefings/2026-05-10-AI每日简报.md
+    - 2026-05-09-AI每日简报: ai-briefings/2026-05-09-AI每日简报.md
+    - 2026-05-08-AI每日简报: ai-briefings/2026-05-08-AI每日简报.md
+    - 2026-05-07-AI每日简报: ai-briefings/2026-05-07-AI每日简报.md
+    - 2026-05-06-AI每日简报: ai-briefings/2026-05-06-AI每日简报.md
+    - 2026-05-05-AI每日简报: ai-briefings/2026-05-05-AI每日简报.md

@@ -4,91 +4,128 @@ hide:
   - toc
 ---
 
-# 学科网战略情报系统
+<div class="home-dashboard" markdown>
 
-> 学科网的战略导航仪：回答「风向往哪吹、钱往哪里流、我们往哪打」。
+# 情报总览
 
-<div class="grid cards intelligence-grid" markdown>
+> 2026-07-06 · 最新监测简报：2026-06-29（覆盖 06-22 至 06-28）
 
--   :material-weather-windy:{ .lg .middle } __行业分析__
+<div class="home-metrics" markdown>
 
-    ---
+[:material-database-search: __竞品库__<br><span class="home-metric-number">185</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · 11 / Tier 2 · 24 / 观察池 · 150+</span>](competitors/index.md)
 
-    趋势判断：风向往哪吹。最新：2026-07-06-情报简报
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">2</span> <span class="home-danger-label">个上升</span><br><span class="home-muted">金太阳·中课云 / 猿辅导-飞象老师</span>](monitor/index.md)
 
-    [:octicons-arrow-right-24: 查看行业分析](industry/index.md)
+[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">46</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 11 · Battlecard 11 · 话术 12 · 教研 7 · 运营 5</span>](actions/index.md)
 
--   :material-sword-cross:{ .lg .middle } __竞争分析__
-
-    ---
-
-    竞品洞察：Tier 1 11 家，Tier 2 23 家。
-
-    [:octicons-arrow-right-24: 查看竞品库](competitors/index.md)
-
--   :material-bank:{ .lg .middle } __政策分析__
-
-    ---
-
-    合规与机会：政策风怎么吹。最新：区域政策对比-2026Q1Q2
-
-    [:octicons-arrow-right-24: 查看政策分析](policy/index.md)
-
--   :material-cash-multiple:{ .lg .middle } __市场监测__
-
-    ---
-
-    资金流向：钱往哪里流。
-
-    [:octicons-arrow-right-24: 查看市场监测](market/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">6</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
 
 </div>
 
-## 关键输出
+<div class="home-workbench home-workbench--threat" markdown>
 
-<div class="grid cards" markdown>
+<section class="home-panel threat-panel" markdown>
+<div class="home-panel-header" markdown>
+## Tier 1 威胁看板
 
--   __系统状态__
-
-    ---
-
-    当前事实入口，包含模块状态、阻塞项和下一步行动。
-
-    [:octicons-arrow-right-24: 打开状态看板](status/index.md)
-
--   __应对建议__
-
-    ---
-
-    已沉淀 45 份 L9 输出，覆盖决策层、产品线、市场线、教研线、运营线。
-
-    [:octicons-arrow-right-24: 查看应对建议](actions/index.md)
-
--   __竞争监测__
-
-    ---
-
-    最新周监测：2026-07-06-监测简报
-
-    [:octicons-arrow-right-24: 查看监测日志](monitor/index.md)
-
--   __方法框架__
-
-    ---
-
-    9层分析框架、数据质量规范和 L9 输出规范。
-
-    [:octicons-arrow-right-24: 查看框架](framework/index.md)
-
+[进入竞品库 →](competitors/index.md)
 </div>
 
-## 模块状态
+<a class="threat-row" href="competitors/jintaiyang-zhongkeyun/index.md">
+  <span class="threat-avatar">金</span>
+  <span class="threat-body"><strong>金太阳·中课云</strong><small>综合平台/资源 · 江西三端科技<br>9层深度分析 · AI平台转型完成</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
+</a>
 
-| 模块 | 状态 | 入口 |
-|---|---|---|
-| 行业分析 | 🟡 试运行 | [行业分析](industry/index.md) |
-| 竞争分析 | 🟢 运行中 | [竞争分析](competitors/index.md) |
-| 政策分析 | 🟢 运行中 | [政策分析](policy/index.md) |
-| 市场监测 | 🟡 起步 | [市场监测](market/index.md) |
+<a class="threat-row" href="competitors/yuanfudao-feixiang/index.md">
+  <span class="threat-avatar">猿</span>
+  <span class="threat-body"><strong>猿辅导-飞象老师</strong><small>AI备课/课件 · 猿力科技<br>2.0 发布 · 课堂运行系统上线</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
+</a>
 
-> 最后更新：2026-07-07
+<a class="threat-row" href="competitors/seewo/index.md">
+  <span class="threat-avatar">希</span>
+  <span class="threat-body"><strong>希沃</strong><small>硬件+AI备课/课堂 · 视源股份<br>AI备课&gt;100万用户 · 魔方基座&gt;1万校</small></span>
+  <span class="threat-level threat-level--medium">中 ↑</span>
+</a>
+
+<a class="threat-row" href="competitors/zhixue/index.md">
+  <span class="threat-avatar">智</span>
+  <span class="threat-body"><strong>智学网</strong><small>AI精准教学 · 科大讯飞<br>四维度深度分析 · 教研参考卡已出</small></span>
+  <span class="threat-level threat-level--medium">中 →</span>
+</a>
+
+<a class="threat-row" href="competitors/tal-jiuzhang/index.md">
+  <span class="threat-avatar">好</span>
+  <span class="threat-body"><strong>好未来-九章爱学</strong><small>AI备课/课件 · 好未来<br>会员内购价格已补证 · 标杆校线索</small></span>
+  <span class="threat-level threat-level--medium">中 →</span>
+</a>
+
+[查看全部 11 家 →](competitors/index.md)
+</section>
+
+<div class="home-side-stack" markdown>
+<section class="home-panel latest-output" markdown>
+## 最新产出
+
+<a class="home-feed-item" href="industry/日情报/2026-07-06-情报简报.md">
+  <span class="home-feed-tag home-feed-tag--blue">行业</span>
+  <span class="home-feed-body"><strong>2026-07-06-情报简报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="monitor/index.md">
+  <span class="home-feed-tag">监测</span>
+  <span class="home-feed-body"><strong>2026-07-06-监测简报</strong><small>竞争分析 / 监测日志</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="policy/解读/区域政策对比-2026Q1Q2.md">
+  <span class="home-feed-tag">政策</span>
+  <span class="home-feed-body"><strong>区域政策对比-2026Q1Q2</strong><small>政策解读 · 机会 / 风险已提炼</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="market/周报/2026-06-02-市场监测周报.md">
+  <span class="home-feed-tag">市场</span>
+  <span class="home-feed-body"><strong>2026-06-02-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item" href="ai-briefings/2026-07-07-AI每日简报.md">
+  <span class="home-feed-tag">AI</span>
+  <span class="home-feed-body"><strong>2026-07-07-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+</section>
+
+<section class="home-panel focus-panel" markdown>
+## 本周重点关注
+
+<div class="focus-list" markdown>
+
+- 通用大模型价格与 Agent 能力变化，继续评估题库/资源型入口替代风险
+- AI 学伴合规边界已澄清，重点观察产品是否强调情感陪伴设计
+- Tier 1 暑期动作持续跟踪，优先看金太阳·中课云、飞象老师、希沃
+
+</div>
+</section>
+
+<section class="home-panel role-access" markdown>
+## 按角色取用
+
+<div class="role-grid" markdown>
+
+[__决策层__<br><span>战略简报 2026Q2 · 11 份</span>](actions/executive-briefs/index.md)
+
+[__产品线__<br><span>Battlecard 202606 · 11 份</span>](actions/battlecards/index.md)
+
+[__市场 / 销售__<br><span>销售话术卡 · 12 份</span>](actions/sales-cards/index.md)
+
+[__教研 / 运营__<br><span>参考卡 7 + 5 份</span>](actions/teaching-cards/index.md)
+
+</div>
+</section>
+</div>
+
+</div>
