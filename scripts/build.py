@@ -850,6 +850,168 @@ hide:
     (feedback_dir / "index.md").write_text(content, encoding="utf-8")
 
 
+TAG_META = {
+    "industry": ("行业", "home-row--industry", "home-feed-tag--industry"),
+    "monitor": ("监测", "home-row--monitor", "home-feed-tag--monitor"),
+    "policy": ("政策", "home-row--policy", "home-feed-tag--policy"),
+    "market": ("市场", "home-row--market", "home-feed-tag--market"),
+    "ai": ("AI", "home-row--ai", "home-feed-tag--ai"),
+    "competitor": ("竞品", "home-row--competitor", "home-feed-tag--competitor"),
+    "action": ("行动", "home-row--action", "home-feed-tag--action"),
+}
+
+
+def strip_markdown_inline(text: str) -> str:
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    text = re.sub(r"[*_`#>]+", "", text)
+    return html.escape(text.strip())
+
+
+def first_date(text: str, fallback: str = "0000-00-00") -> str:
+    match = re.search(r"\d{4}-\d{2}-\d{2}", text or "")
+    if match:
+        return match.group(0)
+    compact = re.search(r"(20\d{2})(0[1-9]|1[0-2])", text or "")
+    if compact:
+        return f"{compact.group(1)}-{compact.group(2)}-01"
+    return fallback
+
+
+def source_path_for_site_path(path: str) -> Path | None:
+    if path.startswith("industry/日情报/"):
+        return VAULT_ROOT / "行业分析" / "日情报" / Path(path).name
+    if path.startswith("policy/解读/"):
+        return VAULT_ROOT / "政策分析" / "解读" / Path(path).name
+    if path.startswith("market/周报/"):
+        return VAULT_ROOT / "市场监测" / "周报" / Path(path).name
+    if path.startswith("ai-briefings/"):
+        return AI_BRIEFING_ROOT / "briefings" / Path(path).name
+    return None
+
+
+def first_meaningful_line(path: Path | None, fallback: str) -> str:
+    if path is None or not path.exists():
+        return fallback
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith(("#", "---", "page_type:", "tags:", "- ", "  - ")):
+            continue
+        line = re.sub(r"^>\s*", "", line).strip()
+        if line:
+            return line
+    return fallback
+
+
+def build_feed_item(kind: str, title: str, desc: str, href: str, css_class: str = "home-feed-item") -> str:
+    label, row_class, tag_class = TAG_META[kind]
+    return f"""<a class="{css_class} {row_class}" href="{href}">
+  <span class="home-feed-tag {tag_class}">{label}</span>
+  <span class="home-feed-body"><strong>{strip_markdown_inline(title)}</strong><small>{strip_markdown_inline(desc)}</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>"""
+
+
+def latest_action_output(action_nav: dict) -> tuple[str, str, str]:
+    candidates = []
+    for audience, items in action_nav.items():
+        for title, path in items:
+            candidates.append((first_date(title), title, path, audience))
+    if not candidates:
+        return ("应对建议", "actions/index.md", "查看按角色分发的行动材料")
+    _, title, path, audience = max(candidates, key=lambda item: (item[0], item[1]))
+    return (title, path, f"{audience} · 最新可用材料")
+
+
+def monitor_focus_summary(latest_monitor: str, monitor_path: Path) -> str:
+    if not monitor_path.exists():
+        return "查看最新竞品监测变化"
+    text = monitor_path.read_text(encoding="utf-8")
+    match = re.search(r"\*\*有变化的竞品[^：:]*[：:]\*\*\s*\n\n?-\s*(.+)", text)
+    if match:
+        return match.group(1).strip()
+    match = re.search(r"本周监测发现\*\*(.+?)\*\*", text)
+    if match:
+        return match.group(1).strip()
+    return f"查看 {latest_monitor}，跟踪 Tier 1 变化"
+
+
+def build_focus_items(latest_ai: str, latest_ai_href: str, latest_policy: str, latest_policy_href: str,
+                      latest_monitor: str, latest_market_title: str, latest_market_href: str,
+                      action_nav: dict) -> str:
+    monitor_path = VAULT_ROOT / "监测日志" / f"{latest_monitor}.md"
+    action_title, action_path, action_desc = latest_action_output(action_nav)
+    items = [
+        build_feed_item("ai", latest_ai, first_meaningful_line(source_path_for_site_path(latest_ai_href.rstrip("/") + ".md"), "查看 AI 每日简报，关注外部技术动态"), latest_ai_href, "focus-item"),
+        build_feed_item("policy", latest_policy, first_meaningful_line(source_path_for_site_path(latest_policy_href.rstrip("/") + ".md"), "查看政策解读，关注合规边界与机会窗口"), latest_policy_href, "focus-item"),
+        build_feed_item("competitor", latest_monitor, monitor_focus_summary(latest_monitor, monitor_path), "monitor/", "focus-item"),
+        build_feed_item("market", latest_market_title, "查看市场监测，关注区域采购与资金流向变化", latest_market_href, "focus-item"),
+        build_feed_item("action", action_title, action_desc, public_href(action_path), "focus-item"),
+    ]
+    return "\n\n".join(items)
+
+
+def competitor_aliases(name: str) -> list[str]:
+    aliases = [name, canonical_competitor_name(name)]
+    aliases.extend(name.replace("·", "").split("-"))
+    if "作业帮" in name:
+        aliases.extend(["作业帮", "作业帮教师版"])
+    if "金太阳" in name:
+        aliases.extend(["金太阳", "中课云"])
+    if "猿辅导" in name:
+        aliases.extend(["飞象老师", "猿辅导"])
+    if "好未来" in name:
+        aliases.extend(["九章爱学", "好未来"])
+    return [alias for alias in dict.fromkeys(alias.strip() for alias in aliases) if alias]
+
+
+def competitor_monitor_score(name: str, monitor_text: str) -> tuple[int, str]:
+    score = 0
+    signal = ""
+    for alias in competitor_aliases(name):
+        if alias and alias in monitor_text:
+            score = max(score, 2)
+            section = re.search(rf"###\s+{re.escape(alias)}[^\n]*\n(?P<body>.*?)(?=\n---\n|\n###\s+|\n##\s+|\Z)", monitor_text, re.S)
+            if section:
+                body = section.group("body")
+                if "重要" in body or "建议深度分析" in body:
+                    score = max(score, 30)
+                    signal = "重要信号"
+                elif "一般" in body or "无显著变化" in body:
+                    score = max(score, 5)
+                    signal = "常规监测"
+            break
+    return score, signal
+
+
+def build_threat_items(tiers: dict, latest_monitor: str) -> tuple[str, int, str]:
+    monitor_path = VAULT_ROOT / "监测日志" / f"{latest_monitor}.md"
+    monitor_text = monitor_path.read_text(encoding="utf-8") if monitor_path.exists() else ""
+    ranked = []
+    for index, item in enumerate(tiers.get("Tier 1", [])):
+        score, signal = competitor_monitor_score(item["name"], monitor_text)
+        updated = first_date(item.get("updated", ""), "0000-00-00")
+        latest = strip_markdown_inline(item.get("latest", ""))
+        desc = f"{item['track']} · {item['company']} · {latest}"
+        ranked.append((score, updated, -index, item, signal, desc))
+    ranked.sort(reverse=True, key=lambda row: (row[0], row[1], row[2]))
+    selected = ranked[:5]
+    high_count = sum(1 for score, *_ in selected if score >= 30)
+    high_names = [row[3]["name"] for row in selected if row[0] >= 30]
+    top_names = " / ".join((high_names or [row[3]["name"] for row in selected[:3]])) if selected else "暂无"
+    rows = []
+    for index, (score, _updated, _order, item, signal, desc) in enumerate(selected, start=1):
+        level_class = "threat-level--high" if score >= 30 else "threat-level--medium"
+        row_class = "home-row--danger" if score >= 30 else "home-row--warning"
+        level = "高 ↑" if score >= 30 else "中 →"
+        desc_text = f"{signal} · {desc}" if signal else desc
+        rows.append(f"""<a class="threat-row {row_class}" href="competitors/{item['slug']}/">
+  <span class="threat-avatar threat-avatar--tone-{index}">{html.escape(item['name'][:1])}</span>
+  <span class="threat-body"><strong>{html.escape(item['name'])}</strong><small>{desc_text}</small></span>
+  <span class="threat-level {level_class}">{level}</span>
+</a>""")
+    return "\n\n".join(rows), high_count, top_names
+
+
 def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict, monitor_logs: list, ai_nav: dict):
     tier1 = len(tiers.get("Tier 1", []))
     tier2 = len(tiers.get("Tier 2", []))
@@ -871,6 +1033,21 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
     latest_market_path = latest_market[2] if latest_market else "market/index.md"
     latest_ai = ai_nav.get("latest_title", "暂无")
     latest_ai_path = ai_nav.get("latest_path", "ai-briefings/latest.md")
+    latest_industry_href = public_href(latest_industry_path)
+    latest_policy_href = public_href(latest_policy_path)
+    latest_market_href = public_href(latest_market_path)
+    latest_ai_href = public_href(latest_ai_path)
+    focus_items = build_focus_items(
+        latest_ai,
+        latest_ai_href,
+        latest_policy,
+        latest_policy_href,
+        latest_monitor,
+        latest_market_title,
+        latest_market_href,
+        action_nav,
+    )
+    threat_items, high_threat_count, high_threat_names = build_threat_items(tiers, latest_monitor)
     content = f"""---
 hide:
   - navigation
@@ -887,7 +1064,7 @@ hide:
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">{competitor_total}</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · {tier1} / Tier 2 · {tier2} / 观察池 · 150+</span>](competitors/index.md)
 
-[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">{2}</span> <span class="home-danger-label">个上升</span><br><span class="home-muted">金太阳·中课云 / 猿辅导-飞象老师</span>](monitor/index.md)
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">{high_threat_count}</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">{high_threat_names}</span>](monitor/index.md)
 
 [:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">{action_count}</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 {executive_count} · Battlecard {battlecard_count} · 话术 {sales_count} · 教研 {teaching_count} · 运营 {operation_count}</span>](actions/index.md)
 
@@ -897,109 +1074,99 @@ hide:
 
 <div class="home-workbench home-workbench--threat" markdown>
 
-<section class="home-panel threat-panel" markdown>
-<div class="home-panel-header" markdown>
-## Tier 1 威胁看板
-
-[进入竞品库 →](competitors/index.md)
-</div>
-
-<a class="threat-row" href="competitors/jintaiyang-zhongkeyun/index.md">
-  <span class="threat-avatar">金</span>
-  <span class="threat-body"><strong>金太阳·中课云</strong><small>综合平台/资源 · 江西三端科技<br>9层深度分析 · AI平台转型完成</small></span>
-  <span class="threat-level threat-level--high">高 ↑</span>
-</a>
-
-<a class="threat-row" href="competitors/yuanfudao-feixiang/index.md">
-  <span class="threat-avatar">猿</span>
-  <span class="threat-body"><strong>猿辅导-飞象老师</strong><small>AI备课/课件 · 猿力科技<br>2.0 发布 · 课堂运行系统上线</small></span>
-  <span class="threat-level threat-level--high">高 ↑</span>
-</a>
-
-<a class="threat-row" href="competitors/seewo/index.md">
-  <span class="threat-avatar">希</span>
-  <span class="threat-body"><strong>希沃</strong><small>硬件+AI备课/课堂 · 视源股份<br>AI备课&gt;100万用户 · 魔方基座&gt;1万校</small></span>
-  <span class="threat-level threat-level--medium">中 ↑</span>
-</a>
-
-<a class="threat-row" href="competitors/zhixue/index.md">
-  <span class="threat-avatar">智</span>
-  <span class="threat-body"><strong>智学网</strong><small>AI精准教学 · 科大讯飞<br>四维度深度分析 · 教研参考卡已出</small></span>
-  <span class="threat-level threat-level--medium">中 →</span>
-</a>
-
-<a class="threat-row" href="competitors/tal-jiuzhang/index.md">
-  <span class="threat-avatar">好</span>
-  <span class="threat-body"><strong>好未来-九章爱学</strong><small>AI备课/课件 · 好未来<br>会员内购价格已补证 · 标杆校线索</small></span>
-  <span class="threat-level threat-level--medium">中 →</span>
-</a>
-
-[查看全部 11 家 →](competitors/index.md)
-</section>
-
 <div class="home-side-stack" markdown>
 <section class="home-panel latest-output" markdown>
 ## 最新产出
 
-<a class="home-feed-item" href="{latest_industry_path}">
-  <span class="home-feed-tag home-feed-tag--blue">行业</span>
+<a class="home-feed-item home-row--industry" href="{latest_industry_href}">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>{latest_industry}</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item" href="monitor/index.md">
-  <span class="home-feed-tag">监测</span>
+<a class="home-feed-item home-row--monitor" href="monitor/">
+  <span class="home-feed-tag home-feed-tag--monitor">监测</span>
   <span class="home-feed-body"><strong>{latest_monitor}</strong><small>竞争分析 / 监测日志</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item" href="{latest_policy_path}">
-  <span class="home-feed-tag">政策</span>
+<a class="home-feed-item home-row--policy" href="{latest_policy_href}">
+  <span class="home-feed-tag home-feed-tag--policy">政策</span>
   <span class="home-feed-body"><strong>{latest_policy}</strong><small>政策解读 · 机会 / 风险已提炼</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item" href="{latest_market_path}">
-  <span class="home-feed-tag">市场</span>
+<a class="home-feed-item home-row--market" href="{latest_market_href}">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
   <span class="home-feed-body"><strong>{latest_market_title}</strong><small>市场监测 · 招投标线索</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item" href="{latest_ai_path}">
-  <span class="home-feed-tag">AI</span>
+<a class="home-feed-item home-row--ai" href="{latest_ai_href}">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
   <span class="home-feed-body"><strong>{latest_ai}</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 </section>
+</div>
 
+<div class="home-side-stack" markdown>
 <section class="home-panel focus-panel" markdown>
 ## 本周重点关注
 
-<div class="focus-list" markdown>
+<div class="focus-list">
 
-- 通用大模型价格与 Agent 能力变化，继续评估题库/资源型入口替代风险
-- AI 学伴合规边界已澄清，重点观察产品是否强调情感陪伴设计
-- Tier 1 暑期动作持续跟踪，优先看金太阳·中课云、飞象老师、希沃
+{focus_items}
 
 </div>
 </section>
+</div>
 
-<section class="home-panel role-access" markdown>
+<section class="home-panel threat-panel" markdown>
+<div class="home-panel-header" markdown>
+## Tier 1 威胁看板
+
+[查看全部 →](competitors/index.md)
+</div>
+
+{threat_items}
+
+</section>
+
+</div>
+
+<section class="home-panel role-access role-access--wide" markdown>
 ## 按角色取用
 
-<div class="role-grid" markdown>
+<div class="role-grid">
 
-[__决策层__<br><span>战略简报 2026Q2 · {executive_count} 份</span>](actions/executive-briefs/index.md)
+<a class="role-card role-card--executive" href="actions/executive-briefs/">
+  <strong>决策层</strong>
+  <span>战略简报 2026Q2 · {executive_count} 份</span>
+</a>
 
-[__产品线__<br><span>Battlecard 202606 · {battlecard_count} 份</span>](actions/battlecards/index.md)
+<a class="role-card role-card--product" href="actions/battlecards/">
+  <strong>产品线</strong>
+  <span>Battlecard 202606 · {battlecard_count} 份</span>
+</a>
 
-[__市场 / 销售__<br><span>销售话术卡 · {sales_count} 份</span>](actions/sales-cards/index.md)
+<a class="role-card role-card--sales" href="actions/sales-cards/">
+  <strong>市场 / 销售</strong>
+  <span>销售话术卡 · {sales_count} 份</span>
+</a>
 
-[__教研 / 运营__<br><span>参考卡 {teaching_count} + {operation_count} 份</span>](actions/teaching-cards/index.md)
+<a class="role-card role-card--teaching" href="actions/teaching-cards/">
+  <strong>教研</strong>
+  <span>教研参考卡 · {teaching_count} 份</span>
+</a>
+
+<a class="role-card role-card--operation" href="actions/operation-cards/">
+  <strong>运营</strong>
+  <span>运营参考卡 · {operation_count} 份</span>
+</a>
 
 </div>
 </section>
-</div>
 
 </div>
 """
@@ -1008,6 +1175,15 @@ hide:
 
 def nav_item(title: str, path: str, indent: int = 2) -> str:
     return f"{' ' * indent}- {title}: {path}\n"
+
+
+def public_href(path: str) -> str:
+    """将 MkDocs 源文件路径转成 raw HTML href 可直接访问的站点路径。"""
+    if path.endswith("index.md"):
+        return path[:-len("index.md")]
+    if path.endswith(".md"):
+        return f"{path[:-3]}/"
+    return path
 
 
 def generate_mkdocs_yml(tiers: dict, industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict, monitor_logs: list, ai_nav: dict):
