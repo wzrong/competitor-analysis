@@ -19,7 +19,18 @@ python3 scripts/build.py
 # ── 步骤 2: 生成静态站点 ──
 echo ""
 echo "[2/4] 生成静态 HTML 站点..."
-./venv/bin/mkdocs build
+set +e
+BUILD_OUTPUT=$(./venv/bin/mkdocs build 2>&1)
+BUILD_STATUS=$?
+set -e
+printf "%s\n" "$BUILD_OUTPUT" | awk '
+  /Warning from the Material for MkDocs team/ { skip = 1; next }
+  skip && /https:\/\/squidfunk.github.io\/mkdocs-material\/blog\/2026\/02\/18\/mkdocs-2.0\// { skip = 0; next }
+  !skip { print }
+'
+if [ "$BUILD_STATUS" -ne 0 ]; then
+    exit "$BUILD_STATUS"
+fi
 
 # ── 步骤 3: Git 提交 ──
 echo ""

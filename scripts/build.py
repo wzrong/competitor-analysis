@@ -1124,7 +1124,7 @@ hide:
 
 <section class="home-panel threat-panel" markdown>
 <div class="home-panel-header" markdown>
-## Tier 1 威胁看板
+## 重点竞品威胁看板
 
 [查看全部 →](competitors/index.md)
 </div>
