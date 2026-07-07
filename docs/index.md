@@ -18,7 +18,7 @@ hide:
 
 [:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">46</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 11 · Battlecard 11 · 话术 12 · 教研 7 · 运营 5</span>](actions/index.md)
 
-[:material-file-document-check: __政策解读__<br><span class="home-metric-number">6</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">9</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
 
 </div>
 
