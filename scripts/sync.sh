@@ -20,7 +20,7 @@ python3 scripts/build.py
 echo ""
 echo "[2/4] 生成静态 HTML 站点..."
 set +e
-BUILD_OUTPUT=$(./venv/bin/mkdocs build 2>&1)
+BUILD_OUTPUT=$(./venv/bin/mkdocs build --quiet 2>&1)
 BUILD_STATUS=$?
 set -e
 printf "%s\n" "$BUILD_OUTPUT" | awk '

@@ -935,6 +935,21 @@ def monitor_focus_summary(latest_monitor: str, monitor_path: Path) -> str:
     return f"查看 {latest_monitor}，跟踪 Tier 1 变化"
 
 
+def monitor_overview_line(latest_monitor: str) -> str:
+    monitor_path = VAULT_ROOT / "监测日志" / f"{latest_monitor}.md"
+    if not monitor_path.exists():
+        return f"最新监测：{strip_markdown_inline(latest_monitor)}"
+    text = monitor_path.read_text(encoding="utf-8")
+    execution = re.search(r"\*\*执行日期\*\*[：:]\s*(\d{4}-\d{2}-\d{2})", text)
+    period = re.search(r"\*\*监测周期\*\*[：:]\s*([^\n]+)", text)
+    execution_date = execution.group(1) if execution else first_date(latest_monitor, latest_monitor)
+    if period:
+        clean_period = re.sub(r"（[^）]*）", "", period.group(1)).strip()
+        clean_period = re.sub(r"\s*至\s*", " 至 ", clean_period)
+        return f"最新监测：{execution_date} · 覆盖 {strip_markdown_inline(clean_period)}"
+    return f"最新监测：{execution_date}"
+
+
 def build_focus_items(latest_ai: str, latest_ai_href: str, latest_policy: str, latest_policy_href: str,
                       latest_monitor: str, latest_market_title: str, latest_market_href: str,
                       action_nav: dict) -> str:
@@ -1037,6 +1052,7 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
     latest_policy_href = public_href(latest_policy_path)
     latest_market_href = public_href(latest_market_path)
     latest_ai_href = public_href(latest_ai_path)
+    overview_line = monitor_overview_line(latest_monitor)
     focus_items = build_focus_items(
         latest_ai,
         latest_ai_href,
@@ -1058,7 +1074,7 @@ hide:
 
 # 情报总览
 
-> 2026-07-06 · 最新监测简报：2026-06-29（覆盖 06-22 至 06-28）
+> {overview_line}
 
 <div class="home-metrics" markdown>
 

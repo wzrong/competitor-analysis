@@ -715,7 +715,50 @@
 
 [data-md-color-scheme="slate"] .home-metrics a,
 [data-md-color-scheme="slate"] .home-panel {
-  background: var(--md-code-bg-color);
+  background: #252a34;
+  border-color: #465064;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+[data-md-color-scheme="slate"] .home-dashboard {
+  color: #d7deea;
+}
+
+[data-md-color-scheme="slate"] .home-dashboard h1,
+[data-md-color-scheme="slate"] .home-panel h2,
+[data-md-color-scheme="slate"] .home-feed-body strong,
+[data-md-color-scheme="slate"] .threat-body strong {
+  color: #f2f5f9;
+}
+
+[data-md-color-scheme="slate"] .home-dashboard blockquote {
+  color: #b3bdcc;
+  border-left-color: #6b7586;
+}
+
+[data-md-color-scheme="slate"] .home-muted,
+[data-md-color-scheme="slate"] .home-feed-body small,
+[data-md-color-scheme="slate"] .threat-body small,
+[data-md-color-scheme="slate"] .role-grid span {
+  color: #aeb8c7;
+}
+
+[data-md-color-scheme="slate"] .home-feed-arrow {
+  color: #c3ccda;
+}
+
+[data-md-color-scheme="slate"] .home-panel-header a {
+  color: #8fb1ff !important;
+}
+
+[data-md-color-scheme="slate"] .home-metrics a:hover {
+  background: color-mix(in srgb, var(--metric-color) 12%, #252a34);
+  border-color: color-mix(in srgb, var(--metric-color) 70%, #6b7586);
+}
+
+[data-md-color-scheme="slate"] .home-danger,
+[data-md-color-scheme="slate"] .home-danger-label {
+  color: #ff6b7a;
 }
 
 [data-md-color-scheme="slate"] .role-card {
@@ -723,11 +766,33 @@
   border-color: color-mix(in srgb, var(--role-color) 42%, transparent);
 }
 
+[data-md-color-scheme="slate"] .role-grid strong {
+  color: color-mix(in srgb, var(--role-color) 62%, #fff);
+}
+
 [data-md-color-scheme="slate"] .threat-row:hover,
 [data-md-color-scheme="slate"] .home-feed-item:hover,
 [data-md-color-scheme="slate"] .focus-item:hover {
-  background: color-mix(in srgb, var(--row-color) 14%, transparent);
+  background: color-mix(in srgb, var(--row-color) 18%, #252a34);
   box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--row-color) 55%, transparent);
+}
+
+[data-md-color-scheme="slate"] .md-footer,
+[data-md-color-scheme="slate"] .md-footer-meta {
+  color: #aeb8c7 !important;
+  background: #151922 !important;
+  border-top: 1px solid #303848;
+}
+
+[data-md-color-scheme="slate"] .md-copyright,
+[data-md-color-scheme="slate"] .md-copyright__highlight {
+  color: #aeb8c7 !important;
+  opacity: 1 !important;
+}
+
+[data-md-color-scheme="slate"] .md-footer .weixin-tooltip,
+[data-md-color-scheme="slate"] .md-footer a {
+  color: #8fb1ff !important;
 }
 
 @media screen and (max-width: 76.25em) {
