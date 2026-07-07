@@ -44,6 +44,10 @@ if git diff --cached --quiet; then
     exit 0
 fi
 
+echo ""
+echo "本次变更文件："
+git status --short
+
 # 提交信息：支持自定义，默认用时间戳
 COMMIT_MSG="${1:-更新站点内容 $(date '+%Y-%m-%d %H:%M:%S')}"
 git commit -m "$COMMIT_MSG"
