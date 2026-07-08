@@ -28,9 +28,9 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新产出
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-06-情报简报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-07-情报简报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-06-情报简报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-07-情报简报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -52,9 +52,9 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-07-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-08-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-07-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-07-08-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 </section>
@@ -66,9 +66,9 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-07-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-08-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-07-AI每日简报</strong><small>今天 OpenAI 和 Google DeepMind 官方均无新动态，行业焦点集中在两条主线：一是 Anthropic 的 Claude Fable 5 在 GPU 内核生成上刷新纪录，二是国产厂商在应用层（视频生成打入好莱坞、扩散模型推理加速论文入选 ICML）持续发力。以下是今日最值得关注的几件事：</small></span>
+  <span class="home-feed-body"><strong>2026-07-08-AI每日简报</strong><small>今日主线由「模型可解释性」与「开源大规模 MoE」两条叙事牵引：Anthropic 用 Jacobian 方法在 Claude 内部找到一块类似全局工作空间的「J 空间」，业内讨论骤起；腾讯次日开源 295B 参数、21B 激活的 Hy3 MoE 模型，Apache 2.0 授权、256K 上下文，为国产开源阵营再添重量级选手。Anthropic 同期把 Claude Cowork 从桌面推向 Web/移动端，把 Fable 5 重新全球部署；国内一线则围绕具身智能视觉基模、Kimi K2.7 Code 高速版持续放量。</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
