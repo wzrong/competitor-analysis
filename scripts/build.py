@@ -14,6 +14,7 @@ VAULT_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/竞品分析工作台
 AI_BRIEFING_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/AI信息聚合")
 WEBSITE_ROOT = Path(__file__).parent.parent
 DOCS_ROOT = WEBSITE_ROOT / "docs"
+MONITOR_ROOT = VAULT_ROOT / "竞品库" / "监测日志"
 
 SITE_NAME = "学科网战略情报系统"
 SITE_DESCRIPTION = "行业分析、竞争分析、政策分析、市场监测与应对建议门户"
@@ -515,7 +516,7 @@ def sort_markdown_by_date(files):
 
 
 def copy_monitor_logs():
-    monitor_src = VAULT_ROOT / "监测日志"
+    monitor_src = MONITOR_ROOT
     monitor_dst = DOCS_ROOT / "monitor"
     monitor_dst.mkdir(parents=True, exist_ok=True)
     dated_logs = [src for src in monitor_src.glob("*.md") if re.match(r"\d{4}-\d{2}-\d{2}-", src.stem)]
@@ -531,7 +532,7 @@ def copy_monitor_logs():
         latest_content = (monitor_dst / log_files[0].name).read_text(encoding="utf-8")
         (monitor_dst / "index.md").write_text(latest_content, encoding="utf-8")
     else:
-        (monitor_dst / "index.md").write_text("# 竞争监测日志\n\n> 暂无监测简报。\n", encoding="utf-8")
+        (monitor_dst / "index.md").write_text("# 竞品周情报\n\n> 暂无竞品周情报。\n", encoding="utf-8")
     return [f.stem for f in log_files]
 
 
@@ -852,7 +853,7 @@ hide:
 
 TAG_META = {
     "industry": ("行业", "home-row--industry", "home-feed-tag--industry"),
-    "monitor": ("监测", "home-row--monitor", "home-feed-tag--monitor"),
+    "monitor": ("竞品", "home-row--competitor", "home-feed-tag--competitor"),
     "policy": ("政策", "home-row--policy", "home-feed-tag--policy"),
     "market": ("市场", "home-row--market", "home-feed-tag--market"),
     "ai": ("AI", "home-row--ai", "home-feed-tag--ai"),
@@ -896,7 +897,13 @@ def source_path_for_site_path(path: str) -> Path | None:
         return VAULT_ROOT / "市场监测" / "周报" / Path(path).name
     if path.startswith("ai-briefings/"):
         return AI_BRIEFING_ROOT / "briefings" / Path(path).name
+    if path.startswith("monitor/"):
+        return MONITOR_ROOT / Path(path).name
     return None
+
+
+def monitor_source_path(name: str) -> Path:
+    return MONITOR_ROOT / f"{name}.md"
 
 
 def first_meaningful_line(path: Path | None, fallback: str) -> str:
@@ -904,6 +911,8 @@ def first_meaningful_line(path: Path | None, fallback: str) -> str:
         return fallback
     for raw_line in path.read_text(encoding="utf-8").splitlines():
         line = raw_line.strip()
+        if line.startswith("#") and ">" in line:
+            line = line.split(">", 1)[1].strip()
         if not line or line.startswith(("#", "---", "page_type:", "tags:", "- ", "  - ")):
             continue
         line = re.sub(r"^>\s*", "", line).strip()
@@ -1029,7 +1038,7 @@ def monitor_focus_summary(latest_monitor: str, monitor_path: Path) -> str:
 
 
 def monitor_overview_line(latest_monitor: str) -> str:
-    monitor_path = VAULT_ROOT / "监测日志" / f"{latest_monitor}.md"
+    monitor_path = monitor_source_path(latest_monitor)
     if not monitor_path.exists():
         return f"最新监测：{strip_markdown_inline(latest_monitor)}"
     text = monitor_path.read_text(encoding="utf-8")
@@ -1041,6 +1050,36 @@ def monitor_overview_line(latest_monitor: str) -> str:
         clean_period = re.sub(r"\s*至\s*", " 至 ", clean_period)
         return f"最新监测：{execution_date} · 覆盖 {strip_markdown_inline(clean_period)}"
     return f"最新监测：{execution_date}"
+
+
+def clean_overview_title(title: str) -> str:
+    title = strip_markdown_inline(title)
+    title = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", title)
+    return title
+
+
+def home_overview_line(latest_industry: str, latest_monitor: str, latest_market_title: str,
+                       latest_policy: str, latest_ai: str) -> str:
+    latest_dates = [
+        date for date in [
+            first_date(latest_industry),
+            first_date(latest_monitor),
+            first_date(latest_market_title),
+            first_date(latest_ai),
+            first_date(latest_policy),
+        ]
+        if date != "0000-00-00"
+    ]
+    updated = max(latest_dates) if latest_dates else datetime.now().strftime("%Y-%m-%d")
+    module_dates = [
+        f"行业 {first_date(latest_industry, '—')}",
+        f"竞品 {first_date(latest_monitor, '—')}",
+        f"市场 {first_date(latest_market_title, '—')}",
+        f"AI {first_date(latest_ai, '—')}",
+    ]
+    if latest_policy and latest_policy != "政策时间轴":
+        module_dates.append(f"政策 {first_date(latest_policy, '2026Q1Q2')}")
+    return f"全站更新：{updated} · 行业 / 竞品 / 市场 / AI / 政策已同步（" + "，".join(module_dates) + "）"
 
 
 def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict,
@@ -1073,7 +1112,7 @@ def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, ac
         add_item("policy", title, first_meaningful_line(source_path_for_site_path(path), "查看政策解读，关注合规边界与机会窗口"), path)
 
     for log_name in monitor_logs:
-        monitor_path = VAULT_ROOT / "监测日志" / f"{log_name}.md"
+        monitor_path = monitor_source_path(log_name)
         add_item("competitor", log_name, monitor_focus_summary(log_name, monitor_path), f"monitor/{log_name}.md")
 
     for group, title, path in market_nav:
@@ -1121,7 +1160,7 @@ def build_latest_items(latest_industry: str, latest_industry_href: str, latest_m
                        latest_market_href: str, latest_ai: str, latest_ai_href: str) -> str:
     items = [
         (first_date(f"{latest_industry} {latest_industry_href}"), build_feed_item("industry", latest_industry, "行业情报 · 含对学科网的影响分析", latest_industry_href)),
-        (first_date(latest_monitor), build_feed_item("monitor", latest_monitor, "竞争分析 / 监测日志", "monitor/")),
+        (first_date(latest_monitor), build_feed_item("monitor", latest_monitor, "竞争分析 / 竞品周情报", "monitor/")),
         (first_date(f"{latest_policy} {latest_policy_href}"), build_feed_item("policy", latest_policy, "政策解读 · 机会 / 风险已提炼", latest_policy_href)),
         (first_date(f"{latest_market_title} {latest_market_href}"), build_feed_item("market", latest_market_title, "市场监测 · 招投标线索", latest_market_href)),
         (first_date(f"{latest_ai} {latest_ai_href}"), build_feed_item("ai", latest_ai, "外部技术动态 · AI每日简报", latest_ai_href)),
@@ -1149,40 +1188,69 @@ def competitor_monitor_score(name: str, monitor_text: str) -> tuple[int, str]:
     signal = ""
     for alias in competitor_aliases(name):
         if alias and alias in monitor_text:
-            score = max(score, 2)
+            score = max(score, 10)
             section = re.search(rf"###\s+{re.escape(alias)}[^\n]*\n(?P<body>.*?)(?=\n---\n|\n###\s+|\n##\s+|\Z)", monitor_text, re.S)
             if section:
                 body = section.group("body")
-                if "重要" in body or "建议深度分析" in body:
-                    score = max(score, 30)
+                if "🚨" in body or "战略级" in body:
+                    score = max(score, 100)
+                    signal = "战略级信号"
+                elif "⚠️" in body or "重要" in body or "建议深度分析" in body:
+                    score = max(score, 90)
                     signal = "重要信号"
                 elif "一般" in body or "无显著变化" in body:
-                    score = max(score, 5)
+                    score = max(score, 30)
                     signal = "常规监测"
+            elif re.search(rf"{re.escape(alias)}.*?(战略级|重要|建议深度分析|⚠️|🚨)", monitor_text):
+                score = max(score, 90)
+                signal = "重要信号"
             break
     return score, signal
 
 
-def build_threat_items(tiers: dict, latest_monitor: str) -> tuple[str, int, str]:
-    monitor_path = VAULT_ROOT / "监测日志" / f"{latest_monitor}.md"
-    monitor_text = monitor_path.read_text(encoding="utf-8") if monitor_path.exists() else ""
+def recent_monitor_texts(monitor_logs: list[str], window_days: int = 30) -> list[tuple[date, str, str]]:
+    dated_logs = []
+    for log_name in monitor_logs:
+        log_date = date_value(log_name)
+        path = monitor_source_path(log_name)
+        if log_date and path.exists():
+            dated_logs.append((log_date, log_name, path.read_text(encoding="utf-8")))
+    if not dated_logs:
+        return []
+    anchor = max(log_date for log_date, _name, _text in dated_logs)
+    cutoff = anchor - timedelta(days=window_days)
+    return [(log_date, name, text) for log_date, name, text in dated_logs if cutoff <= log_date <= anchor]
+
+
+def build_threat_items(tiers: dict, monitor_logs: list[str]) -> tuple[str, int, str]:
+    recent_logs = recent_monitor_texts(monitor_logs)
+    anchor = max((log_date for log_date, _name, _text in recent_logs), default=None)
     ranked = []
     for index, item in enumerate(tiers.get("Tier 1", [])):
-        score, signal = competitor_monitor_score(item["name"], monitor_text)
+        best_score = 0
+        best_signal = ""
+        best_date = None
+        for log_date, _log_name, monitor_text in recent_logs:
+            score, signal = competitor_monitor_score(item["name"], monitor_text)
+            if score > best_score or (score == best_score and (best_date is None or log_date > best_date)):
+                best_score = score
+                best_signal = signal
+                best_date = log_date
         updated = first_date(item.get("updated", ""), "0000-00-00")
         latest = strip_markdown_inline(item.get("latest", ""))
         desc = f"{item['track']} · {item['company']} · {latest}"
-        ranked.append((score, updated, -index, item, signal, desc))
-    ranked.sort(reverse=True, key=lambda row: (row[0], row[1], row[2]))
+        recency_bonus = (best_date - (anchor - timedelta(days=30))).days if best_date and anchor else 0
+        ranked.append((best_score, recency_bonus, updated, -index, item, best_signal, desc))
+    ranked.sort(reverse=True, key=lambda row: (row[0], row[1], row[2], row[3]))
     selected = ranked[:5]
-    high_count = sum(1 for score, *_ in selected if score >= 30)
-    high_names = [row[3]["name"] for row in selected if row[0] >= 30]
-    top_names = " / ".join((high_names or [row[3]["name"] for row in selected[:3]])) if selected else "暂无"
+    high_count = sum(1 for score, *_ in ranked if score >= 90)
+    high_names = [row[4]["name"] for row in ranked if row[0] >= 90]
+    top_names = " / ".join((high_names or [row[4]["name"] for row in selected[:3]])) if selected else "暂无"
     rows = []
-    for index, (score, _updated, _order, item, signal, desc) in enumerate(selected, start=1):
-        level_class = "threat-level--high" if score >= 30 else "threat-level--medium"
-        row_class = "home-row--danger" if score >= 30 else "home-row--warning"
-        level = "高 ↑" if score >= 30 else "中 →"
+    for index, (score, _recency, _updated, _order, item, signal, desc) in enumerate(selected, start=1):
+        level_class = "threat-level--high" if score >= 90 else "threat-level--medium"
+        row_class = "home-row--danger" if score >= 90 else "home-row--warning"
+        level = "高 ↑" if score >= 90 else "中 →"
         desc_text = f"{signal} · {desc}" if signal else desc
         rows.append(f"""<a class="threat-row {row_class}" href="competitors/{item['slug']}/">
   <span class="threat-avatar threat-avatar--tone-{index}">{html.escape(item['name'][:1])}</span>
@@ -1208,7 +1276,8 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
     latest_policy = policy_nav[0][0] if policy_nav else "政策时间轴"
     latest_policy_path = policy_nav[0][1] if policy_nav else "policy/index.md"
     latest_monitor = monitor_logs[0] if monitor_logs else "暂无"
-    latest_market = next((item for item in market_nav if item[0] == "周报"), None)
+    market_weeklies = [item for item in market_nav if item[0] == "周报"]
+    latest_market = max(market_weeklies, key=lambda item: first_date(f"{item[1]} {item[2]}")) if market_weeklies else None
     latest_market_title = latest_market[1] if latest_market else "市场监测总览"
     latest_market_path = latest_market[2] if latest_market else "market/index.md"
     latest_ai = ai_nav.get("latest_title", "暂无")
@@ -1217,7 +1286,13 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
     latest_policy_href = public_href(latest_policy_path)
     latest_market_href = public_href(latest_market_path)
     latest_ai_href = public_href(latest_ai_path)
-    overview_line = monitor_overview_line(latest_monitor)
+    overview_line = home_overview_line(
+        latest_industry,
+        latest_monitor,
+        latest_market_title,
+        latest_policy,
+        latest_ai,
+    )
     latest_items = build_latest_items(
         latest_industry,
         latest_industry_href,
@@ -1237,7 +1312,7 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
         monitor_logs,
         ai_nav,
     )
-    threat_items, high_threat_count, high_threat_names = build_threat_items(tiers, latest_monitor)
+    threat_items, high_threat_count, high_threat_names = build_threat_items(tiers, monitor_logs)
     content = f"""---
 hide:
   - navigation
