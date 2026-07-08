@@ -26,11 +26,17 @@ hide:
 
 <div class="home-side-stack" markdown>
 <section class="home-panel latest-output" markdown>
-## <span class="section-kicker section-kicker--new">NEW</span> 最新产出
+## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-07-情报简报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-08-情报简报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-07-情报简报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-08-情报简报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-08-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-07-08-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -40,21 +46,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--policy" href="policy/解读/区域政策对比-2026Q1Q2/">
-  <span class="home-feed-tag home-feed-tag--policy">政策</span>
-  <span class="home-feed-body"><strong>区域政策对比-2026Q1Q2</strong><small>政策解读 · 机会 / 风险已提炼</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
 <a class="home-feed-item home-row--market" href="market/周报/2026-06-02-市场监测周报/">
   <span class="home-feed-tag home-feed-tag--market">市场</span>
   <span class="home-feed-body"><strong>2026-06-02-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-08-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-08-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+<a class="home-feed-item home-row--policy" href="policy/解读/区域政策对比-2026Q1Q2/">
+  <span class="home-feed-tag home-feed-tag--policy">政策</span>
+  <span class="home-feed-body"><strong>区域政策对比-2026Q1Q2</strong><small>政策解读 · 机会 / 风险已提炼</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 </section>
@@ -66,33 +66,33 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-08-情报简报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>WAIC 教育 AI 与希沃母公司业绩信号</strong><small>来源：2026-07-08-情报简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-06-情报简报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>AI 拟人化互动合规窗口</strong><small>来源：2026-07-06-情报简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--competitor" href="monitor/2026-07-06-监测简报/">
+  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
+  <span class="home-feed-body"><strong>作业帮教师版（母公司层面）— ⚠️ 重要（C端搜题入口地...</strong><small>来源：2026-07-06-监测简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--market" href="market/周报/2026-07-07-真实数据周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>招投标真实数据与市场线索</strong><small>来源：2026-07-07-真实数据周报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--ai" href="ai-briefings/2026-07-08-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-08-AI每日简报</strong><small>今日主线由「模型可解释性」与「开源大规模 MoE」两条叙事牵引：Anthropic 用 Jacobian 方法在 Claude 内部找到一块类似全局工作空间的「J 空间」，业内讨论骤起；腾讯次日开源 295B 参数、21B 激活的 Hy3 MoE 模型，Apache 2.0 授权、256K 上下文，为国产开源阵营再添重量级选手。Anthropic 同期把 Claude Cowork 从桌面推向 Web/移动端，把 Fable 5 重新全球部署；国内一线则围绕具身智能视觉基模、Kimi K2.7 Code 高速版持续放量。</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--policy" href="policy/解读/区域政策对比-2026Q1Q2/">
-  <span class="home-feed-tag home-feed-tag--policy">政策</span>
-  <span class="home-feed-body"><strong>区域政策对比-2026Q1Q2</strong><small>扫描对象：十大重点省份对&quot;人工智能+教育&quot;行动计划（教科信〔2026〕1号）的落地配套文件</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--competitor" href="monitor/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>2026-07-06-监测简报</strong><small>作业帮教师版（母公司层面）— ⚠️ 重要（C端搜题入口地位被&quot;豆包爱学&quot;等通用AI产品削弱，详见下文）</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--market" href="market/周报/2026-06-02-市场监测周报/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>2026-06-02-市场监测周报</strong><small>查看市场监测，关注区域采购与资金流向变化</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--action" href="actions/sales-cards/政策合规差异化-销售话术总卡-202607/">
-  <span class="home-feed-tag home-feed-tag--action">行动</span>
-  <span class="home-feed-body"><strong>政策合规差异化-销售话术总卡-202607</strong><small>销售话术卡 · 最新可用材料</small></span>
+  <span class="home-feed-body"><strong>模型可解释性与开源大规模 MoE</strong><small>来源：2026-07-08-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 

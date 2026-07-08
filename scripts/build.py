@@ -7,7 +7,7 @@ import html
 import os
 import re
 import shutil
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 VAULT_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/竞品分析工作台")
@@ -877,6 +877,16 @@ def first_date(text: str, fallback: str = "0000-00-00") -> str:
     return fallback
 
 
+def date_value(text: str) -> date | None:
+    value = first_date(text)
+    if value == "0000-00-00":
+        return None
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").date()
+    except ValueError:
+        return None
+
+
 def source_path_for_site_path(path: str) -> Path | None:
     if path.startswith("industry/日情报/"):
         return VAULT_ROOT / "行业分析" / "日情报" / Path(path).name
@@ -900,6 +910,89 @@ def first_meaningful_line(path: Path | None, fallback: str) -> str:
         if line:
             return line
     return fallback
+
+
+def compact_focus_text(text: str, limit: int = 34) -> str:
+    text = re.sub(r"\s+", " ", strip_markdown_inline(text))
+    text = re.sub(r"^本期覆盖\s*\d{4}-\d{2}-\d{2}（[^）]*）[。，；;]?", "", text)
+    text = re.sub(r"^今日主线由", "", text)
+    text = re.sub(r"^本期主线由", "", text)
+    text = re.sub(r"^扫描对象[：:]\s*", "", text)
+    text = text.strip(" ：:，,。；;")
+    if len(text) <= limit:
+        return text
+    return text[:limit].rstrip(" ，,。；;") + "..."
+
+
+def focus_topic_title(kind: str, source_title: str, source_line: str) -> str:
+    plain_title = strip_markdown_inline(source_title)
+    plain_line = strip_markdown_inline(source_line)
+    quoted = re.findall(r"[「“](.+?)[」”]", plain_line)
+    if quoted:
+        return compact_focus_text("与".join(quoted[:2]), 28)
+    if kind == "industry" and "主线为" in plain_line:
+        if "WAIC" in plain_line and "视源股份" in plain_line:
+            return "WAIC 教育 AI 与希沃母公司业绩信号"
+        topic = plain_line.split("主线为", 1)[1]
+        topic = re.split(r"[。；;]", topic, maxsplit=1)[0]
+        return compact_focus_text(topic, 28)
+    if kind == "industry" and "合规信号" in plain_line:
+        return "AI 拟人化互动合规窗口"
+    if kind == "industry" and "通用大模型进展" in plain_line:
+        return "通用大模型进展与竞品信号澄清"
+    if kind == "ai" and "两条叙事" in plain_line:
+        topic = plain_line.split("两条叙事", 1)[0]
+        return compact_focus_text(topic, 28)
+    if kind == "ai" and "安全与信任" in plain_line:
+        return "大模型安全与身份验证压力"
+    if kind == "competitor":
+        return compact_focus_text(plain_line, 28)
+    if kind == "market":
+        if "真实数据周报" in plain_title:
+            return "招投标真实数据与市场线索"
+        if "合并周报" in plain_title:
+            return "近 6 周市场监测补录"
+        return re.sub(r"^\d{4}-\d{2}-\d{2}-", "", plain_title)
+    if kind == "policy":
+        return re.sub(r"^\d{4}-\d{2}-", "", plain_title)
+    if kind == "action":
+        return re.sub(r"^\d{4}-\d{2}-\d{2}-", "", plain_title)
+    fallback_title = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", plain_title)
+    if fallback_title in {"情报简报", "AI每日简报", "监测简报"}:
+        return compact_focus_text(plain_line, 28)
+    return fallback_title
+
+
+def focus_importance(kind: str, source_title: str, source_desc: str, topic_title: str) -> int:
+    text = f"{source_title} {source_desc} {topic_title}"
+    score = {
+        "competitor": 45,
+        "policy": 40,
+        "market": 35,
+        "industry": 34,
+        "ai": 30,
+        "action": 28,
+    }.get(kind, 20)
+    for keyword, weight in [
+        ("战略", 18),
+        ("重要", 16),
+        ("风险", 14),
+        ("威胁", 14),
+        ("合规", 12),
+        ("政策", 12),
+        ("招投标", 12),
+        ("采购", 10),
+        ("竞品", 10),
+        ("WAIC", 10),
+        ("希沃", 10),
+        ("视源股份", 10),
+        ("模型", 8),
+        ("Agent", 8),
+        ("AI", 6),
+    ]:
+        if keyword in text:
+            score += weight
+    return score
 
 
 def build_feed_item(kind: str, title: str, desc: str, href: str, css_class: str = "home-feed-item") -> str:
@@ -950,19 +1043,91 @@ def monitor_overview_line(latest_monitor: str) -> str:
     return f"最新监测：{execution_date}"
 
 
-def build_focus_items(latest_ai: str, latest_ai_href: str, latest_policy: str, latest_policy_href: str,
-                      latest_monitor: str, latest_market_title: str, latest_market_href: str,
-                      action_nav: dict) -> str:
-    monitor_path = VAULT_ROOT / "监测日志" / f"{latest_monitor}.md"
-    action_title, action_path, action_desc = latest_action_output(action_nav)
+def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, action_nav: dict,
+                      monitor_logs: list, ai_nav: dict) -> str:
+    candidates = []
+
+    def add_item(kind: str, source_title: str, source_desc: str, path: str):
+        item_date = date_value(f"{source_title} {path}")
+        if item_date is None:
+            return
+        topic_title = focus_topic_title(kind, source_title, source_desc)
+        desc = f"来源：{strip_markdown_inline(source_title)}"
+        candidates.append({
+            "date": item_date,
+            "kind": kind,
+            "topic": topic_title,
+            "source": source_title,
+            "desc": desc,
+            "html": build_feed_item(kind, topic_title, desc, public_href(path), "focus-item"),
+            "score": focus_importance(kind, source_title, source_desc, topic_title),
+        })
+
+    for _subdir, title, path in industry_nav:
+        add_item("industry", title, first_meaningful_line(source_path_for_site_path(path), "查看行业情报，关注外部趋势变化"), path)
+
+    for title, path, _report_type in ai_nav.get("items", []):
+        add_item("ai", title, first_meaningful_line(source_path_for_site_path(path), "查看 AI 每日简报，关注外部技术动态"), path)
+
+    for title, path in policy_nav:
+        add_item("policy", title, first_meaningful_line(source_path_for_site_path(path), "查看政策解读，关注合规边界与机会窗口"), path)
+
+    for log_name in monitor_logs:
+        monitor_path = VAULT_ROOT / "监测日志" / f"{log_name}.md"
+        add_item("competitor", log_name, monitor_focus_summary(log_name, monitor_path), f"monitor/{log_name}.md")
+
+    for group, title, path in market_nav:
+        if group == "周报":
+            add_item("market", title, "查看市场监测，关注区域采购与资金流向变化", path)
+
+    for audience, outputs in action_nav.items():
+        for title, path in outputs:
+            add_item("action", title, f"{audience} · 可用行动材料", path)
+
+    if not candidates:
+        return ""
+
+    anchor = max(item["date"] for item in candidates)
+    week_start = anchor - timedelta(days=anchor.weekday())
+    week_end = week_start + timedelta(days=6)
+    weekly_items = [item for item in candidates if week_start <= item["date"] <= week_end]
+    if len(weekly_items) < 5:
+        weekly_items = candidates
+
+    unique_items = []
+    seen_topics = set()
+    kind_counts = {}
+    for item in sorted(
+        weekly_items,
+        key=lambda row: (row["score"] + (row["date"] - week_start).days * 8, row["date"], row["topic"]),
+        reverse=True,
+    ):
+        normalized_topic = re.sub(r"\W+", "", item["topic"])
+        if normalized_topic in seen_topics:
+            continue
+        if kind_counts.get(item["kind"], 0) >= 2:
+            continue
+        seen_topics.add(normalized_topic)
+        kind_counts[item["kind"]] = kind_counts.get(item["kind"], 0) + 1
+        unique_items.append(item)
+        if len(unique_items) == 5:
+            break
+
+    return "\n\n".join(item["html"] for item in unique_items)
+
+
+def build_latest_items(latest_industry: str, latest_industry_href: str, latest_monitor: str,
+                       latest_policy: str, latest_policy_href: str, latest_market_title: str,
+                       latest_market_href: str, latest_ai: str, latest_ai_href: str) -> str:
     items = [
-        build_feed_item("ai", latest_ai, first_meaningful_line(source_path_for_site_path(latest_ai_href.rstrip("/") + ".md"), "查看 AI 每日简报，关注外部技术动态"), latest_ai_href, "focus-item"),
-        build_feed_item("policy", latest_policy, first_meaningful_line(source_path_for_site_path(latest_policy_href.rstrip("/") + ".md"), "查看政策解读，关注合规边界与机会窗口"), latest_policy_href, "focus-item"),
-        build_feed_item("competitor", latest_monitor, monitor_focus_summary(latest_monitor, monitor_path), "monitor/", "focus-item"),
-        build_feed_item("market", latest_market_title, "查看市场监测，关注区域采购与资金流向变化", latest_market_href, "focus-item"),
-        build_feed_item("action", action_title, action_desc, public_href(action_path), "focus-item"),
+        (first_date(f"{latest_industry} {latest_industry_href}"), build_feed_item("industry", latest_industry, "行业情报 · 含对学科网的影响分析", latest_industry_href)),
+        (first_date(latest_monitor), build_feed_item("monitor", latest_monitor, "竞争分析 / 监测日志", "monitor/")),
+        (first_date(f"{latest_policy} {latest_policy_href}"), build_feed_item("policy", latest_policy, "政策解读 · 机会 / 风险已提炼", latest_policy_href)),
+        (first_date(f"{latest_market_title} {latest_market_href}"), build_feed_item("market", latest_market_title, "市场监测 · 招投标线索", latest_market_href)),
+        (first_date(f"{latest_ai} {latest_ai_href}"), build_feed_item("ai", latest_ai, "外部技术动态 · AI每日简报", latest_ai_href)),
     ]
-    return "\n\n".join(items)
+    items.sort(key=lambda item: item[0], reverse=True)
+    return "\n\n".join(item_html for _date, item_html in items)
 
 
 def competitor_aliases(name: str) -> list[str]:
@@ -1053,15 +1218,24 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
     latest_market_href = public_href(latest_market_path)
     latest_ai_href = public_href(latest_ai_path)
     overview_line = monitor_overview_line(latest_monitor)
-    focus_items = build_focus_items(
-        latest_ai,
-        latest_ai_href,
+    latest_items = build_latest_items(
+        latest_industry,
+        latest_industry_href,
+        latest_monitor,
         latest_policy,
         latest_policy_href,
-        latest_monitor,
         latest_market_title,
         latest_market_href,
+        latest_ai,
+        latest_ai_href,
+    )
+    focus_items = build_focus_items(
+        industry_nav,
+        policy_nav,
+        market_nav,
         action_nav,
+        monitor_logs,
+        ai_nav,
     )
     threat_items, high_threat_count, high_threat_names = build_threat_items(tiers, latest_monitor)
     content = f"""---
@@ -1092,37 +1266,9 @@ hide:
 
 <div class="home-side-stack" markdown>
 <section class="home-panel latest-output" markdown>
-## <span class="section-kicker section-kicker--new">NEW</span> 最新产出
+## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="{latest_industry_href}">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>{latest_industry}</strong><small>行业情报 · 含对学科网的影响分析</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--monitor" href="monitor/">
-  <span class="home-feed-tag home-feed-tag--monitor">监测</span>
-  <span class="home-feed-body"><strong>{latest_monitor}</strong><small>竞争分析 / 监测日志</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--policy" href="{latest_policy_href}">
-  <span class="home-feed-tag home-feed-tag--policy">政策</span>
-  <span class="home-feed-body"><strong>{latest_policy}</strong><small>政策解读 · 机会 / 风险已提炼</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--market" href="{latest_market_href}">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>{latest_market_title}</strong><small>市场监测 · 招投标线索</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="{latest_ai_href}">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>{latest_ai}</strong><small>外部技术动态 · AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
+{latest_items}
 </section>
 </div>
 
