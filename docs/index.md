@@ -8,13 +8,13 @@ hide:
 
 # 情报总览
 
-> 最新监测：2026-07-06 · 覆盖 2026-06-29 至 2026-07-05
+> 最新监测：暂无
 
 <div class="home-metrics" markdown>
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">185</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · 11 / Tier 2 · 24 / 观察池 · 150+</span>](competitors/index.md)
 
-[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">1</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">作业帮教师版</span>](monitor/index.md)
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">0</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 菁优网 / 橡皮网</span>](monitor/index.md)
 
 [:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">46</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 11 · Battlecard 11 · 话术 12 · 教研 7 · 运营 5</span>](actions/index.md)
 
@@ -28,9 +28,9 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-08-情报简报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-08-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-08-情报简报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-08-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -40,15 +40,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--monitor" href="monitor/">
-  <span class="home-feed-tag home-feed-tag--monitor">监测</span>
-  <span class="home-feed-body"><strong>2026-07-06-监测简报</strong><small>竞争分析 / 监测日志</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
 <a class="home-feed-item home-row--market" href="market/周报/2026-06-02-市场监测周报/">
   <span class="home-feed-tag home-feed-tag--market">市场</span>
   <span class="home-feed-body"><strong>2026-06-02-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--monitor" href="monitor/">
+  <span class="home-feed-tag home-feed-tag--monitor">监测</span>
+  <span class="home-feed-body"><strong>暂无</strong><small>竞争分析 / 监测日志</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -66,21 +66,15 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-08-情报简报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-08-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>WAIC 教育 AI 与希沃母公司业绩信号</strong><small>来源：2026-07-08-情报简报</small></span>
+  <span class="home-feed-body"><strong>WAIC 教育 AI 与希沃母公司业绩信号</strong><small>来源：2026-07-08-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-06-情报简报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-06-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>AI 拟人化互动合规窗口</strong><small>来源：2026-07-06-情报简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--competitor" href="monitor/2026-07-06-监测简报/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>作业帮教师版（母公司层面）— ⚠️ 重要（C端搜题入口地...</strong><small>来源：2026-07-06-监测简报</small></span>
+  <span class="home-feed-body"><strong>AI 拟人化互动合规窗口</strong><small>来源：2026-07-06-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -96,6 +90,12 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-06-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>大模型安全与身份验证压力</strong><small>来源：2026-07-06-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 </div>
 </section>
 </div>
@@ -107,33 +107,33 @@ hide:
 [查看全部 →](competitors/index.md)
 </div>
 
-<a class="threat-row home-row--danger" href="competitors/zuoyebang-teacher/">
-  <span class="threat-avatar threat-avatar--tone-1">作</span>
-  <span class="threat-body"><strong>作业帮教师版</strong><small>重要信号 · AI精准教学/资源 · 作业帮 · 2026-07-06 母公司C端竞争地位下滑背景信号（豆包爱学冲击）</small></span>
-  <span class="threat-level threat-level--high">高 ↑</span>
-</a>
-
 <a class="threat-row home-row--warning" href="competitors/21cnjy/">
-  <span class="threat-avatar threat-avatar--tone-2">2</span>
-  <span class="threat-body"><strong>21世纪教育网</strong><small>常规监测 · 资源/题库 · 深圳二一教育 · 2026-05-23 四维度深度分析</small></span>
+  <span class="threat-avatar threat-avatar--tone-1">2</span>
+  <span class="threat-body"><strong>21世纪教育网</strong><small>资源/题库 · 深圳二一教育 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--medium">中 →</span>
 </a>
 
 <a class="threat-row home-row--warning" href="competitors/jyeoo/">
-  <span class="threat-avatar threat-avatar--tone-3">菁</span>
-  <span class="threat-body"><strong>菁优网</strong><small>常规监测 · 资源/题库 · 菁优智慧教育 · 2026-05-23 四维度深度分析</small></span>
+  <span class="threat-avatar threat-avatar--tone-2">菁</span>
+  <span class="threat-body"><strong>菁优网</strong><small>资源/题库 · 菁优智慧教育 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--medium">中 →</span>
 </a>
 
 <a class="threat-row home-row--warning" href="competitors/xiangpi/">
-  <span class="threat-avatar threat-avatar--tone-4">橡</span>
-  <span class="threat-body"><strong>橡皮网</strong><small>常规监测 · 资源/题库 · 北京正确教育 · 2026-05-23 四维度深度分析</small></span>
+  <span class="threat-avatar threat-avatar--tone-3">橡</span>
+  <span class="threat-body"><strong>橡皮网</strong><small>资源/题库 · 北京正确教育 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--medium">中 →</span>
 </a>
 
 <a class="threat-row home-row--warning" href="competitors/51jiaoxi/">
-  <span class="threat-avatar threat-avatar--tone-5">教</span>
-  <span class="threat-body"><strong>教习网</strong><small>常规监测 · 资源/题库 · 深圳教习网 · 2026-05-23 四维度深度分析</small></span>
+  <span class="threat-avatar threat-avatar--tone-4">教</span>
+  <span class="threat-body"><strong>教习网</strong><small>资源/题库 · 深圳教习网 · 2026-05-23 四维度深度分析</small></span>
+  <span class="threat-level threat-level--medium">中 →</span>
+</a>
+
+<a class="threat-row home-row--warning" href="competitors/zhengqueyun/">
+  <span class="threat-avatar threat-avatar--tone-5">正</span>
+  <span class="threat-body"><strong>正确云</strong><small>备课/备授课 · 北京正确教育 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--medium">中 →</span>
 </a>
 

@@ -19,18 +19,43 @@ python3 scripts/build.py
 # ── 步骤 2: 生成静态站点 ──
 echo ""
 echo "[2/4] 生成静态 HTML 站点..."
+echo "      正在清理旧站点并重新生成，请稍等..."
+BUILD_LOG="$(mktemp)"
+BUILD_START=$(date +%s)
 set +e
-BUILD_OUTPUT=$(./venv/bin/mkdocs build --quiet 2>&1)
-BUILD_STATUS=$?
-set -e
-printf "%s\n" "$BUILD_OUTPUT" | awk '
+set -o pipefail
+./venv/bin/mkdocs build --verbose 2>&1 | awk '
   /Warning from the Material for MkDocs team/ { skip = 1; next }
   skip && /https:\/\/squidfunk.github.io\/mkdocs-material\/blog\/2026\/02\/18\/mkdocs-2.0\// { skip = 0; next }
-  !skip { print }
-'
+  skip { next }
+  /DEBUG/ { next }
+  /The following pages exist in the docs directory, but are not included in the "nav" configuration:/ {
+    nav_skip = 1
+    print "      提示：发现部分文档未放入顶部导航（仍可通过链接访问），已略过详细清单。"
+    next
+  }
+  nav_skip && /^  - / { next }
+  nav_skip { nav_skip = 0 }
+  { print; fflush() }
+' | tee "$BUILD_LOG" &
+BUILD_PID=$!
+while kill -0 "$BUILD_PID" 2>/dev/null; do
+    sleep 2
+    if kill -0 "$BUILD_PID" 2>/dev/null; then
+        echo "      ...仍在生成静态页面、搜索索引和资源文件"
+    fi
+done
+wait "$BUILD_PID"
+BUILD_STATUS=$?
+set +o pipefail
+set -e
+BUILD_END=$(date +%s)
 if [ "$BUILD_STATUS" -ne 0 ]; then
+    rm -f "$BUILD_LOG"
     exit "$BUILD_STATUS"
 fi
+echo "      静态站点生成完成，用时 $((BUILD_END - BUILD_START)) 秒。"
+rm -f "$BUILD_LOG"
 
 # ── 步骤 3: Git 提交 ──
 echo ""
