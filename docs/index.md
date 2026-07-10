@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-09 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-09，竞品 2026-07-06，市场 2026-07-07，AI 2026-07-09，政策 2026Q1Q2）
+> 全站更新：2026-07-10 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-10，竞品 2026-07-06，市场 2026-07-07，AI 2026-07-10，政策 2026Q1Q2）
 
 <div class="home-metrics" markdown>
 
@@ -28,15 +28,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-09-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-10-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-09-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-10-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-09-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-10-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-09-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-07-10-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -66,15 +66,21 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-10-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>行业日情报</strong><small>来源：2026-07-10-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--industry" href="industry/日情报/2026-07-08-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>WAIC 教育 AI 与希沃母公司业绩信号</strong><small>来源：2026-07-08-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-06-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>AI 拟人化互动合规窗口</strong><small>来源：2026-07-06-行业日情报</small></span>
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-10-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>GPT-5.6 日与谁更聪明</strong><small>来源：2026-07-10-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -87,12 +93,6 @@ hide:
 <a class="focus-item home-row--ai" href="ai-briefings/2026-07-09-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
   <span class="home-feed-body"><strong>模型能力叙事与工程与评测基础设施</strong><small>来源：2026-07-09-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--market" href="market/周报/2026-07-07-真实数据周报/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>招投标真实数据与市场线索</strong><small>来源：2026-07-07-真实数据周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
