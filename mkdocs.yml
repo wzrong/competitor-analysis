@@ -92,6 +92,9 @@ extra_javascript:
 
 nav:
   - 首页: index.md
+  - 每日概要:
+    - 今日概要: daily/latest.md
+    - 历史归档: daily/index.md
   - 行业分析:
     - 总览: industry/index.md
     - 2026-07-13-行业日情报: industry/日情报/2026-07-13-行业日情报.md

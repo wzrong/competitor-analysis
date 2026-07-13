@@ -801,6 +801,59 @@ def copy_ai_briefings():
     }
 
 
+def copy_daily_digests():
+    """复制每日情报概要，并生成稳定的今日入口与历史归档。"""
+    src_dir = VAULT_ROOT / "每日概要"
+    dst_dir = DOCS_ROOT / "daily"
+    dst_dir.mkdir(parents=True, exist_ok=True)
+
+    files = []
+    if src_dir.exists():
+        files = [
+            path for path in src_dir.glob("????-??-??-每日情报概要.md")
+            if re.match(r"\d{4}-\d{2}-\d{2}-每日情报概要$", path.stem)
+        ]
+        files = sort_markdown_by_date(files)
+
+    archive = []
+    for src in files:
+        report_date = src.name[:10]
+        dst = dst_dir / f"{report_date}.md"
+        write_markdown(src, dst, page_type="daily_digest", tags=["每日概要", report_date])
+        archive.append((report_date, f"daily/{report_date}.md"))
+
+    latest_title = "暂无每日概要"
+    if archive:
+        latest_title = archive[0][0]
+        latest_content = (dst_dir / f"{latest_title}.md").read_text(encoding="utf-8")
+        (dst_dir / "latest.md").write_text(latest_content, encoding="utf-8")
+    else:
+        (dst_dir / "latest.md").write_text("# 每日情报概要\n\n> 暂无概要。\n", encoding="utf-8")
+
+    index_lines = [
+        "---",
+        "page_type: daily_digest_index",
+        "tags:",
+        "  - 每日概要",
+        "---",
+        "# 每日情报概要",
+        "",
+        "> 汇总行业、竞争、政策、市场与 AI 动态，提炼当天最值得关注的变化及其对学科网的含义。",
+        "",
+        f"最新概要：[查看今日概要](latest.md)（{latest_title}）",
+        "",
+        "| 日期 | 概要 |",
+        "|---|---|",
+    ]
+    if not archive:
+        index_lines.append("| — | 暂无概要 |")
+    for report_date, _path in archive:
+        index_lines.append(f"| {report_date} | [{report_date} 每日情报概要]({report_date}.md) |")
+    (dst_dir / "index.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")
+
+    return archive
+
+
 def generate_feedback_page():
     feedback_dir = DOCS_ROOT / "feedback"
     feedback_dir.mkdir(parents=True, exist_ok=True)
@@ -1326,6 +1379,8 @@ hide:
 
 > {overview_line}
 
+[:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){{ .md-button .md-button--primary }}
+
 <div class="home-metrics" markdown>
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">{competitor_total}</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · {tier1} / Tier 2 · {tier2} / 观察池 · 150+</span>](competitors/index.md)
@@ -1519,6 +1574,9 @@ extra_javascript:
 
 nav:
   - 首页: index.md
+  - 每日概要:
+    - 今日概要: daily/latest.md
+    - 历史归档: daily/index.md
   - 行业分析:
     - 总览: industry/index.md
 """
@@ -1575,6 +1633,7 @@ def main():
     monitor_logs = copy_monitor_logs()
     action_nav = copy_response_outputs()
     ai_nav = copy_ai_briefings()
+    copy_daily_digests()
     generate_feedback_page()
     generate_home(tiers, industry_nav, policy_nav, market_nav, action_nav, monitor_logs, ai_nav)
     generate_mkdocs_yml(tiers, industry_nav, policy_nav, market_nav, action_nav, monitor_logs, ai_nav)

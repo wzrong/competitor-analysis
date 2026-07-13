@@ -10,6 +10,8 @@ hide:
 
 > 全站更新：2026-07-13 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-13，竞品 2026-07-13，市场 2026-07-13，AI 2026-07-13，政策 2026Q1Q2）
 
+[:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
+
 <div class="home-metrics" markdown>
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">185</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · 11 / Tier 2 · 24 / 观察池 · 150+</span>](competitors/index.md)
