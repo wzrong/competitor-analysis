@@ -11,7 +11,7 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 from urllib.request import Request, urlopen
 
 
@@ -19,7 +19,11 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DIGEST_ROOT = PROJECT_ROOT / "每日概要"
 LOG_ROOT = DIGEST_ROOT / "推送日志"
 DEFAULT_WEBHOOK_FILE = Path.home() / ".config" / "xkw-intelligence" / "wecom-webhook-url"
-KEYCHAIN_SERVICE = "xkw-intelligence-wecom-webhook"
+DEFAULT_KEYCHAIN_SERVICE = "xkw-intelligence-wecom-webhook"
+GROUPS = {
+    "原群": DEFAULT_KEYCHAIN_SERVICE,
+    "产品群": "xkw-intelligence-wecom-webhook-product",
+}
 MAX_CONTENT_BYTES = 3500
 
 
@@ -28,6 +32,12 @@ def parse_args():
     parser.add_argument("--date", default=date.today().isoformat(), help="概要日期，格式 YYYY-MM-DD")
     parser.add_argument("--dry-run", action="store_true", help="只校验并打印消息，不发送")
     parser.add_argument("--force", action="store_true", help="忽略相同内容已发送记录")
+    parser.add_argument(
+        "--group",
+        action="append",
+        choices=GROUPS.keys(),
+        help="只发送到指定群，可重复使用；默认发送到全部群",
+    )
     return parser.parse_args()
 
 
@@ -69,7 +79,7 @@ def read_previous_log(report_date: str):
         return None
 
 
-def write_log(report_date: str, status: str, digest_hash: str, detail=None):
+def write_log(report_date: str, status: str, digest_hash: str, groups: dict):
     LOG_ROOT.mkdir(parents=True, exist_ok=True)
     payload = {
         "date": report_date,
@@ -77,35 +87,59 @@ def write_log(report_date: str, status: str, digest_hash: str, detail=None):
         "content_sha256": digest_hash,
         "updated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
     }
-    if detail is not None:
-        payload["detail"] = detail
+    payload["groups"] = groups
     log_path(report_date).write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
 
 
-def load_webhook():
-    webhook = os.getenv("WECOM_WEBHOOK_URL", "").strip()
+def validate_webhook(webhook: str) -> str:
+    parsed = urlparse(webhook)
+    query = parse_qs(parsed.query)
+    if not (
+        parsed.scheme == "https"
+        and parsed.hostname == "qyapi.weixin.qq.com"
+        and parsed.path == "/cgi-bin/webhook/send"
+        and query.get("key")
+        and query["key"][0]
+    ):
+        raise ValueError("Webhook 地址不是合法的企业微信群机器人地址")
+    return webhook
+
+
+def load_webhook(group_name: str, keychain_service: str):
+    webhook = ""
+    if group_name == "原群":
+        webhook = os.getenv("WECOM_WEBHOOK_URL", "").strip()
     if not webhook:
         keychain = subprocess.run(
-            ["security", "find-generic-password", "-s", KEYCHAIN_SERVICE, "-w"],
+            ["security", "find-generic-password", "-s", keychain_service, "-w"],
             capture_output=True,
             text=True,
             check=False,
         )
         if keychain.returncode == 0:
             webhook = keychain.stdout.strip()
-    if not webhook:
+    if not webhook and group_name == "原群":
         path = Path(os.getenv("WECOM_WEBHOOK_FILE", DEFAULT_WEBHOOK_FILE)).expanduser()
         if path.exists():
             webhook = path.read_text(encoding="utf-8").strip()
     if not webhook:
         return None
-    parsed = urlparse(webhook)
-    if parsed.scheme != "https" or parsed.hostname != "qyapi.weixin.qq.com" or "/cgi-bin/webhook/send" not in parsed.path:
-        raise ValueError("Webhook 地址不是合法的企业微信群机器人地址")
-    return webhook
+    return validate_webhook(webhook)
+
+
+def previous_group_status(previous, group_name: str, digest_hash: str):
+    if not previous or previous.get("content_sha256") != digest_hash:
+        return None
+    groups = previous.get("groups")
+    if isinstance(groups, dict):
+        return groups.get(group_name)
+    # 兼容升级前的单群日志：旧的 sent 只代表原群已发送。
+    if group_name == "原群" and previous.get("status") == "sent":
+        return {"status": "sent", "migrated_from_legacy_log": True}
+    return None
 
 
 def send_message(webhook: str, message: str):
@@ -134,31 +168,51 @@ def main():
     message = extract_message(path)
     digest_hash = content_hash(message)
     previous = read_previous_log(args.date)
-    if not args.force and previous and previous.get("status") == "sent" and previous.get("content_sha256") == digest_hash:
-        print(f"{args.date} 相同内容已发送，跳过重复推送。")
-        return 0
 
     if args.dry_run:
         print(message)
         print(f"\n[校验通过] {len(message.encode('utf-8'))} bytes | sha256={digest_hash[:12]}")
         return 0
 
-    webhook = load_webhook()
-    if not webhook:
-        write_log(args.date, "skipped_no_webhook", digest_hash, "未配置企业微信群机器人 Webhook")
-        print(f"未配置企微 Webhook，已跳过发送。可保存到 macOS 钥匙串服务：{KEYCHAIN_SERVICE}")
-        return 0
+    selected_groups = args.group or list(GROUPS)
+    group_results = {}
+    if previous and previous.get("content_sha256") == digest_hash:
+        if isinstance(previous.get("groups"), dict):
+            group_results.update(previous["groups"])
+        elif previous.get("status") == "sent":
+            group_results["原群"] = {"status": "sent", "migrated_from_legacy_log": True}
 
-    try:
-        result = send_message(webhook, message)
-    except Exception as exc:
-        write_log(args.date, "failed", digest_hash, str(exc))
-        print(str(exc), file=sys.stderr)
-        return 1
+    failed = False
+    for group_name in selected_groups:
+        prior = previous_group_status(previous, group_name, digest_hash)
+        if not args.force and prior and prior.get("status") == "sent":
+            group_results[group_name] = prior
+            print(f"{group_name}：相同内容已发送，跳过。")
+            continue
 
-    write_log(args.date, "sent", digest_hash, result)
-    print(f"{args.date} 每日概要已发送到企业微信群。")
-    return 0
+        try:
+            webhook = load_webhook(group_name, GROUPS[group_name])
+            if not webhook:
+                group_results[group_name] = {"status": "skipped_no_webhook"}
+                print(f"{group_name}：未配置 Webhook，已跳过。")
+                continue
+            result = send_message(webhook, message)
+            group_results[group_name] = {"status": "sent", "detail": result}
+            print(f"{group_name}：{args.date} 每日概要已发送。")
+        except Exception as exc:
+            failed = True
+            group_results[group_name] = {"status": "failed", "detail": str(exc)}
+            print(f"{group_name}：{exc}", file=sys.stderr)
+
+    statuses = [item.get("status") for item in group_results.values()]
+    if failed:
+        overall_status = "partial_failed" if "sent" in statuses else "failed"
+    elif "sent" in statuses:
+        overall_status = "sent"
+    else:
+        overall_status = "skipped_no_webhook"
+    write_log(args.date, overall_status, digest_hash, group_results)
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
