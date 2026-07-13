@@ -310,6 +310,13 @@ def sanitize_public_text(content: str) -> str:
 
 def write_markdown(src: Path, dst: Path, **front_matter):
     content = src.read_text(encoding="utf-8")
+    if front_matter.get("page_type") == "daily_digest":
+        content = re.sub(
+            r"\n?<!-- WECOM_START -->.*?<!-- WECOM_END -->\s*",
+            "\n",
+            content,
+            flags=re.S,
+        )
     content = rewrite_image_refs(content)
     content = strip_internal_sections(content)
     content = sanitize_public_text(content)
