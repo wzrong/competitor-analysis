@@ -23,6 +23,7 @@ DEFAULT_KEYCHAIN_SERVICE = "xkw-intelligence-wecom-webhook"
 GROUPS = {
     "原群": DEFAULT_KEYCHAIN_SERVICE,
     "产品群": "xkw-intelligence-wecom-webhook-product",
+    "解决方案群": "xkw-intelligence-wecom-webhook-solution",
 }
 MAX_CONTENT_BYTES = 3500
 
