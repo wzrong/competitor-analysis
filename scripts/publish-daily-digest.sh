@@ -18,8 +18,10 @@ cd "$WEBSITE_ROOT"
 
 echo "等待 GitHub Pages 更新：$PUBLIC_URL"
 PAGE_READY=0
+PAGE_TMP="$(mktemp)"
+trap 'rm -f "$PAGE_TMP"' EXIT
 for _ in {1..12}; do
-    if curl -fsSL "$PUBLIC_URL" | grep -q "$REPORT_DATE"; then
+    if curl -fsSL "$PUBLIC_URL" -o "$PAGE_TMP" && grep -q "$REPORT_DATE" "$PAGE_TMP"; then
         PAGE_READY=1
         break
     fi
