@@ -10,13 +10,13 @@ import shutil
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-VAULT_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/竞品分析工作台")
+VAULT_ROOT = Path(__file__).resolve().parents[2]
 AI_BRIEFING_ROOT = Path("/Users/wzrong/Documents/Claude/Projects/AI信息聚合")
-WEBSITE_ROOT = Path(__file__).parent.parent
+WEBSITE_ROOT = Path(__file__).resolve().parents[1]
 DOCS_ROOT = WEBSITE_ROOT / "docs"
 MONITOR_ROOT = VAULT_ROOT / "竞品库" / "监测日志"
 
-SITE_NAME = "学科网战略情报系统"
+SITE_NAME = "学科网情报系统"
 SITE_DESCRIPTION = "行业分析、竞争分析、政策分析、市场监测与应对建议门户"
 
 INTERNAL_SECTION_HEADINGS = {
@@ -223,7 +223,8 @@ def rewrite_obsidian_link(target: str, dst: Path) -> str:
         if not target_path.exists():
             return target
         return f"{site_relative(dst, target)}{anchor}"
-    if decoded.startswith("Projects/竞品分析工作台/竞品库/") and "/screenshots/" in decoded:
+    project_competitor_prefix = f"Projects/{VAULT_ROOT.name}/竞品库/"
+    if decoded.startswith(project_competitor_prefix) and "/screenshots/" in decoded:
         parts = decoded.split("/")
         idx = parts.index("竞品库")
         slug = slugify(parts[idx + 1])
@@ -394,7 +395,7 @@ def copy_system_status():
 
 def copy_framework():
     dst = DOCS_ROOT / "framework" / "index.md"
-    src = VAULT_ROOT / "战略情报系统落地方案.md"
+    src = VAULT_ROOT / "情报系统落地方案.md"
     write_markdown(src, dst, page_type="framework", tags=["战略框架", "9层分析框架"])
 
 
@@ -1561,7 +1562,7 @@ nav:
 
 def main():
     print("=" * 50)
-    print("学科网战略情报系统 → MkDocs 网站构建")
+    print("学科网情报系统 → MkDocs 网站构建")
     print("=" * 50)
     clean_docs()
     tiers = parse_competitor_index()

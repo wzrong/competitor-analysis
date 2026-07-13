@@ -6,10 +6,8 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WEBSITE_DIR="$(dirname "$SCRIPT_DIR")"
-OBSIDIAN_DIR="/Users/wzrong/Documents/Claude/Projects/竞品分析工作台"
-
 echo "=========================================="
-echo "竞品分析工作台 → 网站同步部署"
+echo "学科网情报系统 → 网站同步部署"
 echo "=========================================="
 
 cd "$WEBSITE_DIR"

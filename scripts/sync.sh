@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-# 竞品分析工作台 — 一键构建+推送脚本
+# 学科网情报系统 — 一键构建+推送脚本
 # 用法: ./scripts/sync.sh [提交信息]
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR/.."
 
 echo "=================================================="
-echo "  竞品分析工作台 → 构建 & 推送"
+echo "  学科网情报系统 → 构建 & 推送"
 echo "=================================================="
 echo ""
 
@@ -24,7 +24,7 @@ BUILD_LOG="$(mktemp)"
 BUILD_START=$(date +%s)
 set +e
 set -o pipefail
-./venv/bin/mkdocs build --verbose 2>&1 | awk '
+./venv/bin/python -m mkdocs build --verbose 2>&1 | awk '
   /Warning from the Material for MkDocs team/ { skip = 1; next }
   skip && /https:\/\/squidfunk.github.io\/mkdocs-material\/blog\/2026\/02\/18\/mkdocs-2.0\// { skip = 0; next }
   skip { next }
