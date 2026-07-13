@@ -512,7 +512,8 @@ def copy_market_monitoring():
             elif src.suffix.lower() == ".md":
                 continue
 
-    nav_files.sort(key=lambda x: (x[0], x[1]))
+    # 周报在上方已按文件名倒序加入，保留该顺序，确保最新日期在前。
+    # 不要在这里再按标题升序排列，否则会把周报恢复为旧到新。
     return nav_files
 
 
