@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-13 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-13，竞品 2026-07-13，市场 2026-07-07，AI 2026-07-13，政策 2026Q1Q2）
+> 全站更新：2026-07-13 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-13，竞品 2026-07-13，市场 2026-07-13，AI 2026-07-13，政策 2026Q1Q2）
 
 <div class="home-metrics" markdown>
 
@@ -40,15 +40,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-13-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-13-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+<a class="home-feed-item home-row--market" href="market/周报/2026-07-13-市场监测周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>2026-07-13-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--market" href="market/周报/2026-07-07-合并周报-6周补录/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>2026-07-07-合并周报-6周补录</strong><small>市场监测 · 招投标线索</small></span>
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-13-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-07-13-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -90,9 +90,9 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-12-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>说明：7 月 11 日简报缺失，本期覆盖窗口延长为 7...</strong><small>来源：2026-07-12-AI每日简报</small></span>
+<a class="focus-item home-row--market" href="market/周报/2026-07-13-市场监测周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>市场监测周报</strong><small>来源：2026-07-13-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
