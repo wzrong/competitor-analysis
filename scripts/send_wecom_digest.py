@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -18,6 +19,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DIGEST_ROOT = PROJECT_ROOT / "每日概要"
 LOG_ROOT = DIGEST_ROOT / "推送日志"
 DEFAULT_WEBHOOK_FILE = Path.home() / ".config" / "xkw-intelligence" / "wecom-webhook-url"
+KEYCHAIN_SERVICE = "xkw-intelligence-wecom-webhook"
 MAX_CONTENT_BYTES = 3500
 
 
@@ -86,6 +88,15 @@ def write_log(report_date: str, status: str, digest_hash: str, detail=None):
 def load_webhook():
     webhook = os.getenv("WECOM_WEBHOOK_URL", "").strip()
     if not webhook:
+        keychain = subprocess.run(
+            ["security", "find-generic-password", "-s", KEYCHAIN_SERVICE, "-w"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if keychain.returncode == 0:
+            webhook = keychain.stdout.strip()
+    if not webhook:
         path = Path(os.getenv("WECOM_WEBHOOK_FILE", DEFAULT_WEBHOOK_FILE)).expanduser()
         if path.exists():
             webhook = path.read_text(encoding="utf-8").strip()
@@ -135,7 +146,7 @@ def main():
     webhook = load_webhook()
     if not webhook:
         write_log(args.date, "skipped_no_webhook", digest_hash, "未配置企业微信群机器人 Webhook")
-        print(f"未配置企微 Webhook，已跳过发送。配置文件：{DEFAULT_WEBHOOK_FILE}")
+        print(f"未配置企微 Webhook，已跳过发送。可保存到 macOS 钥匙串服务：{KEYCHAIN_SERVICE}")
         return 0
 
     try:
