@@ -6,7 +6,7 @@ WEBSITE_ROOT="$(dirname "$SCRIPT_DIR")"
 PROJECT_ROOT="$(dirname "$WEBSITE_ROOT")"
 REPORT_DATE="${1:-$(date '+%Y-%m-%d')}"
 DIGEST_FILE="$PROJECT_ROOT/每日概要/$REPORT_DATE-每日情报概要.md"
-PUBLIC_URL="https://wzrong.github.io/competitor-analysis/daily/$REPORT_DATE/"
+PUBLIC_URL="https://comp.wzrong.me/daily/$REPORT_DATE/"
 
 if [ ! -f "$DIGEST_FILE" ]; then
     echo "未找到每日概要：$DIGEST_FILE" >&2

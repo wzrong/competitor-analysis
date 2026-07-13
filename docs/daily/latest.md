@@ -45,7 +45,7 @@ tags:
 
 ## 完整信息入口
 
-- [行业日情报](https://wzrong.github.io/competitor-analysis/industry/%E6%97%A5%E6%83%85%E6%8A%A5/2026-07-13-%E8%A1%8C%E4%B8%9A%E6%97%A5%E6%83%85%E6%8A%A5/)
-- [竞品周情报](https://wzrong.github.io/competitor-analysis/monitor/2026-07-13-%E7%AB%9E%E5%93%81%E5%91%A8%E6%83%85%E6%8A%A5/)
-- [市场监测周报](https://wzrong.github.io/competitor-analysis/market/%E5%91%A8%E6%8A%A5/2026-07-13-%E5%B8%82%E5%9C%BA%E7%9B%91%E6%B5%8B%E5%91%A8%E6%8A%A5/)
-- [AI 每日简报](https://wzrong.github.io/competitor-analysis/ai-briefings/2026-07-13-AI%E6%AF%8F%E6%97%A5%E7%AE%80%E6%8A%A5/)
+- [行业日情报](https://comp.wzrong.me/industry/%E6%97%A5%E6%83%85%E6%8A%A5/2026-07-13-%E8%A1%8C%E4%B8%9A%E6%97%A5%E6%83%85%E6%8A%A5/)
+- [竞品周情报](https://comp.wzrong.me/monitor/2026-07-13-%E7%AB%9E%E5%93%81%E5%91%A8%E6%83%85%E6%8A%A5/)
+- [市场监测周报](https://comp.wzrong.me/market/%E5%91%A8%E6%8A%A5/2026-07-13-%E5%B8%82%E5%9C%BA%E7%9B%91%E6%B5%8B%E5%91%A8%E6%8A%A5/)
+- [AI 每日简报](https://comp.wzrong.me/ai-briefings/2026-07-13-AI%E6%AF%8F%E6%97%A5%E7%AE%80%E6%8A%A5/)

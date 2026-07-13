@@ -56,6 +56,14 @@ def extract_message(path: Path) -> str:
     message = match.group(1).strip()
     if "学科网情报系统" not in message:
         raise ValueError("企微消息必须包含“学科网情报系统”")
+    if "wzrong.github.io/competitor-analysis" in message:
+        raise ValueError("企微消息不得使用旧的 GitHub Pages 域名")
+    required_links = (
+        "https://comp.wzrong.me/daily/latest/",
+        "](https://comp.wzrong.me/)",
+    )
+    if not all(link in message for link in required_links):
+        raise ValueError("企微消息必须包含自定义域名的今日概要和系统首页链接")
     size = len(message.encode("utf-8"))
     if size > MAX_CONTENT_BYTES:
         raise ValueError(f"企微精简内容为 {size} 字节，超过安全上限 {MAX_CONTENT_BYTES} 字节")
