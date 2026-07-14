@@ -643,6 +643,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../industry/%E6%97%A5%E6%83%85%E6%8A%A5/2026-07-14-%E8%A1%8C%E4%B8%9A%E6%97%A5%E6%83%85%E6%8A%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-07-14-行业日情报
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../industry/%E6%97%A5%E6%83%85%E6%8A%A5/2026-07-13-%E8%A1%8C%E4%B8%9A%E6%97%A5%E6%83%85%E6%8A%A5/" class="md-nav__link">
         
   
@@ -6161,6 +6189,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../ai-briefings/2026-07-14-AI%E6%AF%8F%E6%97%A5%E7%AE%80%E6%8A%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-07-14-AI每日简报
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ai-briefings/2026-07-13-AI%E6%AF%8F%E6%97%A5%E7%AE%80%E6%8A%A5/" class="md-nav__link">
         
   
@@ -8105,7 +8161,7 @@
 <blockquote>
 <p>资金流向：钱往哪里流。跟踪招投标、采购与区域市场信号，用于判断机会窗口。</p>
 <p>模块状态：🟢 <strong>自动化运行中（Phase 6）</strong> —— 2026-07-07 完成 WebSearch 实测；同期新增 <code>weekly-market-monitor</code> 定时任务（每周一 09:37 自动执行），首次自动运行 2026-07-13<br />
-最后更新：2026-07-07（第三次 · 自动化任务上线）<br />
+最后更新：2026-07-13（增加全国公共资源交易平台固定信源；新增商机预警——采购意向监测+商机线索清单输出给市场线）<br />
 定时任务：<a href="../../../Scheduled/weekly-market-monitor/SKILL.md">../../../Scheduled/weekly-market-monitor/SKILL.md</a></p>
 </blockquote>
 <h2 id="_2">模块定位<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -8114,6 +8170,7 @@
 <li>区域采购热度：哪些省市正在释放预算和项目机会。</li>
 <li>竞品商业落地：Tier &frac12; 竞品是否出现中标、续约、区域集采或学校采购。</li>
 <li>新进入者预警：陌生企业是否通过采购记录进入教育数字化场景。</li>
+<li>商机预警：通过采购意向公开/招标预告提前发现采购需求，输出商机线索清单给市场线跟进（趋势分析为主定位，商机预警为辅助输出；前置信号不计入中标统计）。</li>
 </ol>
 <h2 id="_3">当前工作台<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
@@ -8128,6 +8185,21 @@
 <tr>
 <td><a href="%E7%9B%91%E6%B5%8B%E5%AF%B9%E8%B1%A1%E6%B8%85%E5%8D%95/">监测对象清单.md</a></td>
 <td>Tier 1 周度监测对象、关键词、频率</td>
+<td>✅ 已建立</td>
+</tr>
+<tr>
+<td><a href="https://www.ggzy.gov.cn/deal/dealList.html?DEAL_CLASSIFY=02&amp;DEAL_STAGE=0201">全国公共资源交易平台 · 政府采购采购/资审公告</a></td>
+<td>采购前置信号源：主要看采购预告/采购公告，判断是否需要跟进；成交仍需结果/合同核实</td>
+<td>✅ 2026-07-13 已接入</td>
+</tr>
+<tr>
+<td><a href="https://www.ccgp.gov.cn/cgyx/">中国政府采购网 · 政府采购意向公开</a></td>
+<td>商机预警主信源：提前 ≥30 天的采购意向（预算+预计采购时间），检索走站内搜索选「采购意向」类型</td>
+<td>✅ 2026-07-13 已接入</td>
+</tr>
+<tr>
+<td><a href="商机线索/清单模板.md">商机线索/清单模板.md</a></td>
+<td>商机线索清单模板（面向市场线的独立输出物，每周一生成）</td>
 <td>✅ 已建立</td>
 </tr>
 <tr>
