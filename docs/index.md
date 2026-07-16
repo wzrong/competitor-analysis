@@ -74,27 +74,27 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-15-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>行业日情报</strong><small>来源：2026-07-15-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-14-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>治理信号与具身与 Agent 基础设施</strong><small>来源：2026-07-14-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
 <a class="focus-item home-row--ai" href="ai-briefings/2026-07-16-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>三国杀</strong><small>来源：2026-07-16-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>OpenAI 发布 GPT-5.6 三模型家族，Sol 版本编程效率...</strong><small>来源：2026-07-16-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-16-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>好未来·学而思 学习机产品线升级至万元档，AI 家教标准制定成核心卡...</strong><small>来源：2026-07-16-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="focus-item home-row--market" href="market/周报/2026-07-13-市场监测周报/">
   <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>市场监测周报</strong><small>来源：2026-07-13-市场监测周报</small></span>
+  <span class="home-feed-body"><strong>龙岗区&quot;龙老师&quot;区域自建平台生态成型</strong><small>来源：2026-07-13-市场监测周报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-15-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>4399 AI陪伴产品&quot;今天也有光&quot;悄然内测，面...</strong><small>来源：2026-07-15-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 

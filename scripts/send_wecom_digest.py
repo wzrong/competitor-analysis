@@ -100,6 +100,7 @@ def format_message_for_wecom(message: str) -> str:
     focus_lines = stripped[focus_idx + 1 : watch_idx]
     watch_lines = stripped[watch_idx + 1 : status_idx]
     tail_lines = stripped[status_idx + 1 :] if status_idx < len(stripped) else []
+    tail_lines = trim_status_tail(tail_lines) if status_idx < len(stripped) else tail_lines
 
     parts = [f"**{title}**"]
     if summary_lines:
@@ -115,6 +116,17 @@ def format_message_for_wecom(message: str) -> str:
         parts.extend(["", *tail_lines])
 
     return "\n".join(parts)
+
+
+def trim_status_tail(lines: list[str]) -> list[str]:
+    """丢弃数据状态条目，仅保留状态段之后真正需要展示的尾部链接。"""
+    first_link_idx = next(
+        (idx for idx, line in enumerate(lines) if re.search(r"\[[^\]]+\]\(https://", line)),
+        None,
+    )
+    if first_link_idx is None:
+        return []
+    return lines[first_link_idx:]
 
 
 def content_hash(message: str) -> str:

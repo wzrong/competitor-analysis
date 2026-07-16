@@ -942,6 +942,7 @@ TAG_META = {
 
 
 def strip_markdown_inline(text: str) -> str:
+    text = html.unescape(text)
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     text = re.sub(r"[*_`#>]+", "", text)
     return html.escape(text.strip())
@@ -1000,6 +1001,83 @@ def first_meaningful_line(path: Path | None, fallback: str) -> str:
     return fallback
 
 
+def clean_focus_heading(text: str) -> str:
+    """将情报文档的事项标题清理成首页可用的具体主题。"""
+    text = text.strip()
+    text = re.sub(r"^#+\s*", "", text)
+    text = re.sub(r"^\d+\.\s*", "", text)
+    text = re.sub(r"^⭐\s*", "", text)
+    text = re.sub(r"^[【〔]\s*", "", text)
+    text = re.sub(r"\s*[】〕](?:（[^）]*）)?\s*$", "", text)
+    text = re.sub(r"^Tier\s*\d+[^ ]*\s+([^】]+)】\s*", r"\1 ", text, flags=re.I)
+    text = re.sub(r"^\[(?:Tier\s*\d+[^\]]*|新|新赛道|招投标|行业信号)\]\s*", "", text, flags=re.I)
+    text = re.sub(r"^Tier\s*\d+[^ ]*\s+", "", text, flags=re.I)
+    return text.strip()
+
+
+def first_table_topic(section: str) -> str | None:
+    """取 Markdown 表格第一条数据的首列，跳过表头和分隔行。"""
+    for raw_line in section.splitlines():
+        line = raw_line.strip()
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if not cells or not cells[0] or cells[0] in {"信号", "指标", "竞品", "省份"}:
+            continue
+        if all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells if cell):
+            continue
+        return clean_focus_heading(cells[0])
+    return None
+
+
+def specific_focus_line(kind: str, path: Path | None, fallback: str) -> str:
+    """从报告内容提取具体事项，避免首页使用“行业日情报”等文档类型名。"""
+    if path is None or not path.exists():
+        return fallback
+    text = path.read_text(encoding="utf-8")
+
+    if kind == "industry":
+        today_section = re.search(r"^##\s+今日情报\s*$\n(?P<body>.*?)(?=^##\s+|\Z)", text, re.M | re.S)
+        search_text = today_section.group("body") if today_section else text
+        heading = re.search(r"^###\s+(.+)$", search_text, re.M)
+        if heading:
+            topic = clean_focus_heading(heading.group(1))
+            if topic:
+                return topic
+
+    if kind == "ai":
+        overview = re.search(r"^##\s+今日概览\s*$\n(?P<body>.*?)(?=^##\s+|\Z)", text, re.M | re.S)
+        search_text = overview.group("body") if overview else text
+        priority_item = re.search(r"^\s*[-*]\s+⭐\s*(.+)$", search_text, re.M)
+        if not priority_item:
+            priority_item = re.search(r"^\s*\d+\.\s+(.+)$", search_text, re.M)
+        if priority_item:
+            topic = clean_focus_heading(priority_item.group(1))
+            if topic:
+                return topic
+        deep_reading = re.search(r"^##\s+深度阅读推荐\s*$\n(?P<body>.*?)(?=^##\s+|\Z)", text, re.M | re.S)
+        if deep_reading:
+            heading = re.search(r"^###\s+(.+)$", deep_reading.group("body"), re.M)
+            if heading:
+                topic = clean_focus_heading(heading.group(1))
+                if topic:
+                    return topic
+
+    if kind == "market":
+        trend_section = re.search(r"^##\s+[^\n]*趋势信号[^\n]*$\n(?P<body>.*?)(?=^##\s+|\Z)", text, re.M | re.S)
+        if trend_section:
+            topic = first_table_topic(trend_section.group("body"))
+            if topic:
+                return topic
+        heading = re.search(r"^###\s+(?:\d+(?:\.\d+)*\s*)?(.+)$", text, re.M)
+        if heading:
+            topic = clean_focus_heading(heading.group(1))
+            if topic:
+                return topic
+
+    return fallback
+
+
 def compact_focus_text(text: str, limit: int = 34) -> str:
     text = re.sub(r"\s+", " ", strip_markdown_inline(text))
     text = re.sub(r"^本期覆盖\s*\d{4}-\d{2}-\d{2}（[^）]*）[。，；;]?", "", text)
@@ -1015,6 +1093,8 @@ def compact_focus_text(text: str, limit: int = 34) -> str:
 def focus_topic_title(kind: str, source_title: str, source_line: str) -> str:
     plain_title = strip_markdown_inline(source_title)
     plain_line = strip_markdown_inline(source_line)
+    if kind == "ai" and plain_line:
+        return compact_focus_text(plain_line, 34)
     quoted = re.findall(r"[「“](.+?)[」”]", plain_line)
     if quoted:
         return compact_focus_text("与".join(quoted[:2]), 28)
@@ -1028,6 +1108,8 @@ def focus_topic_title(kind: str, source_title: str, source_line: str) -> str:
         return "AI 拟人化互动合规窗口"
     if kind == "industry" and "通用大模型进展" in plain_line:
         return "通用大模型进展与竞品信号澄清"
+    if kind == "industry" and plain_line:
+        return compact_focus_text(plain_line, 34)
     if kind == "ai" and "两条叙事" in plain_line:
         topic = plain_line.split("两条叙事", 1)[0]
         return compact_focus_text(topic, 28)
@@ -1040,6 +1122,8 @@ def focus_topic_title(kind: str, source_title: str, source_line: str) -> str:
             return "招投标真实数据与市场线索"
         if "合并周报" in plain_title:
             return "近 6 周市场监测补录"
+        if plain_line and not plain_line.startswith("查看市场监测"):
+            return compact_focus_text(plain_line, 34)
         return re.sub(r"^\d{4}-\d{2}-\d{2}-", "", plain_title)
     if kind == "policy":
         return re.sub(r"^\d{4}-\d{2}-", "", plain_title)
@@ -1182,10 +1266,14 @@ def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, ac
         })
 
     for _subdir, title, path in industry_nav:
-        add_item("industry", title, first_meaningful_line(source_path_for_site_path(path), "查看行业情报，关注外部趋势变化"), path)
+        source_path = source_path_for_site_path(path)
+        source_desc = first_meaningful_line(source_path, "查看行业情报，关注外部趋势变化")
+        add_item("industry", title, specific_focus_line("industry", source_path, source_desc), path)
 
     for title, path, _report_type in ai_nav.get("items", []):
-        add_item("ai", title, first_meaningful_line(source_path_for_site_path(path), "查看 AI 每日简报，关注外部技术动态"), path)
+        source_path = source_path_for_site_path(path)
+        source_desc = first_meaningful_line(source_path, "查看 AI 每日简报，关注外部技术动态")
+        add_item("ai", title, specific_focus_line("ai", source_path, source_desc), path)
 
     for title, path in policy_nav:
         add_item("policy", title, first_meaningful_line(source_path_for_site_path(path), "查看政策解读，关注合规边界与机会窗口"), path)
@@ -1196,7 +1284,13 @@ def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, ac
 
     for group, title, path in market_nav:
         if group == "周报":
-            add_item("market", title, "查看市场监测，关注区域采购与资金流向变化", path)
+            source_path = source_path_for_site_path(path)
+            source_desc = specific_focus_line(
+                "market",
+                source_path,
+                "查看市场监测，关注区域采购与资金流向变化",
+            )
+            add_item("market", title, source_desc, path)
 
     for audience, outputs in action_nav.items():
         for title, path in outputs:
@@ -1212,24 +1306,36 @@ def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, ac
     if len(weekly_items) < 5:
         weekly_items = candidates
 
-    unique_items = []
-    seen_topics = set()
-    kind_counts = {}
-    for item in sorted(
+    ranked_items = sorted(
         weekly_items,
         key=lambda row: (row["score"] + (row["date"] - week_start).days * 8, row["date"], row["topic"]),
         reverse=True,
-    ):
+    )
+    unique_items = []
+    seen_topics = set()
+    kind_counts = {}
+
+    def append_unique(item: dict, max_per_kind: int) -> bool:
         normalized_topic = re.sub(r"\W+", "", item["topic"])
         if normalized_topic in seen_topics:
-            continue
-        if kind_counts.get(item["kind"], 0) >= 2:
-            continue
+            return False
+        if kind_counts.get(item["kind"], 0) >= max_per_kind:
+            return False
         seen_topics.add(normalized_topic)
         kind_counts[item["kind"]] = kind_counts.get(item["kind"], 0) + 1
         unique_items.append(item)
+        return True
+
+    # 先保留每个情报模块的最强事项，再用高分候选补足 5 条。
+    for item in ranked_items:
+        append_unique(item, 1)
         if len(unique_items) == 5:
             break
+    if len(unique_items) < 5:
+        for item in ranked_items:
+            append_unique(item, 2)
+            if len(unique_items) == 5:
+                break
 
     return "\n\n".join(item["html"] for item in unique_items)
 
