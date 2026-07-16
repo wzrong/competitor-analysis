@@ -26,6 +26,8 @@ GROUPS = {
     "解决方案群": "xkw-intelligence-wecom-webhook-solution",
 }
 MAX_CONTENT_BYTES = 3500
+FOCUS_HEADER = "**今日重点**"
+WATCH_HEADER = "**建议关注**"
 
 
 def parse_args():
@@ -53,7 +55,7 @@ def extract_message(path: Path) -> str:
     match = re.search(r"<!-- WECOM_START -->\s*(.*?)\s*<!-- WECOM_END -->", content, re.S)
     if not match:
         raise ValueError(f"{path.name} 缺少 WECOM_START/WECOM_END 标记")
-    message = match.group(1).strip()
+    message = format_message_for_wecom(match.group(1).strip())
     if "学科网情报系统" not in message:
         raise ValueError("企微消息必须包含“学科网情报系统”")
     if "wzrong.github.io/competitor-analysis" in message:
@@ -68,6 +70,51 @@ def extract_message(path: Path) -> str:
     if size > MAX_CONTENT_BYTES:
         raise ValueError(f"企微精简内容为 {size} 字节，超过安全上限 {MAX_CONTENT_BYTES} 字节")
     return message
+
+
+def format_message_for_wecom(message: str) -> str:
+    """将通用 Markdown 摘要转换成更适合企微机器人显示的紧凑版式。"""
+    lines = [line.rstrip() for line in message.splitlines()]
+    stripped = [line.strip() for line in lines if line.strip()]
+    if not stripped:
+        return message
+
+    try:
+        focus_idx = stripped.index(FOCUS_HEADER)
+        watch_idx = stripped.index(WATCH_HEADER)
+    except ValueError:
+        return message
+
+    status_idx = next((i for i, line in enumerate(stripped) if line.startswith("**数据状态**")), None)
+    if status_idx is None:
+        status_idx = len(stripped)
+
+    if not (0 < focus_idx < watch_idx <= status_idx):
+        return message
+
+    title = stripped[0]
+    if title.startswith("## "):
+        title = title[3:].strip()
+
+    summary_lines = stripped[1:focus_idx]
+    focus_lines = stripped[focus_idx + 1 : watch_idx]
+    watch_lines = stripped[watch_idx + 1 : status_idx]
+    tail_lines = stripped[status_idx + 1 :] if status_idx < len(stripped) else []
+
+    parts = [f"**{title}**"]
+    if summary_lines:
+        parts.extend(["", *summary_lines])
+
+    if focus_lines:
+        parts.extend(["", "────────", FOCUS_HEADER, *focus_lines])
+
+    if watch_lines:
+        parts.extend(["", "────────", WATCH_HEADER, *watch_lines])
+
+    if tail_lines:
+        parts.extend(["", *tail_lines])
+
+    return "\n".join(parts)
 
 
 def content_hash(message: str) -> str:

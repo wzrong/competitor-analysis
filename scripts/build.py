@@ -308,6 +308,22 @@ def sanitize_public_text(content: str) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+def strip_daily_digest_public_sections(content: str) -> str:
+    lines = content.splitlines()
+    kept = []
+    skip_section = False
+    for line in lines:
+        if line.startswith("## 数据状态"):
+            skip_section = True
+            continue
+        if skip_section and line.startswith("## "):
+            skip_section = False
+        if skip_section:
+            continue
+        kept.append(line)
+    return "\n".join(kept).rstrip() + "\n"
+
+
 def write_markdown(src: Path, dst: Path, **front_matter):
     content = src.read_text(encoding="utf-8")
     if front_matter.get("page_type") == "daily_digest":
@@ -317,6 +333,7 @@ def write_markdown(src: Path, dst: Path, **front_matter):
             content,
             flags=re.S,
         )
+        content = strip_daily_digest_public_sections(content)
     content = rewrite_image_refs(content)
     content = strip_internal_sections(content)
     content = sanitize_public_text(content)
