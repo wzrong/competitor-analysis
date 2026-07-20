@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-17 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-17，竞品 2026-07-13，市场 2026-07-13，AI 2026-07-17，政策 2026Q1Q2）
+> 全站更新：2026-07-20 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-20，竞品 2026-07-20，市场 2026-07-20，AI 2026-07-20，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -16,7 +16,7 @@ hide:
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">185</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · 11 / Tier 2 · 24 / 观察池 · 150+</span>](competitors/index.md)
 
-[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">2</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">希沃 / 作业帮教师版</span>](monitor/index.md)
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">5</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">希沃 / 好未来-九章爱学 / 猿辅导-飞象老师 / 智学网 / 作业帮教师版</span>](monitor/index.md)
 
 [:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">46</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 11 · Battlecard 11 · 话术 12 · 教研 7 · 运营 5</span>](actions/index.md)
 
@@ -30,27 +30,27 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-17-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-20-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-17-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-17-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-17-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-07-20-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--competitor" href="monitor/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>2026-07-13-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
+  <span class="home-feed-body"><strong>2026-07-20-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--market" href="market/周报/2026-07-13-市场监测周报/">
+<a class="home-feed-item home-row--market" href="market/周报/2026-07-20-市场监测周报/">
   <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>2026-07-13-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
+  <span class="home-feed-body"><strong>2026-07-20-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-20-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-07-20-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,33 +68,33 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--competitor" href="monitor/2026-07-13-竞品周情报/">
+<a class="focus-item home-row--competitor" href="monitor/2026-07-20-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>希沃（视源股份）— ⚠️ 重要（H1业绩预告+三次递表港...</strong><small>来源：2026-07-13-竞品周情报</small></span>
+  <span class="home-feed-body"><strong>查看 2026-07-20-竞品周情报，跟踪 Tier...</strong><small>来源：2026-07-20-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-17-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-20-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>学而思T6系列开售，AI家教能力升级</strong><small>来源：2026-07-17-行业日情报</small></span>
+  <span class="home-feed-body"><strong>好未来-九章爱学：产品更名+双模型融合</strong><small>来源：2026-07-20-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-17-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>Gemini 3.5 Pro 今日发布：架构完全重构，200 万 t...</strong><small>来源：2026-07-17-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--market" href="market/周报/2026-07-13-市场监测周报/">
+<a class="focus-item home-row--market" href="market/周报/2026-07-20-市场监测周报/">
   <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>龙岗区&quot;龙老师&quot;区域自建平台生态成型</strong><small>来源：2026-07-13-市场监测周报</small></span>
+  <span class="home-feed-body"><strong>二一教育（Tier 1）正式确认加入龙岗&quot;AI 教育应用工...</strong><small>来源：2026-07-20-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-16-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-20-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI 发布 GPT-5.6 三模型家族，Sol 版本编程效率...</strong><small>来源：2026-07-16-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>Claude Fable 5 今日永久纳入 Max/Team Pre...</strong><small>来源：2026-07-20-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--action" href="actions/sales-cards/政策合规差异化-销售话术总卡-202607/">
+  <span class="home-feed-tag home-feed-tag--action">行动</span>
+  <span class="home-feed-body"><strong>政策合规差异化-销售话术总卡-202607</strong><small>来源：政策合规差异化-销售话术总卡-202607</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -115,28 +115,28 @@ hide:
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--danger" href="competitors/zuoyebang-teacher/">
-  <span class="threat-avatar threat-avatar--tone-2">作</span>
-  <span class="threat-body"><strong>作业帮教师版</strong><small>重要信号 · AI精准教学/资源 · 作业帮 · 2026-07-06 母公司C端竞争地位下滑背景信号（豆包爱学冲击）</small></span>
+<a class="threat-row home-row--danger" href="competitors/tal-jiuzhang/">
+  <span class="threat-avatar threat-avatar--tone-2">好</span>
+  <span class="threat-body"><strong>好未来-九章爱学</strong><small>重要信号 · AI备课/课件 · 好未来 · 2026-07-13 母公司T6学习机+AI家教标准（动态补充）</small></span>
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--warning" href="competitors/21cnjy/">
-  <span class="threat-avatar threat-avatar--tone-3">2</span>
-  <span class="threat-body"><strong>21世纪教育网</strong><small>常规监测 · 资源/题库 · 深圳二一教育 · 2026-05-23 四维度深度分析</small></span>
-  <span class="threat-level threat-level--medium">中 →</span>
+<a class="threat-row home-row--danger" href="competitors/yuanfudao-feixiang/">
+  <span class="threat-avatar threat-avatar--tone-3">猿</span>
+  <span class="threat-body"><strong>猿辅导-飞象老师</strong><small>重要信号 · AI备课/课件 · 猿力科技 · 2026-07-13 AI大阅读开课确认（母公司动态补充）</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--warning" href="competitors/jyeoo/">
-  <span class="threat-avatar threat-avatar--tone-4">菁</span>
-  <span class="threat-body"><strong>菁优网</strong><small>常规监测 · 资源/题库 · 菁优智慧教育 · 2026-05-23 四维度深度分析</small></span>
-  <span class="threat-level threat-level--medium">中 →</span>
+<a class="threat-row home-row--danger" href="competitors/zhixue/">
+  <span class="threat-avatar threat-avatar--tone-4">智</span>
+  <span class="threat-body"><strong>智学网</strong><small>重要信号 · AI精准教学 · 科大讯飞 · 2026-05-23 四维度深度分析</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--warning" href="competitors/xiangpi/">
-  <span class="threat-avatar threat-avatar--tone-5">橡</span>
-  <span class="threat-body"><strong>橡皮网</strong><small>常规监测 · 资源/题库 · 北京正确教育 · 2026-05-23 四维度深度分析</small></span>
-  <span class="threat-level threat-level--medium">中 →</span>
+<a class="threat-row home-row--danger" href="competitors/zuoyebang-teacher/">
+  <span class="threat-avatar threat-avatar--tone-5">作</span>
+  <span class="threat-body"><strong>作业帮教师版</strong><small>重要信号 · AI精准教学/资源 · 作业帮 · 2026-07-06 母公司C端竞争地位下滑背景信号（豆包爱学冲击）</small></span>
+  <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
 </section>
