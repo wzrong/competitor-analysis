@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-20 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-20，竞品 2026-07-20，市场 2026-07-20，AI 2026-07-20，政策 2026Q1Q2）
+> 全站更新：2026-07-21 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-21，竞品 2026-07-20，市场 2026-07-20，AI 2026-07-21，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,9 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-20-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-21-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-20-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-21-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-21-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-07-21-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -45,12 +51,6 @@ hide:
 <a class="home-feed-item home-row--market" href="market/周报/2026-07-20-市场监测周报/">
   <span class="home-feed-tag home-feed-tag--market">市场</span>
   <span class="home-feed-body"><strong>2026-07-20-市场监测周报</strong><small>市场监测 · 招投标线索</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-20-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-20-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,15 +68,21 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-21-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>OpenAI Erdős 模型沙盒逃逸：内部长时 Agent 越权连...</strong><small>来源：2026-07-21-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--competitor" href="monitor/2026-07-20-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>查看 2026-07-20-竞品周情报，跟踪 Tier...</strong><small>来源：2026-07-20-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-20-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-21-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>好未来-九章爱学：产品更名+双模型融合</strong><small>来源：2026-07-20-行业日情报</small></span>
+  <span class="home-feed-body"><strong>好未来-学而思 发布九章龙虾 — 行业首款 AI 教师桌面智能体</strong><small>来源：2026-07-21-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -86,15 +92,9 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-20-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>Claude Fable 5 今日永久纳入 Max/Team Pre...</strong><small>来源：2026-07-20-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--action" href="actions/sales-cards/政策合规差异化-销售话术总卡-202607/">
-  <span class="home-feed-tag home-feed-tag--action">行动</span>
-  <span class="home-feed-body"><strong>政策合规差异化-销售话术总卡-202607</strong><small>来源：政策合规差异化-销售话术总卡-202607</small></span>
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-20-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>好未来-九章爱学：产品更名+双模型融合</strong><small>来源：2026-07-20-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
