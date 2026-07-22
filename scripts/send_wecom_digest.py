@@ -270,26 +270,6 @@ def main():
         elif previous.get("status") == "sent":
             group_results["原群"] = {"status": "sent", "migrated_from_legacy_log": True}
 
-    # 先完整预检全部目标群，再发送任何一条消息，避免钥匙串不可访问时产生
-    # “部分群已发、部分群未发”的状态。
-    webhooks = {}
-    preflight_failed = False
-    for group_name in selected_groups:
-        prior = previous_group_status(previous, group_name, digest_hash)
-        if not args.force and prior and prior.get("status") == "sent":
-            continue
-        try:
-            webhooks[group_name] = load_webhook(group_name, GROUPS[group_name])
-        except Exception as exc:
-            preflight_failed = True
-            group_results[group_name] = {"status": "failed", "detail": str(exc)}
-            print(f"{group_name}：{exc}", file=sys.stderr)
-
-    if preflight_failed:
-        write_log(args.date, "failed", digest_hash, group_results)
-        print("Webhook 预检未通过，本次未向任何群发送。", file=sys.stderr)
-        return 1
-
     failed = False
     for group_name in selected_groups:
         prior = previous_group_status(previous, group_name, digest_hash)
@@ -299,7 +279,7 @@ def main():
             continue
 
         try:
-            webhook = webhooks.get(group_name)
+            webhook = load_webhook(group_name, GROUPS[group_name])
             if not webhook:
                 group_results[group_name] = {"status": "skipped_no_webhook"}
                 print(f"{group_name}：未配置 Webhook，已跳过。")

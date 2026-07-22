@@ -33,6 +33,4 @@ if [ "$PAGE_READY" -ne 1 ]; then
     exit 1
 fi
 
-echo "预检三个企微群的 Webhook..."
-./venv/bin/python scripts/send_wecom_digest.py --check-webhooks
 ./venv/bin/python scripts/send_wecom_digest.py --date "$REPORT_DATE"
