@@ -25,6 +25,9 @@ GROUPS = {
     "产品群": "xkw-intelligence-wecom-webhook-product",
     "解决方案群": "xkw-intelligence-wecom-webhook-solution",
 }
+# 本项目已经登记了三个正式推送群。默认全部视为必需配置：如果当前运行
+# 环境读不到钥匙串，必须失败并交由调用方在宿主环境重试，不能误记为未配置。
+REQUIRED_GROUPS = frozenset(GROUPS)
 MAX_CONTENT_BYTES = 3500
 FOCUS_HEADER = "**今日重点**"
 WATCH_HEADER = "**建议关注**"
@@ -34,6 +37,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="发送学科网情报系统每日概要到企业微信群")
     parser.add_argument("--date", default=date.today().isoformat(), help="概要日期，格式 YYYY-MM-DD")
     parser.add_argument("--dry-run", action="store_true", help="只校验并打印消息，不发送")
+    parser.add_argument("--check-webhooks", action="store_true", help="只检查目标群 Webhook 是否可读取，不发送")
     parser.add_argument("--force", action="store_true", help="忽略相同内容已发送记录")
     parser.add_argument(
         "--group",
@@ -194,6 +198,11 @@ def load_webhook(group_name: str, keychain_service: str):
         if path.exists():
             webhook = path.read_text(encoding="utf-8").strip()
     if not webhook:
+        if group_name in REQUIRED_GROUPS:
+            raise RuntimeError(
+                f"无法读取{group_name}的企微 Webhook（钥匙串服务：{keychain_service}）。"
+                "该群已登记为必需配置；若在 Codex 沙箱中运行，请保留现有配置并在沙箱外重试。"
+            )
         return None
     return validate_webhook(webhook)
 
@@ -228,6 +237,18 @@ def send_message(webhook: str, message: str):
 
 def main():
     args = parse_args()
+    selected_groups = args.group or list(GROUPS)
+    if args.check_webhooks:
+        failed = False
+        for group_name in selected_groups:
+            try:
+                load_webhook(group_name, GROUPS[group_name])
+                print(f"{group_name}：Webhook 可读取。")
+            except Exception as exc:
+                failed = True
+                print(f"{group_name}：{exc}", file=sys.stderr)
+        return 1 if failed else 0
+
     path = digest_path(args.date)
     if not path.exists():
         print(f"未找到每日概要：{path}", file=sys.stderr)
@@ -242,13 +263,32 @@ def main():
         print(f"\n[校验通过] {len(message.encode('utf-8'))} bytes | sha256={digest_hash[:12]}")
         return 0
 
-    selected_groups = args.group or list(GROUPS)
     group_results = {}
     if previous and previous.get("content_sha256") == digest_hash:
         if isinstance(previous.get("groups"), dict):
             group_results.update(previous["groups"])
         elif previous.get("status") == "sent":
             group_results["原群"] = {"status": "sent", "migrated_from_legacy_log": True}
+
+    # 先完整预检全部目标群，再发送任何一条消息，避免钥匙串不可访问时产生
+    # “部分群已发、部分群未发”的状态。
+    webhooks = {}
+    preflight_failed = False
+    for group_name in selected_groups:
+        prior = previous_group_status(previous, group_name, digest_hash)
+        if not args.force and prior and prior.get("status") == "sent":
+            continue
+        try:
+            webhooks[group_name] = load_webhook(group_name, GROUPS[group_name])
+        except Exception as exc:
+            preflight_failed = True
+            group_results[group_name] = {"status": "failed", "detail": str(exc)}
+            print(f"{group_name}：{exc}", file=sys.stderr)
+
+    if preflight_failed:
+        write_log(args.date, "failed", digest_hash, group_results)
+        print("Webhook 预检未通过，本次未向任何群发送。", file=sys.stderr)
+        return 1
 
     failed = False
     for group_name in selected_groups:
@@ -259,7 +299,7 @@ def main():
             continue
 
         try:
-            webhook = load_webhook(group_name, GROUPS[group_name])
+            webhook = webhooks.get(group_name)
             if not webhook:
                 group_results[group_name] = {"status": "skipped_no_webhook"}
                 print(f"{group_name}：未配置 Webhook，已跳过。")
