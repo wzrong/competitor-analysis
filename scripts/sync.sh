@@ -81,20 +81,20 @@ git commit -m "$COMMIT_MSG"
 echo ""
 echo "[4/4] 推送到 GitHub..."
 
-# 检测代理是否可用
+# GitHub 在当前网络环境下依赖本机代理。代理失败时不要自动切换直连：
+# Codex 沙箱无法访问宿主机的 127.0.0.1，而关闭代理后直连 GitHub 容易超时。
+PUSH_OK=0
 PROXY=$(git config --global --get https.proxy 2>/dev/null || true)
 if [ -n "$PROXY" ]; then
     echo "      检测到 Git 代理: $PROXY"
-    # 尝试带代理推送
     if git push origin main 2>&1; then
         PUSH_OK=1
     else
-        echo "      代理推送失败，尝试绕过代理..."
-        if git -c http.proxy= -c https.proxy= push origin main 2>&1; then
-            PUSH_OK=1
-        fi
+        echo "      代理推送失败，不自动切换为直连。"
+        echo "      如在 Codex 沙箱中运行，请在沙箱外保留当前代理配置后重试。"
     fi
 else
+    echo "      未检测到 Git HTTPS 代理，将尝试当前网络直连。"
     if git push origin main 2>&1; then
         PUSH_OK=1
     fi
@@ -107,15 +107,16 @@ if [ "$PUSH_OK" = "1" ]; then
     echo "✅ 推送成功！"
     echo ""
     echo "   GitHub Pages 将在 1-2 分钟后自动部署"
-    echo "   访问地址: https://wzrong.github.io/competitor-analysis"
+    echo "   访问地址: https://comp.wzrong.me/"
 else
     echo "❌ 推送失败"
     echo ""
     echo "   可能原因:"
-    echo "   1. 网络代理未开启（你配置了 $PROXY）"
+    echo "   1. 当前执行环境无法访问本机代理（配置：${PROXY:-未配置}）"
     echo "   2. GitHub 认证过期"
     echo ""
     echo "   你可以稍后手动推送:"
     echo "   cd $(pwd) && git push origin main"
+    exit 1
 fi
 echo "=================================================="
