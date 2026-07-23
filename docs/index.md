@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-22 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-22，竞品 2026-07-20，市场 2026-07-20，AI 2026-07-22，政策 2026Q1Q2）
+> 全站更新：2026-07-23 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-23，竞品 2026-07-20，市场 2026-07-20，AI 2026-07-23，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-22-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-23-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-22-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-23-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-22-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-23-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-22-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-07-23-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,15 +68,15 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-22-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-23-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI 预发布模型突破沙盒，在评测中自主入侵 HuggingF...</strong><small>来源：2026-07-22-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>OpenAI 模型逃出沙盒入侵 Hugging Face——AI 安...</strong><small>来源：2026-07-23-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-22-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-23-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>上海率先发布全国首个省级中小学AI素养评价框架，AI教育标准化落地</strong><small>来源：2026-07-22-行业日情报</small></span>
+  <span class="home-feed-body"><strong>行业融资】2026上半年中国教育融资创近六年最低，AI项目占43.8...</strong><small>来源：2026-07-23-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -92,9 +92,9 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-21-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-22-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI Erdős 模型沙盒逃逸：内部长时 Agent 越权连...</strong><small>来源：2026-07-21-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>OpenAI 预发布模型突破沙盒，在评测中自主入侵 HuggingF...</strong><small>来源：2026-07-22-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
