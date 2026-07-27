@@ -97,6 +97,7 @@ nav:
     - 历史归档: daily/index.md
   - 行业分析:
     - 总览: industry/index.md
+    - 2026-07-27-行业日情报: industry/日情报/2026-07-27-行业日情报.md
     - 2026-07-26-行业日情报: industry/日情报/2026-07-26-行业日情报.md
     - 2026-07-25-行业日情报: industry/日情报/2026-07-25-行业日情报.md
     - 2026-07-24-行业日情报: industry/日情报/2026-07-24-行业日情报.md
@@ -148,6 +149,7 @@ nav:
     - 深度分析: competitors/analyses/index.md
     - 竞品监测:
       - 最新监测: monitor/index.md
+      - 2026-07-27-竞品周情报: monitor/2026-07-27-竞品周情报.md
       - 2026-07-20-竞品周情报: monitor/2026-07-20-竞品周情报.md
       - 2026-07-13-竞品周情报: monitor/2026-07-13-竞品周情报.md
       - 2026-07-06-竞品周情报: monitor/2026-07-06-竞品周情报.md
@@ -215,7 +217,13 @@ nav:
     - 2026-01-江苏省人工智能+行动方案: policy/解读/2026-01-江苏省人工智能+行动方案.md
   - 市场监测:
     - 总览: market/index.md
-    - 周报:
+    - 商机线索:
+      - 2026-07-26-商机线索: market/商机线索/2026-07-26-商机线索.md
+      - 2026-07-20-商机线索: market/商机线索/2026-07-20-商机线索.md
+    - 周数据报表:
+      - 2026-07-26-周数据报表: market/周报表/2026-07-26-周数据报表.md
+    - 市场监测周报:
+      - 2026-07-26-市场监测周报: market/周报/2026-07-26-市场监测周报.md
       - 2026-07-20-市场监测周报: market/周报/2026-07-20-市场监测周报.md
       - 2026-07-13-市场监测周报: market/周报/2026-07-13-市场监测周报.md
       - 2026-07-07-真实数据周报: market/周报/2026-07-07-真实数据周报.md
@@ -227,11 +235,13 @@ nav:
       - 2026-07-07-真实数据搜索: market/招投标数据/2026-07-07-真实数据搜索.md
       - 2026-07-13: market/招投标数据/2026-07-13.md
       - 2026-07-20: market/招投标数据/2026-07-20.md
+      - 2026-07-26: market/招投标数据/2026-07-26.md
       - 基线-2026-06-01: market/招投标数据/基线-2026-06-01.md
   - 应对建议:
     - 总览: actions/index.md
     - 决策层简报:
       - 总览: actions/executive-briefs/index.md
+      - 飞象老师-战略简报-2026Q3: actions/executive-briefs/飞象老师-战略简报-2026Q3.md
       - 飞象老师-战略简报-2026Q2: actions/executive-briefs/飞象老师-战略简报-2026Q2.md
       - 金太阳中课云-战略简报-2026Q2: actions/executive-briefs/金太阳中课云-战略简报-2026Q2.md
       - 菁优网-战略简报-2026Q2: actions/executive-briefs/菁优网-战略简报-2026Q2.md
@@ -239,12 +249,15 @@ nav:
       - 橡皮网-战略简报-2026Q2: actions/executive-briefs/橡皮网-战略简报-2026Q2.md
       - 智学网-战略简报-2026Q2: actions/executive-briefs/智学网-战略简报-2026Q2.md
       - 教习网-战略简报-2026Q2: actions/executive-briefs/教习网-战略简报-2026Q2.md
+      - 希沃-战略简报-2026Q3: actions/executive-briefs/希沃-战略简报-2026Q3.md
       - 希沃-战略简报-2026Q2: actions/executive-briefs/希沃-战略简报-2026Q2.md
+      - 作业帮教师版-战略简报-2026Q3: actions/executive-briefs/作业帮教师版-战略简报-2026Q3.md
       - 作业帮教师版-战略简报-2026Q2: actions/executive-briefs/作业帮教师版-战略简报-2026Q2.md
       - 九章爱学-战略简报-2026Q2: actions/executive-briefs/九章爱学-战略简报-2026Q2.md
       - 21世纪教育网-战略简报-2026Q2: actions/executive-briefs/21世纪教育网-战略简报-2026Q2.md
     - Battlecard:
       - 总览: actions/battlecards/index.md
+      - 飞象老师-Battlecard-202607: actions/battlecards/飞象老师-Battlecard-202607.md
       - 飞象老师-Battlecard-202606: actions/battlecards/飞象老师-Battlecard-202606.md
       - 金太阳中课云-Battlecard-202606: actions/battlecards/金太阳中课云-Battlecard-202606.md
       - 菁优网-Battlecard-202606: actions/battlecards/菁优网-Battlecard-202606.md
@@ -252,12 +265,15 @@ nav:
       - 橡皮网-Battlecard-202606: actions/battlecards/橡皮网-Battlecard-202606.md
       - 智学网-Battlecard-202606: actions/battlecards/智学网-Battlecard-202606.md
       - 教习网-Battlecard-202606: actions/battlecards/教习网-Battlecard-202606.md
+      - 希沃-Battlecard-202607: actions/battlecards/希沃-Battlecard-202607.md
       - 希沃-Battlecard-202606: actions/battlecards/希沃-Battlecard-202606.md
+      - 作业帮教师版-Battlecard-202607: actions/battlecards/作业帮教师版-Battlecard-202607.md
       - 作业帮教师版-Battlecard-202606: actions/battlecards/作业帮教师版-Battlecard-202606.md
       - 九章爱学-Battlecard-202606: actions/battlecards/九章爱学-Battlecard-202606.md
       - 21世纪教育网-Battlecard-202606: actions/battlecards/21世纪教育网-Battlecard-202606.md
     - 销售话术卡:
       - 总览: actions/sales-cards/index.md
+      - 飞象老师-销售话术卡-202607: actions/sales-cards/飞象老师-销售话术卡-202607.md
       - 飞象老师-销售话术卡-202606: actions/sales-cards/飞象老师-销售话术卡-202606.md
       - 金太阳中课云-销售话术卡-202606: actions/sales-cards/金太阳中课云-销售话术卡-202606.md
       - 菁优网-销售话术卡-202606: actions/sales-cards/菁优网-销售话术卡-202606.md
@@ -266,7 +282,9 @@ nav:
       - 智学网-销售话术卡-202606: actions/sales-cards/智学网-销售话术卡-202606.md
       - 教习网-销售话术卡-202606: actions/sales-cards/教习网-销售话术卡-202606.md
       - 政策合规差异化-销售话术总卡-202607: actions/sales-cards/政策合规差异化-销售话术总卡-202607.md
+      - 希沃-销售话术卡-202607: actions/sales-cards/希沃-销售话术卡-202607.md
       - 希沃-销售话术卡-202606: actions/sales-cards/希沃-销售话术卡-202606.md
+      - 作业帮教师版-销售话术卡-202607: actions/sales-cards/作业帮教师版-销售话术卡-202607.md
       - 作业帮教师版-销售话术卡-202606: actions/sales-cards/作业帮教师版-销售话术卡-202606.md
       - 九章爱学-销售话术卡-202606: actions/sales-cards/九章爱学-销售话术卡-202606.md
       - 21世纪教育网-销售话术卡-202606: actions/sales-cards/21世纪教育网-销售话术卡-202606.md
@@ -289,6 +307,7 @@ nav:
   - AI简报:
     - 最新简报: ai-briefings/latest.md
     - 简报归档: ai-briefings/index.md
+    - 2026-07-27-AI每日简报: ai-briefings/2026-07-27-AI每日简报.md
     - 2026-07-26-AI每日简报: ai-briefings/2026-07-26-AI每日简报.md
     - 2026-07-25-AI每日简报: ai-briefings/2026-07-25-AI每日简报.md
     - 2026-07-24-AI每日简报: ai-briefings/2026-07-24-AI每日简报.md

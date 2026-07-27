@@ -191,6 +191,9 @@ def rewrite_obsidian_link(target: str, dst: Path) -> str:
     if decoded.startswith(("../行业分析/日情报/", "../../行业分析/日情报/", "行业分析/日情报/")):
         filename = decoded.rsplit("/", 1)[1]
         return f"{site_relative(dst, f'industry/日情报/{filename}')}{anchor}"
+    if dst.is_relative_to(DOCS_ROOT / "market" / "周报") and decoded.startswith("商机线索/"):
+        filename = decoded.rsplit("/", 1)[1]
+        return f"{site_relative(dst, f'market/商机线索/{filename}')}{anchor}"
     if decoded.startswith("../政策分析/") or decoded.startswith("../../政策分析/"):
         return f"{site_relative(dst, 'policy/index.md')}{anchor}"
     if decoded.startswith(("../profile.md", "./profile.md")):
@@ -287,6 +290,9 @@ def strip_internal_sections(content: str) -> str:
 def sanitize_public_text(content: str) -> str:
     content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*status/[^)]+\)", r"\1", content)
     content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*系统状态/[^)]+\)", r"\1", content)
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*运行手册\.md(?:#[^)]+)?\)", r"\1", content)
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*招投标数据/字段口径\.md(?:#[^)]+)?\)", r"\1", content)
+    content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*CLAUDE\.md(?:#[^)]+)?\)", r"\1", content)
     content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*学科网/教辅出版威胁地图-2026-07\.md\)", r"\1", content)
     content = re.sub(r"\[([^\]]+)\]\((?:\.\./)*理想众望竞争分析_V3_20260616\.docx\)", r"\1", content)
     content = re.sub(r"\[((?:\.\./)*政策分析/解读/)\]", "[政策解读]", content)
@@ -499,14 +505,62 @@ def copy_market_monitoring():
     add_intro_after_title(index_dst, "> 资金流向：钱往哪里流。跟踪招投标、采购与区域市场信号，用于判断机会窗口。")
     nav_files = []
 
-    weekly_src = VAULT_ROOT / "市场监测" / "周报"
-    if weekly_src.exists():
-        for src in sorted(weekly_src.glob("*.md"), reverse=True):
-            if src.name in {"README.md", "周报模板.md"}:
+    report_groups = [
+        {
+            "title": "商机线索",
+            "source_dir": "商机线索",
+            "page_type": "market_opportunity",
+            "tags": ["市场监测", "商机线索"],
+            "excluded": {"清单模板.md"},
+        },
+        {
+            "title": "周数据报表",
+            "source_dir": "周报表",
+            "page_type": "market_weekly_data",
+            "tags": ["市场监测", "周数据报表"],
+            "excluded": {"周数据报表模板.md"},
+        },
+        {
+            "title": "市场监测周报",
+            "source_dir": "周报",
+            "page_type": "market_weekly",
+            "tags": ["市场监测", "市场监测周报"],
+            "excluded": {"README.md", "周报模板.md"},
+        },
+    ]
+    for report_group in report_groups:
+        source_dir = report_group["source_dir"]
+        src_dir = VAULT_ROOT / "市场监测" / source_dir
+        if not src_dir.exists():
+            continue
+        for src in sorted(src_dir.glob("*.md"), reverse=True):
+            if src.name in report_group["excluded"]:
                 continue
-            dst = dst_dir / "周报" / src.name
-            write_markdown(src, dst, page_type="market_weekly", tags=["市场监测", "周报"])
-            nav_files.append(("周报", dst.stem, f"market/周报/{src.name}"))
+            dst = dst_dir / source_dir / src.name
+            write_markdown(
+                src,
+                dst,
+                page_type=report_group["page_type"],
+                tags=report_group["tags"],
+            )
+            nav_files.append((report_group["title"], dst.stem, f"market/{source_dir}/{src.name}"))
+
+    methodology_src = VAULT_ROOT / "市场监测" / "口径"
+    if methodology_src.exists():
+        for src in sorted(methodology_src.glob("*.md")):
+            write_markdown(
+                src,
+                dst_dir / "口径" / src.name,
+                page_type="market_methodology",
+                tags=["市场监测", "口径与模型"],
+            )
+
+    dataset_src = VAULT_ROOT / "市场监测" / "数据集"
+    if dataset_src.exists():
+        dataset_dst = dst_dir / "数据集"
+        dataset_dst.mkdir(parents=True, exist_ok=True)
+        for src in sorted(dataset_src.glob("*.csv")):
+            shutil.copyfile(src, dataset_dst / src.name)
 
     object_list = VAULT_ROOT / "市场监测" / "监测对象清单.md"
     if object_list.exists():
@@ -529,8 +583,8 @@ def copy_market_monitoring():
             elif src.suffix.lower() == ".md":
                 continue
 
-    # 周报在上方已按文件名倒序加入，保留该顺序，确保最新日期在前。
-    # 不要在这里再按标题升序排列，否则会把周报恢复为旧到新。
+    # 三类市场产出均按文件名倒序加入，确保各栏目最新日期在前。
+    # 不要在这里再按标题升序排列，否则会把报告恢复为旧到新。
     return nav_files
 
 
@@ -975,6 +1029,10 @@ def source_path_for_site_path(path: str) -> Path | None:
         return VAULT_ROOT / "政策分析" / "解读" / Path(path).name
     if path.startswith("market/周报/"):
         return VAULT_ROOT / "市场监测" / "周报" / Path(path).name
+    if path.startswith("market/周报表/"):
+        return VAULT_ROOT / "市场监测" / "周报表" / Path(path).name
+    if path.startswith("market/商机线索/"):
+        return VAULT_ROOT / "市场监测" / "商机线索" / Path(path).name
     if path.startswith("ai-briefings/"):
         return AI_BRIEFING_ROOT / "briefings" / Path(path).name
     if path.startswith("monitor/"):
@@ -1283,7 +1341,7 @@ def build_focus_items(industry_nav: list, policy_nav: list, market_nav: list, ac
         add_item("competitor", log_name, monitor_focus_summary(log_name, monitor_path), f"monitor/{log_name}.md")
 
     for group, title, path in market_nav:
-        if group == "周报":
+        if group == "市场监测周报":
             source_path = source_path_for_site_path(path)
             source_desc = specific_focus_line(
                 "market",
@@ -1461,7 +1519,7 @@ def generate_home(tiers: dict, industry_nav: list, policy_nav: list, market_nav:
     latest_policy = policy_nav[0][0] if policy_nav else "政策时间轴"
     latest_policy_path = policy_nav[0][1] if policy_nav else "policy/index.md"
     latest_monitor = monitor_logs[0] if monitor_logs else "暂无"
-    market_weeklies = [item for item in market_nav if item[0] == "周报"]
+    market_weeklies = [item for item in market_nav if item[0] == "市场监测周报"]
     latest_market = max(market_weeklies, key=lambda item: first_date(f"{item[1]} {item[2]}")) if market_weeklies else None
     latest_market_title = latest_market[1] if latest_market else "市场监测总览"
     latest_market_path = latest_market[2] if latest_market else "market/index.md"
