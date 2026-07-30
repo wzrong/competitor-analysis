@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-29 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-29，竞品 2026-07-27，市场 2026-07-26，AI 2026-07-29，政策 2026Q1Q2）
+> 全站更新：2026-07-30 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-30，竞品 2026-07-27，市场 2026-07-26，AI 2026-07-30，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-29-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-30-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-29-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-07-30-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-29-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-30-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-29-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-07-30-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,6 +68,18 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-07-30-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>教育板块早盘全线大涨，机构定调&quot;政策改善+供给出清+需求释...</strong><small>来源：2026-07-30-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--ai" href="ai-briefings/2026-07-30-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>1178名AI员工联署&quot;Pacing the Fronti...</strong><small>来源：2026-07-30-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--competitor" href="monitor/2026-07-27-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>查看 2026-07-27-竞品周情报，跟踪 Tier...</strong><small>来源：2026-07-27-竞品周情报</small></span>
@@ -83,18 +95,6 @@ hide:
 <a class="focus-item home-row--industry" href="industry/日情报/2026-07-29-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>Kimi K3 权重正式开放下载，2.8万亿参数刷新开源纪录</strong><small>来源：2026-07-29-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-28-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1. Kimi K3 权重发布：首个开源 3T 级 MoE 模型正式...</strong><small>来源：2026-07-28-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-28-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>菲尔兹奖大讨论持续发酵：中国基础教育实力获验证，但人才留用问题引争议</strong><small>来源：2026-07-28-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
