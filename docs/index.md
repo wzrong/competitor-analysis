@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-07-31 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-07-31，竞品 2026-07-27，市场 2026-07-26，AI 2026-07-31，政策 2026Q1Q2）
+> 全站更新：2026-08-03 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-03，竞品 2026-07-27，市场 2026-07-26，AI 2026-08-03，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-07-31-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-03-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-07-31-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-08-03-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-07-31-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-03-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-07-31-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-08-03-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,15 +68,15 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-31-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-03-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>清朗·未成年人网络保护专项行动持续发酵，AI 家教暑期档承压（补入）</strong><small>来源：2026-07-31-行业日情报</small></span>
+  <span class="home-feed-body"><strong>36氪梳理 H1 2026 教育 AI 产品图谱：头部16款产品，诊...</strong><small>来源：2026-08-03-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-31-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-03-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>Gemini Robotics 2：Google 发布全身体控制机器...</strong><small>来源：2026-07-31-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>OpenAI 暗度陈仓：用十道数学题宣布了下一代模型 Astra</strong><small>来源：2026-08-03-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -86,15 +86,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-07-30-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>教育板块早盘全线大涨，机构定调&quot;政策改善+供给出清+需求释...</strong><small>来源：2026-07-30-行业日情报</small></span>
+<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-07-30-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1178名AI员工联署&quot;Pacing the Fronti...</strong><small>来源：2026-07-30-AI每日简报</small></span>
+<a class="focus-item home-row--action" href="actions/sales-cards/政策合规差异化-销售话术总卡-202607/">
+  <span class="home-feed-tag home-feed-tag--action">行动</span>
+  <span class="home-feed-body"><strong>政策合规差异化-销售话术总卡-202607</strong><small>来源：政策合规差异化-销售话术总卡-202607</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
