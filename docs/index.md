@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-04 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-04，竞品 2026-08-03，市场 2026-07-26，AI 2026-08-04，政策 2026Q1Q2）
+> 全站更新：2026-08-06 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-06，竞品 2026-08-03，市场 2026-07-26，AI 2026-08-06，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-04-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-06-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-08-04-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-08-06-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-04-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-06-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-04-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-08-06-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,33 +68,33 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-06-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>飞象星球中标内蒙古通辽 286.89 万元，东西部协作政策资金切入区...</strong><small>来源：2026-08-06-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-06-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>谷歌 AI 领导层大地震：Jeff Dean 离职创业，哈萨比斯卸任...</strong><small>来源：2026-08-06-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--competitor" href="monitor/2026-08-03-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>查看 2026-08-03-竞品周情报，跟踪 Tier...</strong><small>来源：2026-08-03-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-03-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>36氪梳理 H1 2026 教育 AI 产品图谱：头部16款产品，诊...</strong><small>来源：2026-08-03-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-04-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-05-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>阿里发布 Qwen3.8-Max：2.4 万亿参数，PaperBen...</strong><small>来源：2026-08-04-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>白宫召集四巨头敲定 AI 安全测试框架：政府获准测试前沿模型&amp;quo...</strong><small>来源：2026-08-05-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-03-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI 暗度陈仓：用十道数学题宣布了下一代模型 Astra</strong><small>来源：2026-08-03-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-04-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-05-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>教育部&quot;全球人工智能教育服务平台&quot;启动项目征集...</strong><small>来源：2026-08-04-行业日情报</small></span>
+  <span class="home-feed-body"><strong>36氪行业深度：免费AI攻入教育，好未来们的护城河还剩多宽</strong><small>来源：2026-08-05-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 

@@ -97,6 +97,8 @@ nav:
     - 历史归档: daily/index.md
   - 行业分析:
     - 总览: industry/index.md
+    - 2026-08-06-行业日情报: industry/日情报/2026-08-06-行业日情报.md
+    - 2026-08-05-行业日情报: industry/日情报/2026-08-05-行业日情报.md
     - 2026-08-04-行业日情报: industry/日情报/2026-08-04-行业日情报.md
     - 2026-08-03-行业日情报: industry/日情报/2026-08-03-行业日情报.md
     - 2026-08-02-行业日情报: industry/日情报/2026-08-02-行业日情报.md
@@ -317,6 +319,8 @@ nav:
   - AI简报:
     - 最新简报: ai-briefings/latest.md
     - 简报归档: ai-briefings/index.md
+    - 2026-08-06-AI每日简报: ai-briefings/2026-08-06-AI每日简报.md
+    - 2026-08-05-AI每日简报: ai-briefings/2026-08-05-AI每日简报.md
     - 2026-08-04-AI每日简报: ai-briefings/2026-08-04-AI每日简报.md
     - 2026-08-03-AI每日简报: ai-briefings/2026-08-03-AI每日简报.md
     - 2026-08-02-AI每日简报: ai-briefings/2026-08-02-AI每日简报.md
