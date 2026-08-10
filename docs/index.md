@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-09 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-09，竞品 2026-08-03，市场 2026-07-26，AI 2026-08-09，政策 2026Q1Q2）
+> 全站更新：2026-08-10 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-10，竞品 2026-08-03，市场 2026-07-26，AI 2026-08-10，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-09-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-10-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-08-09-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-08-10-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-09-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-10-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-09-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-08-10-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,15 +68,15 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-09-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI 紧急暂缓最强模型 Astra：首次触发&quot;临界...</strong><small>来源：2026-08-09-AI每日简报</small></span>
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-10-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>讯飞同窗 AI 黑板走进超 10 万间教室，覆盖 33 省级行政区...</strong><small>来源：2026-08-10-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-09-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>衢州&quot;人工智能通识教育培训基地&quot;项目 71.9...</strong><small>来源：2026-08-09-行业日情报</small></span>
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-10-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>白宫敲定 AI 网络安全测试框架：自愿送测、开源豁免、秘而不宣</strong><small>来源：2026-08-10-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -86,15 +86,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-06-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>飞象星球中标内蒙古通辽 286.89 万元，东西部协作政策资金切入区...</strong><small>来源：2026-08-06-行业日情报</small></span>
+<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-07-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI 大更新：GPT-5.6 Sol 显著改进，免费用户升级...</strong><small>来源：2026-08-07-AI每日简报</small></span>
+<a class="focus-item home-row--action" href="actions/sales-cards/政策合规差异化-销售话术总卡-202607/">
+  <span class="home-feed-tag home-feed-tag--action">行动</span>
+  <span class="home-feed-body"><strong>政策合规差异化-销售话术总卡-202607</strong><small>来源：政策合规差异化-销售话术总卡-202607</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
