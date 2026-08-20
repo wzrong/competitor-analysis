@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-20 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-20，竞品 2026-08-03，市场 2026-07-26，AI 2026-08-19，政策 2026Q1Q2）
+> 全站更新：2026-08-20 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-20，竞品 2026-08-03，市场 2026-07-26，AI 2026-08-20，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -36,9 +36,9 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-19-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-20-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-19-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-08-20-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,6 +68,12 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-20-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>1. OpenAI 暂缓前沿模型训练：Astra 触及 Critic...</strong><small>来源：2026-08-20-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--industry" href="industry/日情报/2026-08-20-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>洋葱学园发布&quot;AI未来课堂&quot;整体解决方案，从C端...</strong><small>来源：2026-08-20-行业日情报</small></span>
@@ -83,12 +89,6 @@ hide:
 <a class="focus-item home-row--industry" href="industry/日情报/2026-08-19-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>GSE2026 全球智慧教育大会开幕，教育部副部长调研渝中&quot;...</strong><small>来源：2026-08-19-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-18-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1. Qwen 3.8 27B 在 Artificial Analy...</strong><small>来源：2026-08-18-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
