@@ -60,7 +60,8 @@ rm -f "$BUILD_LOG"
 # ── 步骤 3: Git 提交 ──
 echo ""
 echo "[3/4] Git 提交..."
-git add -A
+# 只提交源内容；site/ 是 MkDocs 生成目录，线上 GitHub Pages workflow 会重新构建。
+git add -A .gitignore CNAME.txt docs mkdocs.yml overrides scripts
 
 # 检查是否有变更
 if git diff --cached --quiet; then
