@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-24 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-24，竞品 2026-08-20，市场 2026-07-26，AI 2026-08-21，政策 2026Q1Q2）
+> 全站更新：2026-08-24 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-24，竞品 2026-08-24，市场 2026-07-26，AI 2026-08-24，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -36,15 +36,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-21-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-21-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+<a class="home-feed-item home-row--competitor" href="monitor/">
+  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
+  <span class="home-feed-body"><strong>2026-08-24-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--competitor" href="monitor/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>2026-08-20-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-24-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-08-24-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,21 +68,21 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--competitor" href="monitor/2026-08-24-竞品周情报/">
+  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
+  <span class="home-feed-body"><strong>查看 2026-08-24-竞品周情报，跟踪 Tier...</strong><small>来源：2026-08-24-竞品周情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-24-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>1. Anthropic 旗舰 Fable 5 遇冷：收入创新高，最...</strong><small>来源：2026-08-24-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--industry" href="industry/日情报/2026-08-24-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>佳发教育半年报：AI 布局加速——华为&quot;教育考试智能体应用...</strong><small>来源：2026-08-24-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--competitor" href="monitor/2026-08-20-竞品周情报/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>查看 2026-08-20-竞品周情报，跟踪 Tier...</strong><small>来源：2026-08-20-竞品周情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-21-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1. Stripe 以约 75 亿美元收购 OpenRouter</strong><small>来源：2026-08-21-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
