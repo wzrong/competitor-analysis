@@ -6,8 +6,10 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from datetime import date, datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -16,6 +18,7 @@ from urllib.request import Request, urlopen
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+WEBSITE_ROOT = Path(__file__).resolve().parents[1]
 DIGEST_ROOT = PROJECT_ROOT / "每日概要"
 LOG_ROOT = DIGEST_ROOT / "推送日志"
 DEFAULT_WEBHOOK_FILE = Path.home() / ".config" / "xkw-intelligence" / "wecom-webhook-url"
@@ -220,6 +223,16 @@ def previous_group_status(previous, group_name: str, digest_hash: str):
 
 
 def send_message(webhook: str, message: str):
+    socks_proxies = configured_socks_proxies()
+    if socks_proxies:
+        failures = []
+        for proxy in socks_proxies:
+            try:
+                return send_message_with_curl(webhook, message, proxy)
+            except RuntimeError as exc:
+                failures.append(str(exc))
+        raise RuntimeError("企微接口连接失败：" + "；".join(failures))
+
     payload = json.dumps({"msgtype": "markdown", "markdown": {"content": message}}, ensure_ascii=False).encode("utf-8")
     request = Request(webhook, data=payload, headers={"Content-Type": "application/json; charset=utf-8"}, method="POST")
     try:
@@ -233,6 +246,83 @@ def send_message(webhook: str, message: str):
     if result.get("errcode") != 0:
         raise RuntimeError(f"企微接口返回失败：errcode={result.get('errcode')} errmsg={result.get('errmsg')}")
     return {"errcode": result.get("errcode"), "errmsg": result.get("errmsg", "ok")}
+
+
+def configured_socks_proxies() -> list[str]:
+    candidates = []
+    for key in ("ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+        candidates.append(os.getenv(key, ""))
+    for key in ("https.proxy", "http.proxy"):
+        value = subprocess.run(
+            ["git", "-C", str(WEBSITE_ROOT), "config", "--get", key],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if value.returncode == 0:
+            candidates.append(value.stdout.strip())
+
+    proxies = []
+    seen = set()
+    for candidate in candidates:
+        proxy = normalize_socks_proxy(candidate)
+        if proxy and proxy not in seen:
+            proxies.append(proxy)
+            seen.add(proxy)
+    return proxies
+
+
+def normalize_socks_proxy(proxy: str) -> str | None:
+    proxy = proxy.strip()
+    if proxy.startswith("socks5h://") or proxy.startswith("socks4a://"):
+        return proxy
+    if proxy.startswith("socks5://"):
+        return "socks5h://" + proxy[len("socks5://") :]
+    return None
+
+
+def send_message_with_curl(webhook: str, message: str, proxy: str):
+    if not shutil.which("curl"):
+        raise RuntimeError("未找到 curl，无法使用 SOCKS5 代理发送")
+    payload = json.dumps({"msgtype": "markdown", "markdown": {"content": message}}, ensure_ascii=False).encode("utf-8")
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=True) as config_file:
+        config_file.write(f'url = "{curl_config_quote(webhook)}"\n')
+        config_file.write(f'proxy = "{curl_config_quote(proxy)}"\n')
+        config_file.flush()
+        result = subprocess.run(
+            [
+                "curl",
+                "--silent",
+                "--show-error",
+                "--connect-timeout",
+                "15",
+                "--max-time",
+                "30",
+                "--request",
+                "POST",
+                "--header",
+                "Content-Type: application/json; charset=utf-8",
+                "--data-binary",
+                "@-",
+                "--config",
+                config_file.name,
+            ],
+            input=payload,
+            capture_output=True,
+            check=False,
+        )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip() or f"curl 退出码 {result.returncode}"
+        raise RuntimeError(detail)
+    body = result.stdout.decode("utf-8", errors="replace")
+    result_json = json.loads(body)
+    if result_json.get("errcode") != 0:
+        raise RuntimeError(f"企微接口返回失败：errcode={result_json.get('errcode')} errmsg={result_json.get('errmsg')}")
+    return {"errcode": result_json.get("errcode"), "errmsg": result_json.get("errmsg", "ok"), "proxy": proxy}
+
+
+def curl_config_quote(value: str) -> str:
+    return value.replace("\\", "\\\\").replace('"', '\\"')
 
 
 def main():
