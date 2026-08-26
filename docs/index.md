@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-25 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-25，竞品 2026-08-24，市场 2026-07-26，AI 2026-08-25，政策 2026Q1Q2）
+> 全站更新：2026-08-26 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-26，竞品 2026-08-24，市场 2026-07-26，AI 2026-08-26，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-25-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-26-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-08-25-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-08-26-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-25-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-26-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-25-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-08-26-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -74,6 +74,18 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-26-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>1. OpenAI 自研芯片 Jalapeño 首测：每瓦吞吐量达...</strong><small>来源：2026-08-26-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-26-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>飞象老师发布 3.0：新增教育应用生成能力，从&quot;生成内容&amp;...</strong><small>来源：2026-08-26-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--ai" href="ai-briefings/2026-08-25-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
   <span class="home-feed-body"><strong>1. OpenAI GPT-5.6 三档模型正式登陆 AWS Kir...</strong><small>来源：2026-08-25-AI每日简报</small></span>
@@ -83,18 +95,6 @@ hide:
 <a class="focus-item home-row--industry" href="industry/日情报/2026-08-25-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>讯飞系中标延续：上海长宁教育数字基座 733.9 万 + 多地品牌供...</strong><small>来源：2026-08-25-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-24-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1. Anthropic 旗舰 Fable 5 遇冷：收入创新高，最...</strong><small>来源：2026-08-24-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-24-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>佳发教育半年报：AI 布局加速——华为&quot;教育考试智能体应用...</strong><small>来源：2026-08-24-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
