@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-27 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-27，竞品 2026-08-24，市场 2026-07-26，AI 2026-08-27，政策 2026Q1Q2）
+> 全站更新：2026-08-28 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-28，竞品 2026-08-24，市场 2026-07-26，AI 2026-08-28，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-27-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-28-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-08-27-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-08-28-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-27-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-28-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-27-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-08-28-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,15 +68,15 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-27-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-28-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>教师个性化智能体</strong><small>来源：2026-08-27-行业日情报</small></span>
+  <span class="home-feed-body"><strong>腾讯 WorkBuddy AI 助教在莱州启动全国首个教育智能体全域...</strong><small>来源：2026-08-28-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-27-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-28-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1. 智谱 GLM-5.3 Flash 认领神秘「牛来」：320B...</strong><small>来源：2026-08-27-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>1. 英伟达 129 亿美元收购 Hugging Face：全球最大...</strong><small>来源：2026-08-28-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -86,15 +86,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-08-26-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>1. OpenAI 自研芯片 Jalapeño 首测：每瓦吞吐量达...</strong><small>来源：2026-08-26-AI每日简报</small></span>
+<a class="focus-item home-row--industry" href="industry/日情报/2026-08-27-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>教师个性化智能体</strong><small>来源：2026-08-27-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-08-26-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>飞象老师发布 3.0：新增教育应用生成能力，从&quot;生成内容&amp;...</strong><small>来源：2026-08-26-行业日情报</small></span>
+<a class="focus-item home-row--ai" href="ai-briefings/2026-08-27-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>1. 智谱 GLM-5.3 Flash 认领神秘「牛来」：320B...</strong><small>来源：2026-08-27-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
