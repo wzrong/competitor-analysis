@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-08-31 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-08-31，竞品 2026-08-31，市场 2026-07-26，AI 2026-08-31，政策 2026Q1Q2）
+> 全站更新：2026-09-01 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-09-01，竞品 2026-08-31，市场 2026-07-26，AI 2026-09-01，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,21 +30,21 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-08-31-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-09-01-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-08-31-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-09-01-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-09-01-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-09-01-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--competitor" href="monitor/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>2026-08-31-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-08-31-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-08-31-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -80,21 +80,21 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
+<a class="focus-item home-row--ai" href="ai-briefings/2026-09-01-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>1. OpenAI GPT-6（Astra）灰测 demo 刷屏，周...</strong><small>来源：2026-09-01-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-09-01-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>豆神教育半年报：AI 教育业务 1.14 亿 +664.32%，营收...</strong><small>来源：2026-09-01-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--ai" href="ai-briefings/2026-08-31-AI周末汇总/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
   <span class="home-feed-body"><strong>英伟达 129 亿美元收购 Hugging Face：全球最大 AI...</strong><small>来源：2026-08-31-AI周末汇总</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--action" href="actions/sales-cards/政策合规差异化-销售话术总卡-202607/">
-  <span class="home-feed-tag home-feed-tag--action">行动</span>
-  <span class="home-feed-body"><strong>政策合规差异化-销售话术总卡-202607</strong><small>来源：政策合规差异化-销售话术总卡-202607</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
