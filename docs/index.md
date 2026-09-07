@@ -74,15 +74,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-09-07-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>纽约市禁止高中以下学生使用生成式 AI，教师可用 AI 备课但不得批...</strong><small>来源：2026-09-07-行业日情报</small></span>
+<a class="focus-item home-row--ai" href="ai-briefings/2026-09-07-AI周末汇总/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>GPT-6 Astra 正式发布（OpenAI 宣布「AGI 时代开...</strong><small>来源：2026-09-07-AI周末汇总</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-09-07-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>Claude 攻克费马大定理：首个可被计算机完整检查的证明</strong><small>来源：2026-09-07-AI每日简报</small></span>
+<a class="focus-item home-row--industry" href="industry/日情报/2026-09-07-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>纽约市禁止高中以下学生使用生成式 AI，教师可用 AI 备课但不得批...</strong><small>来源：2026-09-07-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
