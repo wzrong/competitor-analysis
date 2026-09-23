@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-09-21 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-09-21，竞品 2026-09-21，市场 2026-07-26，AI 2026-09-21，政策 2026Q1Q2）
+> 全站更新：2026-09-23 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-09-23，竞品 2026-09-21，市场 2026-07-26，AI 2026-09-23，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,21 +30,21 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-09-21-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-09-23-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-09-21-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-09-23-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-09-23-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-09-23-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--competitor" href="monitor/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>2026-09-21-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-09-21-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-09-21-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,33 +68,33 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-09-23-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>阿里云栖大会：千问发布 Personal Agent 战略与 Qwe...</strong><small>来源：2026-09-23-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--competitor" href="monitor/2026-09-21-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>查看 2026-09-21-竞品周情报，跟踪 Tier...</strong><small>来源：2026-09-21-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-09-21-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-09-23-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>千问 Qwen-Image-2.1 登顶开源生图：从「生成好看」到「...</strong><small>来源：2026-09-21-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>Claude Opus 5.5：Dario「放慢前沿」之后的第一次发...</strong><small>来源：2026-09-23-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-09-21-行业日情报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-09-22-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>阿里云栖大会：把 ASI 叙事拆成模型、芯片、云三张账单</strong><small>来源：2026-09-22-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-09-22-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>粉笔主动发起公考行业价格战：公开拆解成本结构、复刻同行课程、宣称把面...</strong><small>来源：2026-09-21-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--policy" href="policy/解读/2026-09-18-未成年人健康安全使用网络规定征求意见稿/">
-  <span class="home-feed-tag home-feed-tag--policy">政策</span>
-  <span class="home-feed-body"><strong>18-未成年人健康安全使用网络规定征求意见稿</strong><small>来源：2026-09-18-未成年人健康安全使用网络规定征求意见稿</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
+  <span class="home-feed-body"><strong>《2026智能教育发展蓝皮书》发布：未来课堂从单点工具走向全要素、全...</strong><small>来源：2026-09-22-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
