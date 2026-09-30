@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-09-29 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-09-29，竞品 2026-09-28，市场 2026-07-26，AI 2026-09-29，政策 2026Q1Q2）
+> 全站更新：2026-09-30 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-09-29，竞品 2026-09-28，市场 2026-07-26，AI 2026-09-30，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -18,9 +18,9 @@ hide:
 
 [:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">4</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">希沃 / 好未来-九章爱学 / 智学网 / 猿辅导-飞象老师</span>](monitor/index.md)
 
-[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">56</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 8 · 运营 5</span>](actions/index.md)
+[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">57</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 9 · 运营 5</span>](actions/index.md)
 
-[:material-file-document-check: __政策解读__<br><span class="home-metric-number">22</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">24</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
 
 </div>
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-09-29-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-09-29-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-09-30-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-09-30-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-09-29-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-09-29-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-09-29-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>2026-09-29-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -74,6 +74,12 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
+<a class="focus-item home-row--ai" href="ai-briefings/2026-09-30-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>OpenAI DevDay 2026：25 项发布，Dots 把 C...</strong><small>来源：2026-09-30-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--industry" href="industry/日情报/2026-09-29-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>北京公示第二批人工智能应用场景标杆学校 50 所，并首次给出全市 A...</strong><small>来源：2026-09-29-行业日情报</small></span>
@@ -89,12 +95,6 @@ hide:
 <a class="focus-item home-row--industry" href="industry/日情报/2026-09-28-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>北京印发《&quot;十五五&quot;时期教育改革和发展规划》：建...</strong><small>来源：2026-09-28-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-09-28-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>Claude Sonnet 5.5 偷跑：$2/$10 的定价，比发...</strong><small>来源：2026-09-28-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -165,7 +165,7 @@ hide:
 
 <a class="role-card role-card--teaching" href="actions/teaching-cards/">
   <strong>教研</strong>
-  <span>教研参考卡 · 8 份</span>
+  <span>教研参考卡 · 9 份</span>
 </a>
 
 <a class="role-card role-card--operation" href="actions/operation-cards/">
