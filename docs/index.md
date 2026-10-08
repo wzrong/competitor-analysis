@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-09-30 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-09-29，竞品 2026-09-28，市场 2026-07-26，AI 2026-09-30，政策 2026Q1Q2）
+> 全站更新：2026-10-08 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-10-08，竞品 2026-09-28，市场 2026-07-26，AI 2026-10-08，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-09-30-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-09-30-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-10-08-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>2026-10-08-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-09-29-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-09-29-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-10-08-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-10-08-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,33 +68,33 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-10-08-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>培生宣布收购 AI 原生技能验证平台 Workera：已验证超 1...</strong><small>来源：2026-10-08-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--ai" href="ai-briefings/2026-10-08-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>OpenAI 一夜公开 722 篇数学手稿：当产出速度第一次超过阅读...</strong><small>来源：2026-10-08-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--competitor" href="monitor/2026-09-28-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>查看 2026-09-28-竞品周情报，跟踪 Tier...</strong><small>来源：2026-09-28-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-09-30-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI DevDay 2026：25 项发布，Dots 把 C...</strong><small>来源：2026-09-30-AI每日简报</small></span>
+<a class="focus-item home-row--policy" href="policy/解读/2026-09-24-北京市十五五教育改革和发展规划/">
+  <span class="home-feed-tag home-feed-tag--policy">政策</span>
+  <span class="home-feed-body"><strong>24-北京市十五五教育改革和发展规划</strong><small>来源：2026-09-24-北京市十五五教育改革和发展规划</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-09-29-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>北京公示第二批人工智能应用场景标杆学校 50 所，并首次给出全市 A...</strong><small>来源：2026-09-29-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-09-29-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>Claude Sonnet 5.5 正式发布：官方口径不是跑分，是「...</strong><small>来源：2026-09-29-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--industry" href="industry/日情报/2026-09-28-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>北京印发《&quot;十五五&quot;时期教育改革和发展规划》：建...</strong><small>来源：2026-09-28-行业日情报</small></span>
+<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
