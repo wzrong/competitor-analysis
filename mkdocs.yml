@@ -97,6 +97,9 @@ nav:
     - 历史归档: daily/index.md
   - 行业分析:
     - 总览: industry/index.md
+    - 2026-10-18-行业日情报: industry/日情报/2026-10-18-行业日情报.md
+    - 2026-10-13-行业日情报: industry/日情报/2026-10-13-行业日情报.md
+    - 2026-10-12-行业日情报: industry/日情报/2026-10-12-行业日情报.md
     - 2026-10-09-行业日情报: industry/日情报/2026-10-09-行业日情报.md
     - 2026-10-08-行业日情报: industry/日情报/2026-10-08-行业日情报.md
     - 2026-10-06-行业日情报: industry/日情报/2026-10-06-行业日情报.md
@@ -202,6 +205,8 @@ nav:
     - 深度分析: competitors/analyses/index.md
     - 竞品监测:
       - 最新监测: monitor/index.md
+      - 2026-10-18-竞品周情报: monitor/2026-10-18-竞品周情报.md
+      - 2026-10-13-竞品周情报: monitor/2026-10-13-竞品周情报.md
       - 2026-09-28-竞品周情报: monitor/2026-09-28-竞品周情报.md
       - 2026-09-21-竞品周情报: monitor/2026-09-21-竞品周情报.md
       - 2026-09-07-竞品周情报: monitor/2026-09-07-竞品周情报.md
@@ -382,6 +387,11 @@ nav:
   - AI简报:
     - 最新简报: ai-briefings/latest.md
     - 简报归档: ai-briefings/index.md
+    - 2026-10-18-AI每日简报: ai-briefings/2026-10-18-AI每日简报.md
+    - 2026-10-18-AI周末汇总: ai-briefings/2026-10-18-AI周末汇总.md
+    - 2026-10-13-AI每日简报: ai-briefings/2026-10-13-AI每日简报.md
+    - 2026-10-12-AI每日简报: ai-briefings/2026-10-12-AI每日简报.md
+    - 2026-10-11-AI周末汇总: ai-briefings/2026-10-11-AI周末汇总.md
     - 2026-10-08-AI每日简报: ai-briefings/2026-10-08-AI每日简报.md
     - 2026-10-06-AI每日简报: ai-briefings/2026-10-06-AI每日简报.md
     - 2026-10-04-AI周末汇总: ai-briefings/2026-10-04-AI周末汇总.md
