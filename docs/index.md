@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-11-12 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-12，竞品 2026-11-09，市场 2026-07-26，AI 2026-11-12，政策 2026Q1Q2）
+> 全站更新：2026-11-13 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-13，竞品 2026-11-09，市场 2026-07-26，AI 2026-11-13，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -30,15 +30,15 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-12-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-13-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-11-12-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-11-13-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-12-AI每日简报/">
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-13-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-11-12-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-11-13-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -74,15 +74,15 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-11-12-行业日情报/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-11-13-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>权威信源 + 原文回溯与重新连接学生与教师</strong><small>来源：2026-11-12-行业日情报</small></span>
+  <span class="home-feed-body"><strong>黑龙江印发教育&quot;十五五&quot;规划：设&quot;深化...</strong><small>来源：2026-11-13-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-11-12-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-11-13-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>英伟达董事会准备罢免黄仁勋：罢免、寻人、临时 CEO 三线并行</strong><small>来源：2026-11-12-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>黄仁勋辞职即刻生效：财务型过渡方案，与一份没有接班人的答卷</strong><small>来源：2026-11-13-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
