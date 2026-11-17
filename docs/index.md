@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-11-16 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-16，竞品 2026-11-09，市场 2026-07-26，AI 2026-11-16，政策 2026Q1Q2）
+> 全站更新：2026-11-17 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-17，竞品 2026-11-16，市场 2026-07-26，AI 2026-11-16，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -16,11 +16,11 @@ hide:
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">185</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · 11 / Tier 2 · 24 / 观察池 · 150+</span>](competitors/index.md)
 
-[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">11</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 菁优网 / 教习网 / 希沃 / 智学网 / 金太阳·中课云 / 橡皮网 / 正确云 / 好未来-九章爱学 / 作业帮教师版 / 猿辅导-飞象老师</span>](monitor/index.md)
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">11</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 菁优网 / 教习网 / 正确云 / 希沃 / 猿辅导-飞象老师 / 智学网 / 金太阳·中课云 / 橡皮网 / 好未来-九章爱学 / 作业帮教师版</span>](monitor/index.md)
 
-[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">57</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 9 · 运营 5</span>](actions/index.md)
+[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">58</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 10 · 运营 5</span>](actions/index.md)
 
-[:material-file-document-check: __政策解读__<br><span class="home-metric-number">27</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">29</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
 
 </div>
 
@@ -30,21 +30,21 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-16-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-17-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-11-16-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-11-17-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--competitor" href="monitor/">
+  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
+  <span class="home-feed-body"><strong>2026-11-16-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-16-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
   <span class="home-feed-body"><strong>2026-11-16-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--competitor" href="monitor/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>2026-11-09-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,27 +68,27 @@ hide:
 
 <div class="focus-list">
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-11-16-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>昆山市教育局为全市 2.7 万名教师统一预开通 WorkBuddy...</strong><small>来源：2026-11-16-行业日情报</small></span>
+<a class="focus-item home-row--competitor" href="monitor/2026-11-16-竞品周情报/">
+  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
+  <span class="home-feed-body"><strong>查看 2026-11-16-竞品周情报，跟踪 Tier...</strong><small>来源：2026-11-16-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-11-16-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-11-15-AI周末汇总/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>英伟达的第二周：请愿破 16 万，&quot;回宫&quot;与&amp;q...</strong><small>来源：2026-11-16-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>这一周，公开市场第一次给一家前沿模型公司定价，而且是从「让步」开始、...</strong><small>来源：2026-11-15-AI周末汇总</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--industry" href="industry/日情报/2026-11-17-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>路透社调查&quot;中国加速培养 AI 原生一代&quot;：近...</strong><small>来源：2026-11-17-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="focus-item home-row--policy" href="policy/解读/2026-11-11-广东中小学优秀教育智能体及典型应用案例公示/">
   <span class="home-feed-tag home-feed-tag--policy">政策</span>
   <span class="home-feed-body"><strong>11-广东中小学优秀教育智能体及典型应用案例公示</strong><small>来源：2026-11-11-广东中小学优秀教育智能体及典型应用案例公示</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--competitor" href="monitor/2026-11-09-竞品周情报/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>查看 2026-11-09-竞品周情报，跟踪 Tier...</strong><small>来源：2026-11-09-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -127,15 +127,15 @@ hide:
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--danger" href="competitors/seewo/">
-  <span class="threat-avatar threat-avatar--tone-4">希</span>
-  <span class="threat-body"><strong>希沃</strong><small>重要信号 · 硬件+AI备课/课堂 · 视源股份 · 2026-07-13 H1业绩预告+三次递表港交所（L1资本动态更新）</small></span>
+<a class="threat-row home-row--danger" href="competitors/zhengqueyun/">
+  <span class="threat-avatar threat-avatar--tone-4">正</span>
+  <span class="threat-body"><strong>正确云</strong><small>重要信号 · 备课/备授课 · 北京正确教育 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--danger" href="competitors/zhixue/">
-  <span class="threat-avatar threat-avatar--tone-5">智</span>
-  <span class="threat-body"><strong>智学网</strong><small>重要信号 · AI精准教学 · 科大讯飞 · 2026-07-27 H1爆发（批阅机+1471%/星光教师+3000%）+ L2/L4/L5更新，竞争强度升🔥</small></span>
+<a class="threat-row home-row--danger" href="competitors/seewo/">
+  <span class="threat-avatar threat-avatar--tone-5">希</span>
+  <span class="threat-body"><strong>希沃</strong><small>重要信号 · 硬件+AI备课/课堂 · 视源股份 · 2026-07-13 H1业绩预告+三次递表港交所（L1资本动态更新）</small></span>
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
@@ -165,7 +165,7 @@ hide:
 
 <a class="role-card role-card--teaching" href="actions/teaching-cards/">
   <strong>教研</strong>
-  <span>教研参考卡 · 9 份</span>
+  <span>教研参考卡 · 10 份</span>
 </a>
 
 <a class="role-card role-card--operation" href="actions/operation-cards/">
