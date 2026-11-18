@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-11-17 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-17，竞品 2026-11-16，市场 2026-07-26，AI 2026-11-16，政策 2026Q1Q2）
+> 全站更新：2026-11-18 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-18，竞品 2026-11-16，市场 2026-07-26，AI 2026-11-18，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -18,9 +18,9 @@ hide:
 
 [:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">11</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 菁优网 / 教习网 / 正确云 / 希沃 / 猿辅导-飞象老师 / 智学网 / 金太阳·中课云 / 橡皮网 / 好未来-九章爱学 / 作业帮教师版</span>](monitor/index.md)
 
-[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">58</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 10 · 运营 5</span>](actions/index.md)
+[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">59</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 11 · 运营 5</span>](actions/index.md)
 
-[:material-file-document-check: __政策解读__<br><span class="home-metric-number">29</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">31</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
 
 </div>
 
@@ -30,21 +30,21 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-17-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-18-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-11-17-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-11-18-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-18-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-11-18-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--competitor" href="monitor/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>2026-11-16-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-16-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-11-16-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,33 +68,33 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--industry" href="industry/日情报/2026-11-18-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>海亮科技 HaiModel 通过国家网信办生成式 AI 服务备案：四...</strong><small>来源：2026-11-18-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--competitor" href="monitor/2026-11-16-竞品周情报/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>查看 2026-11-16-竞品周情报，跟踪 Tier...</strong><small>来源：2026-11-16-竞品周情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-11-15-AI周末汇总/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-11-18-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>这一周，公开市场第一次给一家前沿模型公司定价，而且是从「让步」开始、...</strong><small>来源：2026-11-15-AI周末汇总</small></span>
+  <span class="home-feed-body"><strong>GPT-6.2 Astra 与 Sol：在 Anthropic 定价...</strong><small>来源：2026-11-18-AI每日简报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--policy" href="policy/解读/2026-11-17-河南春季教辅材料审查/">
+  <span class="home-feed-tag home-feed-tag--policy">政策</span>
+  <span class="home-feed-body"><strong>17-河南春季教辅材料审查</strong><small>来源：2026-11-17-河南春季教辅材料审查</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="focus-item home-row--industry" href="industry/日情报/2026-11-17-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>路透社调查&quot;中国加速培养 AI 原生一代&quot;：近...</strong><small>来源：2026-11-17-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--policy" href="policy/解读/2026-11-11-广东中小学优秀教育智能体及典型应用案例公示/">
-  <span class="home-feed-tag home-feed-tag--policy">政策</span>
-  <span class="home-feed-body"><strong>11-广东中小学优秀教育智能体及典型应用案例公示</strong><small>来源：2026-11-11-广东中小学优秀教育智能体及典型应用案例公示</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -165,7 +165,7 @@ hide:
 
 <a class="role-card role-card--teaching" href="actions/teaching-cards/">
   <strong>教研</strong>
-  <span>教研参考卡 · 10 份</span>
+  <span>教研参考卡 · 11 份</span>
 </a>
 
 <a class="role-card role-card--operation" href="actions/operation-cards/">
