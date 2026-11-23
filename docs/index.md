@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-11-22 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-22，竞品 2026-11-16，市场 2026-07-26，AI 2026-11-22，政策 2026Q1Q2）
+> 全站更新：2026-11-23 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-23，竞品 2026-11-23，市场 2026-07-26，AI 2026-11-23，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -16,7 +16,7 @@ hide:
 
 [:material-database-search: __竞品库__<br><span class="home-metric-number">185</span> <span class="home-muted">家</span><br><span class="home-muted">Tier 1 · 11 / Tier 2 · 24 / 观察池 · 150+</span>](competitors/index.md)
 
-[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">11</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 菁优网 / 教习网 / 正确云 / 希沃 / 猿辅导-飞象老师 / 智学网 / 金太阳·中课云 / 橡皮网 / 好未来-九章爱学 / 作业帮教师版</span>](monitor/index.md)
+[:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">10</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 教习网 / 菁优网 / 正确云 / 希沃 / 猿辅导-飞象老师 / 智学网 / 金太阳·中课云 / 橡皮网 / 好未来-九章爱学</span>](monitor/index.md)
 
 [:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">61</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 13 · 运营 5</span>](actions/index.md)
 
@@ -30,21 +30,21 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-22-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-23-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-11-22-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-22-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-11-22-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
+  <span class="home-feed-body"><strong>2026-11-23-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--competitor" href="monitor/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>2026-11-16-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
+  <span class="home-feed-body"><strong>2026-11-23-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-23-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-11-23-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -68,21 +68,21 @@ hide:
 
 <div class="focus-list">
 
+<a class="focus-item home-row--competitor" href="monitor/2026-11-23-竞品周情报/">
+  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
+  <span class="home-feed-body"><strong>查看 2026-11-23-竞品周情报，跟踪 Tier...</strong><small>来源：2026-11-23-竞品周情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
 <a class="focus-item home-row--industry" href="industry/日情报/2026-11-21-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
   <span class="home-feed-body"><strong>好未来与北京昌平区教委签署战略合作框架协议：智慧教辅赋能教育、协同育...</strong><small>来源：2026-11-21-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--ai" href="ai-briefings/2026-11-22-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-11-23-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>黎曼猜想的 Lean 复核通过：社区把「相信 AI」换成了「相信流程...</strong><small>来源：2026-11-22-AI每日简报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--competitor" href="monitor/2026-11-16-竞品周情报/">
-  <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
-  <span class="home-feed-body"><strong>查看 2026-11-16-竞品周情报，跟踪 Tier...</strong><small>来源：2026-11-16-竞品周情报</small></span>
+  <span class="home-feed-body"><strong>OpenAI 公开预训练困惑度曲线：把「进度」变成可比较的指标，再提...</strong><small>来源：2026-11-23-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -92,9 +92,9 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-11-22-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>湖南五部门印发&quot;人工智能+教育&quot;行动实施方案（2...</strong><small>来源：2026-11-22-行业日情报</small></span>
+<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
+  <span class="home-feed-tag home-feed-tag--market">市场</span>
+  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -115,15 +115,15 @@ hide:
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--danger" href="competitors/jyeoo/">
-  <span class="threat-avatar threat-avatar--tone-2">菁</span>
-  <span class="threat-body"><strong>菁优网</strong><small>重要信号 · 资源/题库 · 菁优智慧教育 · 2026-05-23 四维度深度分析</small></span>
+<a class="threat-row home-row--danger" href="competitors/51jiaoxi/">
+  <span class="threat-avatar threat-avatar--tone-2">教</span>
+  <span class="threat-body"><strong>教习网</strong><small>重要信号 · 资源/题库 · 深圳教习网 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
-<a class="threat-row home-row--danger" href="competitors/51jiaoxi/">
-  <span class="threat-avatar threat-avatar--tone-3">教</span>
-  <span class="threat-body"><strong>教习网</strong><small>重要信号 · 资源/题库 · 深圳教习网 · 2026-05-23 四维度深度分析</small></span>
+<a class="threat-row home-row--danger" href="competitors/jyeoo/">
+  <span class="threat-avatar threat-avatar--tone-3">菁</span>
+  <span class="threat-body"><strong>菁优网</strong><small>重要信号 · 资源/题库 · 菁优智慧教育 · 2026-05-23 四维度深度分析</small></span>
   <span class="threat-level threat-level--high">高 ↑</span>
 </a>
 
