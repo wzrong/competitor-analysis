@@ -8,7 +8,7 @@ hide:
 
 # 情报总览
 
-> 全站更新：2026-11-23 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-23，竞品 2026-11-23，市场 2026-07-26，AI 2026-11-23，政策 2026Q1Q2）
+> 全站更新：2026-11-24 · 行业 / 竞品 / 市场 / AI / 政策已同步（行业 2026-11-24，竞品 2026-11-23，市场 2026-07-26，AI 2026-11-24，政策 2026Q1Q2）
 
 [:material-newspaper-variant-multiple: 查看今日情报概要](daily/latest.md){ .md-button .md-button--primary }
 
@@ -18,9 +18,9 @@ hide:
 
 [:material-alert-decagram: __高威胁竞品__<br><span class="home-metric-number home-danger">10</span> <span class="home-danger-label">个重点</span><br><span class="home-muted">21世纪教育网 / 教习网 / 菁优网 / 正确云 / 希沃 / 猿辅导-飞象老师 / 智学网 / 金太阳·中课云 / 橡皮网 / 好未来-九章爱学</span>](monitor/index.md)
 
-[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">61</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 13 · 运营 5</span>](actions/index.md)
+[:material-target-account: __应对建议（L9）__<br><span class="home-metric-number">62</span> <span class="home-muted">份 · 五线输出</span><br><span class="home-muted">简报 14 · Battlecard 14 · 话术 15 · 教研 14 · 运营 5</span>](actions/index.md)
 
-[:material-file-document-check: __政策解读__<br><span class="home-metric-number">33</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
+[:material-file-document-check: __政策解读__<br><span class="home-metric-number">34</span> <span class="home-muted">份</span><br><span class="home-muted">最新：区域政策对比-2026Q1Q2</span>](policy/index.md)
 
 </div>
 
@@ -30,21 +30,21 @@ hide:
 <section class="home-panel latest-output" markdown>
 ## <span class="section-kicker section-kicker--new">NEW</span> 最新情报
 
-<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-23-行业日情报/">
+<a class="home-feed-item home-row--industry" href="industry/日情报/2026-11-24-行业日情报/">
   <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>2026-11-23-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-body"><strong>2026-11-24-行业日情报</strong><small>行业情报 · 含对学科网的影响分析</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-24-AI每日简报/">
+  <span class="home-feed-tag home-feed-tag--ai">AI</span>
+  <span class="home-feed-body"><strong>2026-11-24-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
 <a class="home-feed-item home-row--competitor" href="monitor/">
   <span class="home-feed-tag home-feed-tag--competitor">竞品</span>
   <span class="home-feed-body"><strong>2026-11-23-竞品周情报</strong><small>竞争分析 / 竞品周情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="home-feed-item home-row--ai" href="ai-briefings/2026-11-23-AI每日简报/">
-  <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>2026-11-23-AI每日简报</strong><small>外部技术动态 · AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -74,27 +74,27 @@ hide:
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--industry" href="industry/日情报/2026-11-21-行业日情报/">
-  <span class="home-feed-tag home-feed-tag--industry">行业</span>
-  <span class="home-feed-body"><strong>好未来与北京昌平区教委签署战略合作框架协议：智慧教辅赋能教育、协同育...</strong><small>来源：2026-11-21-行业日情报</small></span>
-  <span class="home-feed-arrow">→</span>
-</a>
-
-<a class="focus-item home-row--ai" href="ai-briefings/2026-11-23-AI每日简报/">
+<a class="focus-item home-row--ai" href="ai-briefings/2026-11-24-AI每日简报/">
   <span class="home-feed-tag home-feed-tag--ai">AI</span>
-  <span class="home-feed-body"><strong>OpenAI 公开预训练困惑度曲线：把「进度」变成可比较的指标，再提...</strong><small>来源：2026-11-23-AI每日简报</small></span>
+  <span class="home-feed-body"><strong>智谱 GLM-5.4：750B 用「循环层」换深度，官方口径对标 2...</strong><small>来源：2026-11-24-AI每日简报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--policy" href="policy/解读/2026-11-17-河南春季教辅材料审查/">
+<a class="focus-item home-row--industry" href="industry/日情报/2026-11-24-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>教育部就《教材管理条例（征求意见稿）》公开征求意见：8 章 67 条...</strong><small>来源：2026-11-24-行业日情报</small></span>
+  <span class="home-feed-arrow">→</span>
+</a>
+
+<a class="focus-item home-row--policy" href="policy/解读/2026-11-23-教材管理条例征求意见稿/">
   <span class="home-feed-tag home-feed-tag--policy">政策</span>
-  <span class="home-feed-body"><strong>17-河南春季教辅材料审查</strong><small>来源：2026-11-17-河南春季教辅材料审查</small></span>
+  <span class="home-feed-body"><strong>23-教材管理条例征求意见稿</strong><small>来源：2026-11-23-教材管理条例征求意见稿</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
-<a class="focus-item home-row--market" href="market/周报/2026-07-26-市场监测周报/">
-  <span class="home-feed-tag home-feed-tag--market">市场</span>
-  <span class="home-feed-body"><strong>黑龙江连续第 5 期零记录，且是全品类零记录</strong><small>来源：2026-07-26-市场监测周报</small></span>
+<a class="focus-item home-row--industry" href="industry/日情报/2026-11-23-行业日情报/">
+  <span class="home-feed-tag home-feed-tag--industry">行业</span>
+  <span class="home-feed-body"><strong>江西印发《&quot;十五五&quot;教育发展规划》（赣府发〔20...</strong><small>来源：2026-11-23-行业日情报</small></span>
   <span class="home-feed-arrow">→</span>
 </a>
 
@@ -165,7 +165,7 @@ hide:
 
 <a class="role-card role-card--teaching" href="actions/teaching-cards/">
   <strong>教研</strong>
-  <span>教研参考卡 · 13 份</span>
+  <span>教研参考卡 · 14 份</span>
 </a>
 
 <a class="role-card role-card--operation" href="actions/operation-cards/">
