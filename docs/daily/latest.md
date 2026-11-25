@@ -40,7 +40,7 @@ tags:
 
 - [当日行业日情报](https://comp.wzrong.me/industry/日情报/2026-11-25-行业日情报/)
 - [当日 AI 简报](https://comp.wzrong.me/ai-briefings/2026-11-25-AI每日简报/)
-- [政策时间轴](https://comp.wzrong.me/policy/policy_timeline/)
+- [政策时间轴](https://comp.wzrong.me/policy/)
 - [竞争监测历史](https://comp.wzrong.me/monitor/)
 - [政策分析](https://comp.wzrong.me/policy/)
 - [市场监测](https://comp.wzrong.me/market/)
