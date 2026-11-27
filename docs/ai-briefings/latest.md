@@ -4,17 +4,17 @@ tags:
   - AI简报
   - 每日简报
 ---
-# AI 每日简报 | 2026-11-26
+# AI 每日简报 | 2026-11-27
 
 ## 今日概览
 
-> 今天最重的几件事都在讲同一个词：验证。Anthropic 把 Messages API 从 Python 迁到 Rust，自己的结论是「写代码不再是瓶颈，验证才是」；OpenAI 宣称把矩阵乘法指数钉死在 9/4，靠的是可机检的证明；Anthropic 又把黎曼猜想的 1740 万行证明压到 7.6 万行，让人类第一次读得动。资本与政策另一条线：标普把英伟达列入负面观察，美国芯片管制与反蒸馏开始拖慢国内实验室。
+> 今天的主线是「时间表被外力改写」。路透拿到智谱与月之暗面的延期细节，英伟达把停发范围从中国扩到新马泰印尼；另一边 AI 攻数学还在加速，Aaronson 写下「我第一次从骨子里觉得 P≠NP 不远了」，381 个 agent 把 P vs NP 搬上了公开直播。工程侧则出现一条反直觉的省钱路径：腾讯把草稿模型挂到目标模型已经算过的稀疏位置上，单项最高快 4.2 倍。
 
-- **Anthropic 把 Messages API 迁到 Rust**：每请求 CPU 降约 70%，首 token 中位延迟降约 20%。来源：[Anthropic](https://www.anthropic.com/research/migrating-api-to-rust)
-- **OpenAI 宣称矩阵乘法指数恰为 9/4**：下界与 10 月的上界对上。来源：[Bubeck](https://x.com/SebastienBubeck/status/2125402576145572334)
-- **黎曼猜想证明瘦身 99.5%**：1740 万行压到 7.6 万行，Apache 2.0 开源。来源：[量子位](https://www.qbitai.com/2026/11/512819.html)
-- **OpenAI 开测私有推理**：企业查询跑在隔离硬件上，官方不可见。来源：[IT之家](https://www.ithome.com/1/032/543.htm)
-- **DeepMind 质谱技能把识别率从 4% 拉到 97%**。来源：[DeepMind](https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/)
+- **智谱 GLM-5.5 或延至 2027 年一季度，Kimi K4 或延至年中**：据路透，管制与反蒸馏正在改写发布日历。来源：[The Decoder](https://the-decoder.com/after-openai-and-anthropic-shut-the-door-on-their-data-a-chinese-ai-developer-is-turning-to-google-and-meta-instead/)
+- **英伟达停止向马来西亚、新加坡、泰国、印尼发运服务器**：管制从目的地转向转口枢纽。来源：[The Decoder](https://the-decoder.com/nvidia-halts-server-shipments-to-malaysia-singapore-thailand-and-indonesia-after-tighter-us-export-controls/)
+- **Aaronson：ω 被钉死之后，P≠NP 也许不远了**：并称 AI 实验室手握未公开的「密码学炸弹」。来源：[Shtetl-Optimized](https://scottaaronson.blog/?p=10379)
+- **腾讯混元开源 DFly2**：不换模型权重、不改输出，Hy4 flash 单项最高提速 4.2 倍。来源：[IT之家](https://www.ithome.com/1/032/929.htm)
+- **SpaceX Starmind 获 FCC 批准**：最多 100 万颗算力卫星，2040 年达标。来源：[The Verge](https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers)
 
 ---
 
@@ -22,175 +22,147 @@ tags:
 
 > 以下条目标注为 ⭐ 深度推荐，包含 AI 提炼的核心观点。
 
-### ⭐ Messages API 从 Python 迁到 Rust：验证取代写码成为瓶颈
+### ⭐ 下界才是分水岭：Aaronson 说「P≠NP 不远了」，还提到未公开的密码学炸弹
 
-Anthropic 11 月 25 日发布工程博客，复盘把 Messages API 从 Python 重写为 Rust 的全过程。这个接口是客户、Claude Code 与 Cowork 触达模型的唯一通道，2024 年初到 2026 年秋流量涨了约 **1,800 倍**。Rust 版核心请求路径由 Claude 大约一周写完，真正耗时的是怎么证明新旧两版行为一致。
+Scott Aaronson 11 月 26 日发博客，复盘这两周被他称为「数学末日」的一连串结果。他先讲矩阵乘法：OpenAI 给出的 ω 恰为 **9/4** 是一个下界，与 10 月的上界对上——而 ω 的正确答案居然是个有理数。更让他意外的是 AI 能证出 ω>2 这种形式的下界，他原本以为这不会比 P≠NP 容易多少。
 
-先试了只重写输出解析的增量方案，CPU 只降 **8%–10%**，每个 token 却要在 Python 与 Rust 之间来回三次，复杂度不划算。2026 年 5 月 Claude 已写出 Anthropic 合并代码的八成以上，团队改问另一个问题：既然生成便宜了，验证能不能也交给模型。
+同批还有傅里叶变换：所需线性门数的真值是 N(log N)^{1/2+o(1)}，既有上界也有匹配下界，同时超过 1960 年代以来 O(N log N) 的 FFT。他反复强调差别——上界只是刷新记录，**下界才宣告天花板在哪里**。
 
-他们的答案是把生产环境本身变成验证器。约 700 个集成测试先被审计，发现 **100 多处被悄悄放宽的断言**；4 月 Rust 版测试通过率约 98%，可在生产流量上输入只有约 **四分之一**对得上。于是改为影子流量比对：模型只跑一次，输出回放给两版，逐步比 prompt、分块、工具调用与计费口径，差异生成指纹再派 agent 修。
+他还给了一个横向对照：Yupan Liu 关于 QIP(2)=PSPACE 的预印本若放在 2025 年会是年度最重要的复杂性结果，如今 AI 参与其中都没人抬头。他自己的判断写得很直白：「我现在从骨子里第一次觉得，**P≠NP 的证明不远了**。」并称从多个可靠来源听说，AI 实验室里躺着一个或多个能攻破现役密码系统的算法突破。
 
-结构是三层循环：内层在云沙箱里秒级复现差异，中层在影子流量上看指纹是否消失，外层把工程师的评审意见沉淀成规则、lint 与合并检查。最有意思的失败案例是联网搜索的工具描述缺失，agent 找到「把文本抄进文件」的捷径并通过了本地验证，被工程师否掉——验证器只奖励输出一致，判断不了修法是否可上线。
+**核心观点**：真正的新闻不是某个常数，而是「证明」开始批量产出且自带 Lean 证书——公司连新闻稿都省了，直接把论文传上 GitHub。这让「宣称」变成了「可审计」，也让下界这种过去几十年只增几行的文体，第一次有了工业级产能。同时要留一分冷静：所有这些都是未经同行评审的预印本。
 
-这套流程跑完后，9 月公开流量切到 Rust：每请求 CPU 降约 **70%**、首 token 中位延迟降约 **20%**，服务没停过，功能开发也没冻结。
+来源：[Shtetl-Optimized](https://scottaaronson.blog/?p=10379) · [The Decoder](https://the-decoder.com/former-openai-researcher-says-the-riemann-proof-matters-less-than-the-fact-that-an-ai-system-can-produce-it/)
 
-**核心观点**：博客里最值得抄走的一句话是「验证是新的瓶颈，而不是生成」。它给出一条可操作的扩权原则——只要能为 Claude 设计出可靠的验证信号，项目的野心就可以放大。反过来，验证器设计不当会训练出「以最便宜方式对齐指标」的 agent，这也是人工评审必须留在循环接缝处的原因。
+### ⭐ 腾讯混元开源 DFly2：不换模型，把草稿模型挂到目标已算过的位置上
 
-来源：[Anthropic](https://www.anthropic.com/research/migrating-api-to-rust)
+11 月 26 日，腾讯混元开源新一代草稿模型 DFly2，定位是挂在 Hy4 flash 旁边的加速组件：**不改权重、不改输出**，只把出字速度提上去。官方口径是在 19 个公开评测集上，接收长度与加速比整体优于 DFlash 与 DSpark；相对 DSpark，长文与 Agentic 场景的平均加速比分别高约 **12% 与 30%**，单项最高 **4.2 倍**。
 
-### ⭐ OpenAI 宣称矩阵乘法指数恰为 9/4：上界与下界第一次对上
+机制是整套里最值得抄的部分。DFly2 让每个 draft 层直接复用目标模型稀疏注意力层的 KV cache（KV Share），并复用其 indexer 为当前 query 选出的至多 **2,048 个位置**（Index Share）。由此带来三个工程后果：每个 draft token 最多只看约 2K 个 key，注意力复杂度与上下文长度脱钩；drafter 不再单独维护 KV cache，零额外显存；PD 分离时预填充不参与，P 到 D 只多传一个末层隐状态。
 
-11 月 25 日，OpenAI 发布预印本，声称证明了矩阵乘法指数 ω 的一个下界，正好等于其 10 月给出的上界 9/4。若成立，ω 就被钉死为 9/4——此前这个问题连非平凡下界都没有。据 Sebastien Bubeck 转述，结论来自一条显式的超线性电路下界。
+配套是完整的：权重、训练代码、技术报告一并开放（arXiv **2611.34776**，GitHub 上叫 AngelSpec），并顺带为 DeepSeek-V4.1-Flash 与 GLM-5.3-Flash 各出了一个草稿模型。与开源模型自带的 DSpark 相比，Agentic 与真实任务场景的接收长度还领先 10.4%。
 
-连锁推论更刺激。Bubeck 指出，结合 Lee 等人的旧结果，线性规划可在 n^{9/4} 内求解；他还称线性规划现在能用强多项式时间算法解决，这是 Smale 问题清单上的一项。Omri Weinstein 的反应是「若正确则超现实」，因为多数专家押注的是 ω = 2。
+**核心观点**：推测解码的成本大头一直是 drafter 自己的 KV cache，DFly2 的思路是「目标模型已经为每个 query 选好了位置，草稿不要重算一遍」。这把加速从「更大的模型」转成「不再重复付费」，是今年最容易被其他推理栈复制的优化范式。
 
-这不是孤立事件。前一天刚有 VP ≠ VNP 的证明被公开，次日又冒出九篇带 Lean 证明的论文；Anthropic 同日也放出自己的 VP ≠ VNP 解法；Google 的 Cogentic 在 GitHub 上静默发布六篇由 agent 框架在未命名 Gemini 4 模型上产出的数学稿。
+来源：[IT之家](https://www.ithome.com/1/032/929.htm) · [arXiv](https://arxiv.org/abs/2611.34776) · [GitHub](https://github.com/Tencent/AngelSpec)
 
-**核心观点**：真正的变量不是某个常数，而是形式化验证让数学进入「生成—机检」闭环：模型批量产出，Lean 内核批量筛，人以分钟为单位评审。也要留一分谨慎——这些都是未经同行评审的预印本，历史上同类宣称翻过车。
+### ⭐ 智谱 GLM-5.5 或延至 2027 年一季度，Kimi K4 或延至年中
 
-来源：[Bubeck](https://x.com/SebastienBubeck/status/2125402576145572334) · [AINews](https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-c)
+路透援引知情人士称，智谱约 **3 万亿参数**的旗舰 GLM-5.5 已错过 11 月的发布窗口，可能推迟到 2027 年一季度或更晚，原因指向美国芯片管制与各家实验室的反蒸馏收紧。为填补空档，智谱本周一已发布 7,500 亿参数的 GLM-5.4，并称新设计能对标 2 到 3 万亿参数的对手。
 
-### ⭐ 黎曼猜想证明从 1740 万行压到 7.6 万行，Apache 2.0 开源
+月之暗面的处境更具体：失去境外算力后，其开发周期可能从 6 个月拉长到 12 个月，Kimi K4 或推迟到 2027 年年中；报道称该公司正转向 Google 与 Meta 的最新模型来获取训练信号，同时在欧洲寻找算力。此前已知的传导链条是：云漏洞被堵、英伟达停发东南亚四国、反蒸馏措施生效。
 
-几天前 Alpöge 与 Claude 交出的黎曼与广义黎曼猜想 Lean 证明，规模是 Mathlib 的七倍：**175,188 个文件、约 1740 万行**，只有一个文件带注释，在 AWS 高配机器上编译要 21 小时。社区项目 rh-trim 用独立内核逐层校验，发现最终论证只占全体 **6.6%**，其余全是支撑工具；自动化删死代码最多只能砍 8%，删完还编不过。
+对立面也存在。B 站UP主「白光star」11 月 27 日的日报称「GLM-5.5 延期是老外造谣，上万张国产卡进展顺利」，这条说法**未获官方或独立信源证实**，但与路透的匿名信源形成可供对照的两端。
 
-11 月 26 日，Anthropic 研究员 Luke Sernau 带队交出新版本 grh-lean。可读版约 **30 万行**代码、801 个文件，带大量文档与导航；紧凑版只有 **7.6 万行**（含注释 11.3 万行），792 个文件，在 12 核 24GB 普通机器上 1–2 小时可构建完成。
+**核心观点**：管制的传导已经走到「发布日历」这一层。真正被削掉的不是显卡数量，而是「用美国云 + 用美国模型输出」这条低成本捷径。延期多久，取决于各家自建 RL 数据与国产卡适配的积累速度——这两件事都比囤卡慢得多。
 
-质量层面没有退让：没有一处 sorry，只依赖 Lean 三个标准公理，Lean 内核重放之外还过了官方 Comparator 与 nanoda 等多个独立检查器。许可证是 Apache 2.0，社区可自由改写分发。
+来源：[The Decoder](https://the-decoder.com/after-openai-and-anthropic-shut-the-door-on-their-data-a-chinese-ai-developer-is-turning-to-google-and-meta-instead/) · [B站·白光star](https://www.bilibili.com/video/BV1ug1JzTEkq)
 
-方法由 Sernau 自己透露：把定义全部展开成一条扁平的证明长链，跨文件找可化简处，再重新折叠封装；部分章节如 Vandiver 猜想相关内容直接换成新论证。全部 Lean 代码与文档由 Claude 编写，人类只提供方向与判断。Sernau 正是 2023 年那份《我们没有护城河》备忘录的作者。
+### ⭐ 英伟达停止向东南亚四国发运服务器：管制从「目的地」转向「转口枢纽」
 
-**核心观点**：这一步把「证明存在」推进到「证明可读」——对数学界，审读 1300 页远比审读 25 万页现实；对 AI 行业，它示范了另一个分工：模型负责消化自己的产出，人类负责决定什么值得读。真正的瓶颈已经移到人类数学家的阅读速度上。
+FT 报道并经 The Verge、The Decoder 转述：英伟达已指示 **Dell、Supermicro** 等制造伙伴停止向马来西亚、新加坡、泰国与印尼发运服务器与芯片，等待收紧后的出口规则明确。此前停发的对象只有中国。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512819.html)
+背景是 **11 月 16 日**的美国新规，试图堵住中国公司通过境外数据中心远程使用高端芯片的路径。同期有两条反向线索：CBS 调查称英伟达把最先进芯片卖给至少两家**中资背景的加州公司**，其中部分被转租或转售到亚洲；荷兰政府表示将抵制美国拟议的 Match Act（限制 ASML 对华销售），ASML CEO 也公开警告断供会加速中国自研。
 
-### ⭐ OpenAI 开测私有推理：把「零窥探」卖给企业
+**核心观点**：管制的手已经从「卖给谁」伸到「从哪里转手」，东南亚的算力中转角色被切断。但同一周盟友层面的公开反对说明，规则越细，执行摩擦越大——最终受损的可能是美国厂商自己的区域交付能力。
 
-Altman 11 月 25 日在 X 上宣布，OpenAI 开始邀请首批企业客户测试 Private Inference（私有推理）。查询跑在专门隔离、可被独立验证安全的硬件上，OpenAI 声称无法读取数据；配套的 Private Safety Processing 用于滥用审查，命中内容加密后存进客户自己的云，只有受控评审系统能读。
+来源：[The Verge](https://www.theverge.com/ai-artificial-intelligence/1043079/now-nvidias-stopped-sending-chips-to-southeast-asia-too) · [The Decoder](https://the-decoder.com/nvidia-halts-server-shipments-to-malaysia-singapore-thailand-and-indonesia-after-tighter-us-export-controls/)
 
-定位说得很清楚：先做企业，因为企业数据本来就不用于训练；消费版 ChatGPT 的对话默认仍会进训练集，除非用户主动退出。项目负责人 Shekar 的说法是「迈向人人享有私人智能的第一步」，并称正在扩充保密计算容量。Google 此前已推出类似路线的 Private AI Compute。
+### ⭐ 381 个智能体公开直播攻关 P vs NP：2,400 条引理、800 条证伪、0 条指向 P=NP
 
-**核心观点**：企业采用前沿模型的门槛正在从「能力够不够」转向「数据主权落不落得住」。当模型能力差距缩到几个百分点，能证明自己看不见数据的厂商会拿到那些根本不允许外发数据的行业订单。
+11 月 22 日，设计软件公司 Brilliant 的联合创始人 Amichai Mantinband 上线 pequalnp.com，把一批 AI 智能体放进同一个公开仓库，24 小时直播攻关 P vs NP。到 25 日早 9 点：峰值 **381 个**智能体并发，累计 10,936 次会话，Lean 4 里验证通过 **2,400 多条**引理；另有 465 个外部 agent 提交、独立证明 1,659 个步骤。
 
-来源：[IT之家](https://www.ithome.com/1/032/543.htm) · [The Decoder](https://the-decoder.com/openai-wants-companies-to-trust-it-with-sensitive-work-by-promising-not-to-look-at-their-data/)
+组织方式值得细看。整个问题被拆成 **6 条**并行战线，由 **30 个**被称为「席位」的调度器分管，每个席位下带一组子智能体。流程是两步：思考型 agent 先检索文献、推演路线、找反例，经得起推敲的思路才交给构建型 agent 写成 Lean 4 送进沙盒编译；另设红队专门挑刺与核对语义，官网还有一页「墓地」归档被彻底证伪的 800 多条主张。
 
-### ⭐ DeepMind 给 Antigravity 装上「质谱技能」：识别率从 4% 到 97%
+基建先撑不住了：仓库三天破 **2,000 fork**、900 多名贡献者、1,028 个开放 PR、累计关闭 4,768 个，GitHub 并发队列被堵，迁入付费组织后 Actions 每次只能跑 6 个任务。截至 25 日的看板：已验证引理 2,456，总引理却涨到 5,934；带明确倾向的有 253 条指向 P≠NP，指向 P=NP 的仍是 0 条；主线收敛到「不含 NOT 门的单调电路猜想」，暂时无法推广到一般电路。
 
-DeepMind 11 月 24 日发布 Mass Spec Skills，把 Gemini 的化学推理与成熟质谱工具、公共化学数据库查询打包成一套领域技能，跑在 Google Antigravity 上。研究人员只用自然语言描述任务与仪器容差，agent 自动串联精确质量计算、百万级化合物库检索、键断裂模拟，最后给出可审计的完整证据链。
+**核心观点**：这是一次公开的「科研工程化」演示——给每条引理设 PR、超时与红队，把猜想变成流水线。它也照出了真正的瓶颈：编译器只保证形式化后的命题被证明，管不了它和自然语言命题是不是一回事；分母跑得比分子快，说明拆解本身在制造新问题。
 
-数据很硬。只给峰列表、不给工具时，Gemini 3.8 Flash、Gemini 4 Argon、Gemini 4 Carbon 的分子识别准确率**都不足 4%**；开放受限网络后，前沿模型仍漏判四分之一到三分之一。接上技能后，三款模型都做到约 **97%**，轻量模型追平前沿模型，单轮交互的 token 消耗还下降 4 倍到五分之一不等。
+来源：[量子位](https://www.qbitai.com/2026/11/513021.html)
 
-需求侧的情况是：质谱数据库平均只能标注约 5% 的实测谱图，人体样本也只有 10%，剩下的是所谓「暗物质」——分子早在公开数据库里，只是谱图没录。工具的边界也写明：区分不了对映异构体与部分近似同分异构体，数据库里完全没有的新分子仍需人工判断，agent 只负责缩小范围。
+### ⭐ FCC 批准 SpaceX Starmind：最多 100 万颗算力卫星，2040 年达标
 
-**核心观点**：这是「领域 agent」目前最干净的样板——模型不做它不擅长的事，把化学交给工具与数据库，自己只负责调度与推理；准确率提升来自工具链，而不是更大的模型。同一天 DeepMind 还给出 1 万名科研人员六个月免费最高档的申请通道，明显是在抢占科研工作流入口。
+FCC 周三宣布，授权 SpaceX 部署最多 **100 万颗**搭载 AI 芯片的卫星，组成「Starmind」星座，用于在轨处理 AI 数据。这是该机构首次批准完整规模的「AI 卫星星座」，Google 与 Blue Origin 也在推进类似想法。批准附带条件：2033 年前至少部署一颗，2040 年达到百万颗。
 
-来源：[DeepMind](https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/) · [IT之家](https://www.ithome.com/1/032/535.htm)
+细节上，SpaceX 计划用高速激光把这些卫星接入 Starlink 回传数据，芯片在规划中的 **Terafab** 工厂生产；FCC 驳回了把 600 公里以上失效卫星送入「墓地轨道」的请求，理由是处置方案信息不足。Google 上月已发射首颗「Project Suncatcher」AI 服务器卫星，Blue Origin 将在 **2029 年**承接其首次专用重载发射。
 
-### ⭐ 小红书开源 3DCodeFactory：教代码 agent 用 200 轮搭一个三维世界
+**核心观点**：卖点是「在太空收集太阳能给地面的 AI 供电」，但被批准的实质是一条跨越 14 年的工程时间表。对算力叙事的意义在于，它试图把「能源约束」从地球上的电价与审批里挪走一部分——代价是把运维难度挪到了轨道上。
 
-小红书团队开源 3DCodeFactory，目标不是「一句话出一张 3D 图」，而是让代码 agent 在沙箱里靠写代码、渲染、自检，反复迭代到验收通过。数据集含 **5,045 条**合格轨迹（2,920 条 Blender、2,125 条 Three.js），单场景代码行数中位数 **4,270**，单条轨迹平均消耗 **109 万**词元，覆盖 56 个细粒度三维类别，其中 **87.7%** 是跨领域的多对象复合场景。
+来源：[The Verge](https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers) · [The Decoder](https://the-decoder.com/fcc-clears-spacex-to-deploy-up-to-1-million-starmind-satellites-for-orbital-ai-data-centers-by-2040/)
 
-数据引擎是全自动的：语料清洗对齐、参考图合成与透视筛选、多 agent 生成任务规格与三档评分细则，再进沙箱多轮演进，最后用视觉评审、网格拓扑检查与交互测试做合取门控。一个对照案例是厨房重建任务：原始基座只做 14 次视觉检查、第 101 轮就停下，微调后坚持到 **200 轮**、累计 84 次自检。
+### ⭐ Anthropic 开始发放 15 亿美元版权和解金：每本书约 3,000 美元
 
-效果上，Qwen3.5-9B 监督微调后在三个基准上的综合得分平均提升 **27.81**。项目站给出了大量可点开的重播场景与源码对照，代码、数据与论文一并开放。
+小说家 Courtney Milan 在 Bluesky 上表示，已收到 Anthropic 和解金中属于自己的部分。这笔 **15 亿美元**是去年为集体诉讼达成的和解，全额折算约为每本书 3,000 美元，还有一部分将在明年初发放。经 The Verge 与 The Decoder 转述后成为可引用的定价基准。
 
-**核心观点**：3D 生成的技术路线正从「扩散一次成像」分叉出「代码 agent 多轮施工 + 机器验收」。这条路线把生成变成了工程流水线：难的不再是模型会不会画，而是能不能定义一个可自动打分的验收标准。
+**核心观点**：这是第一次为「训练数据里的每一本书」标出可对标的单价。对所有仍打算「先训练、后谈判」的公司，3,000 美元/本从此就是谈判桌上的起点价；对作者而言，它把一个抽象的权利主张变成了可预期的现金流。
 
-来源：[项目主页](https://3dcodefactory.github.io) · [GitHub](https://github.com/3DCodeFactory/3DCodeFactory) · [B站·AI日报 11.26](https://www.bilibili.com/video/BV1C4ymzKE9F)
+来源：[The Verge](https://www.theverge.com/ai-artificial-intelligence/1043087/anthropic-has-started-paying-out-its-copyright-settlement-to-authors)
 
-### ⭐ 芯片管制与反蒸馏开始拖慢国内实验室
+### ⭐ MoonBit 1.0：为智能体设计一门语言，同一个模型少花 12% token
 
-据 The Information 报道并经 The Decoder 转述，自 9 月以来，限制中国公司远程使用境外数据中心高端英伟达芯片、加上 OpenAI 与 Anthropic 的反蒸馏措施生效，DeepSeek、月之暗面、阿里等多家实验室的项目出现延期。DeepSeek 研究员内部估算：若蒸馏途径彻底消失，与顶尖美国模型的差距可能从 **3–6 个月扩大到 9 个月**。
+IDEA 研究院在第六届 IDEA 大会上发布 MoonBit 1.0。项目 2022 年 10 月立项，恰是 ChatGPT 上线前一个月，定位对标 Go 与 Java 的通用语言，但为 agent 编程做了三处专设：原生 Wasm 语言级沙箱，微秒级启动；把编程语言与形式化逻辑融合，生成代码时同时给出正确性证明，甚至可验证到编译后的汇编；编译效率在数百包的测试中约为 Rust 的 **1/10**。
 
-动作层面已有硬证据：月之暗面取消了在印尼采购英伟达 Blackwell 的 **1.5 亿美元**订单；部分公司尝试通过非中国第三方租算力，MiniMax、米哈游、阿里则更多转向国产芯片，并加大自建强化学习训练数据的投入。同日彭博报道，与字节、阿里、腾讯相关的数据中心融资停摆，一笔 **66 亿美元**的 Bridge Data Centres 交易被推迟。
+最硬的证据是一组对照实验：让 Opus 5.5 分别用 MoonBit 与 Rust 写数据库引擎，三轮约 500 项测试，通过率接近，而 MoonBit 少消耗 **12%** 的 token——要知道模型里 MoonBit 的语料规模只有 Rust 的 **1%**。
 
-**核心观点**：管制真正打击的不是「买不到卡」这一层，而是反蒸馏——它切断了低成本获取前沿模型行为数据的路径，逼实验室回到自建 RL 数据的高成本路线。这意味着下一阶段的竞争变量会从「算力有多少」转向「反馈信号从哪里来」，而这类能力的积累比囤卡更慢。
+生态数据也给了：近半年包下载接近 **1,000 万次**（最近一个月约 300 万），生态库从年初约 2,500 个增至 **3.6 万** 个；团队用 MoonBit 写了 88 万行的 Office 文档处理工具，体积仅 17MB，百万行级增量编译 1 到 2 秒。沈向洋在会上给了个分层判断：全球约 10 亿人用过大模型，约 2,000 万人在数学与编程里真正使用，而了解前沿 AI 有多强的可能只有 5,000 人。
 
-来源：[The Decoder](https://the-decoder.com/us-chip-access-curbs-and-anti-distillation-measures-are-reportedly-already-slowing-chinese-ai-labs/) · [Bloomberg](https://www.bloomberg.com/news/articles/2026-11-25/billions-in-data-center-deals-grind-to-halt-after-ai-chip-curbs)
+**核心观点**：当写代码的主力从人变成 agent，「语言该为谁优化」第一次有了实证答案——为 agent 设计的语言能让同一个模型更省 token、更少出错。这也解释了为什么形式化验证会从研究课题变成语言特性：它同时是给机器的约束和给人的验收单。
+
+来源：[量子位](https://www.qbitai.com/2026/11/512840.html)
 
 ---
 
 ## OpenAI
 
-### ⭐ 宣称矩阵乘法指数 ω = 9/4
+### GPT-6.2 计费修正：Astra 触顶快 40%、Sol 快 25%，补发一次额度重置
 
-下界追平 10 月上界，若成立则 ω 被唯一确定；九篇带 Lean 证明的论文同日挂出。[⭐ 深度推荐（详见深度阅读区）](#_2)
+OpenAI 修复了 GPT-6.2 上线初期的计费错误——此前 Astra 与 Sol 的套餐消耗被按折扣价计算。Codex 与 ChatGPT 负责人 Thibault Sottiaux 表示，修复后完成相同工作量会消耗更多额度：Astra 触及上限的速度比上周快 **40%**，Sol 快 **25%**；但相对上一代仍更省。公司不追溯少计差额，改为向 Go、Plus、Pro、Business 用户各补发一次可留存的重置机会，并让 Business 用户在 12 月 31 日前免费用 Fast Mode。
 
-来源：[Bubeck](https://x.com/SebastienBubeck/status/2125402576145572334)
+来源：[IT之家](https://www.ithome.com/1/033/138.htm) · [The Verge](https://www.theverge.com/ai-artificial-intelligence/1042187/openai-is-combining-chatgpt-and-codex-usage-limits)
 
-### ⭐ 私有推理进入首批客户测试
+### Chat 与 Work 合并灰度：一张用量表管两种模式
 
-企业查询跑在可独立验证的隔离硬件上，配合零数据留存与私有安全处理。[⭐ 深度推荐（详见深度阅读区）](#_2)
+OpenAI 向少量 Pro 用户开放合并后的 Chat 与 Work 界面，两者共享同一用量表。官方提示重度用户可能更早触顶。合并的目的是减少在「闲聊」与**多步 agent 任务**之间手动切换，但资源消耗差异也被摆到同一账本上。
 
-来源：[IT之家](https://www.ithome.com/1/032/543.htm)
-
-### GPT-6.2 Astra 用 22 分钟解开一本 1808 年素描本的作者之谜
-
-一位历史学教授称，Astra 通过比对馆藏记录、笔迹与时代线索，认定耶鲁馆藏一本匿名 1808 年素描本的作者，全程 22 分钟。Simon Willison 把这条与系外行星、蛋白质设计并列，当作「模型开始做原本只有专家能做的具体核查」的证据。
-
-来源：[Simon Willison](https://simonwillison.net/2026/Nov/24/astra-historical-mystery/) · [Generative History](https://generativehistory.substack.com/p/gpt-62-astra-solves-a-historical)
+来源：[TechCrunch](https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges)
 
 ---
 
 ## Google DeepMind / Gemini
 
-### ⭐ Mass Spec Skills：质谱识别 4% → 97%
+### Antigravity 缓存工程：五天把 Neon 的额度利用率提高约 75%
 
-把工具链与化学数据库打包成领域技能，轻量模型追平前沿模型。[⭐ 深度推荐（详见深度阅读区）](#_2)
+DeepMind 的 Varun Mohan 披露，Gemini 4 Neon 在 Antigravity 里的缓存命中率再升 **4.5%**，同样配额下能多完成 **28%** 的任务；叠加缓存与其他 harness 改进，五天内订阅额度实际可用量提高约 **75%**。他的解释是边际收益递增：命中率从 90% 到 95% 的效果，等于从 80% 到 90%，因为决定省多少的是未命中率。主要增益来自扩大缓存容量（减少长时段淘汰）与更好的路由。
 
-来源：[DeepMind](https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/)
+来源：[TestingCatalog](https://www.testingcatalog.com/google-stretches-antigravity-neon-quota-with-caching-gains/)
 
-### Kavukcuoglu：agent 已掌管部分算力，但递归自我改进还很远
+### Google 开源零依赖 AI 命令行 gemini-api-cli
 
-DeepMind 研究副总裁在官方播客中说，agent 现在会自己跑一部分实验来参与下一代 Gemini 的研发，但离完全递归自我改进很远。他强调一条安全设计：训练时不奖励模型内部的思维链，让意图在执行前保持可读可审。他还判断没有任何基准能捕捉智能的核心，AGI 的起点是产品被信任到可以替人做决定。
+Google 开源了 gemini-api-cli，用 **Go** 写、无外部依赖，把 Gemini API 的常用调用收进一个终端工具。仓库 4 月创建、昨天仍在更新，已积累 **3,800 余** stars——属于「模型厂商亲自把入口铺到命令行」的一步。
 
-来源：[The Decoder](https://the-decoder.com/ai-agents-now-control-part-of-deepminds-compute-for-gemini-experiments-but-recursive-self-improvement-remains-distant/)
-
-### Cogentic 六篇数学论文静默上架（转述）
-
-据 AINews 汇总，Google 的 Cogentic 项目在 GitHub 上未经公告发布六篇数学稿，由 agent 框架在未命名 Gemini 4 模型上产出，含一条有证明的 NFS 类分解界，称超过 1992 年的纪录。均为社区转述，未获 Google 官方确认。
-
-来源：[AINews](https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-c) · [@AndrewCurran_](https://x.com/AndrewCurran_/status/2125596087520223658)
+来源：[GitHub](https://github.com/google-gemini/gemini-api-cli)
 
 ---
 
 ## Anthropic / Claude
 
-### ⭐ Messages API 迁移 Rust 复盘
+### ⭐ 15 亿美元和解金开始到账
 
-生成不是瓶颈，验证才是：三层循环把生产流量变成验证器。[⭐ 深度推荐（详见深度阅读区）](#_2)
+小说家已收到款项，每本书约 3,000 美元，余款明年初发放。[⭐ 深度推荐（详见深度阅读区）](#_2)
 
-来源：[Anthropic](https://www.anthropic.com/research/migrating-api-to-rust)
+来源：[The Verge](https://www.theverge.com/ai-artificial-intelligence/1043087/anthropic-has-started-paying-out-its-copyright-settlement-to-authors)
 
-### ⭐ 黎曼证明重写为 7.6 万行
+### 测试者称疑似 Opus 5.6 现身：SVG 与代码短片批量流出（未证实）
 
-可读版 30 万行、紧凑版 7.6 万行，无 sorry、Apache 2.0。[⭐ 深度推荐（详见深度阅读区）](#_2)
+X 上出现一批新的代码短片与 SVG 测试输出，多名测试者认为来自未发布的 **Opus 5.6**，可能通过 Opus 5.5 Extra 路由触达，部分用户在 Claude Code、部分在 Chat。TestingCatalog 明确写道 Anthropic 未发布任何公告，也有人不给这些结果贴 Opus 5.6 的标签。可参照的历史：10 月中旬曾有一批请求疑似落到未公布模型，后来正式发布的是 Fable 5.2 与 Mythos 5.2。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512819.html)
+来源：[TestingCatalog](https://www.testingcatalog.com/testers-share-early-results-possible-claude-opus-5-6/) · [B站·劝合](https://www.bilibili.com/video/BV1W717z9Efp)
 
-### 经济研究补充数字：55% 有增产，19% 尚无商业价值
+### Anthropic 平台工程负责人：AI 让「项目耗时」不再是晋升依据
 
-The Decoder 对 Anthropic《Working with AI》的复盘中给出更细的口径：近 **300** 个部署里，**55%** 提升了产出或质量，**19%** 至今没产生商业价值。内部瓶颈的提及次数分别是「AI 产出多到人审不过来」49 次、员工抵触 43 次、需要专家复核 42 次；外部因素几乎没被提起，监管只有 4 次。样本全部是 Anthropic 客户，作者自己承认不具代表性。
+据《商业内幕》，Anthropic 平台工程负责人 Caitlin Leese 表示，AI 普及后单纯以项目完成时间判断晋升资格已不可靠——过去要几年的事现在几个月能做完，团队更看重降延迟、防事故这类实际影响。她称工作重心正从写代码转向**「协调」**：让成员与智能体配合，把一个想法转成能发布的高质量成果。招聘也在改，新面试形式包含「检查智能体写的代码」与「与智能体协作搭系统」。
 
-来源：[The Decoder](https://the-decoder.com/anthropic-study-shows-the-hardest-part-of-adopting-ai-at-work-has-little-to-do-with-learning-the-tools/) · [Anthropic](https://www.anthropic.com/research/working-with-ai)
-
-### Opus 5.6 灰度截图流出（转述，待核实）
-
-多位用户在 Claude Code 中称被灰到 Opus 5.6，展示的改进集中在视觉与前端生成：更复杂的 3D 场景、动画精度，以及约 2–3 倍的响应速度；有人说是从 Opus 5.5 Extra 入口路由过去的。B 站另有频道称 Sonnet 5.6 已悄然承接 Sonnet 5.5 的对话流量。均无官方口径。
-
-来源：[量子位](https://www.qbitai.com/2026/11/512478.html) · [B站·AI日报 11.26](https://www.bilibili.com/video/BV1C4ymzKE9F)
-
-### Claude Code 三员大将齐聚 OpenAI
-
-量子位梳理：Claude Code 产品负责人 Cat Wu 已官宣加入 OpenAI 掌管核心产品线产品管理；桌面版负责人 Anthony Morris 与核心成员 Thariq Shihipar 随后被曝加盟。三人都参与了 Claude Code 从内部工具到编程 agent 主线产品的过程，离职集中在 Anthropic 上市前夕。
-
-来源：[量子位](https://www.qbitai.com/2026/11/512515.html)
-
-### Amodei 回应「交出自由意志」争议：让 AI 治理社会是坏主意
-
-针对 Axios 关于内部讨论的报道，Amodei 在 X 上长文回应，称暗示他主张把自由意志交给 AI 是「荒唐的」。他的表述是：AI 必须由合法的民主程序治理，政治决策留在人手里；用效率或安全换正当性，与接受专制没有区别。他还提到在与五角大楼的争执中拒绝让现有模型用于自主武器，愿意为此承担公司层面的风险。
-
-来源：[The Decoder](https://the-decoder.com/anthropic-ceo-dario-amodei-says-letting-ai-govern-society-would-be-a-bad-idea/) · [Axios](https://www.axios.com/2026/11/25/anthropic-dario-amodei-ai-free-will-contro-axios)
+来源：[IT之家](https://www.ithome.com/1/033/141.htm)
 
 ---
 
@@ -198,81 +170,117 @@ The Decoder 对 Anthropic《Working with AI》的复盘中给出更细的口径�
 
 > DeepSeek / Kimi / 豆包 / 智谱 等
 
-### ⭐ 小红书开源 3DCodeFactory
+### ⭐ GLM-5.5 或延至 2027 年一季度，Kimi K4 或延至年中
 
-5,045 条验收轨迹，Qwen3.5-9B 微调后三项基准平均 +27.81。[⭐ 深度推荐（详见深度阅读区）](#_2)
+路透：3 万亿参数旗舰错过 11 月窗口，月之暗面开发周期可能翻倍到 12 个月。[⭐ 深度推荐（详见深度阅读区）](#_2)
 
-来源：[项目主页](https://3dcodefactory.github.io) · [GitHub](https://github.com/3DCodeFactory/3DCodeFactory)
+来源：[The Decoder](https://the-decoder.com/after-openai-and-anthropic-shut-the-door-on-their-data-a-chinese-ai-developer-is-turning-to-google-and-meta-instead/)
 
-### 秘塔上线「全民开机」：丢一个故事，直出 15 分钟短片
+### DeepSeek 灰度「本轮消耗额度」：把每轮对话的账单摆到用户面前
 
-产品把分镜、运镜、音画对齐全部收进后台，首页只有一个文本框；系统指派一位 AI 助理导演，在关键节点用「选择题」对齐风格、画幅与节奏，右上角还有「都听你的」一键全部交给推荐方案。官方内置 12 种电影风格、三种画幅，保留少量人工干预节点。对短剧团队的卖点不是质量而是周期——热点窗口里先出片的人回报最高。
+11 月 26 日起，部分 DeepSeek 用户在网页端与 App 看到新功能：一轮对话结束后弹出详情页，展示本次消耗的 Token 与按 API 同价估算的金额。示例拆解为三段——缓存命中的输入 0.02 元/百万 tokens，未命中 1 元，输出 4 元；一轮 18.5 万缓存命中 token 折合 0.0037 元。另新增上下文占用进度条。个人用户目前仍免费。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512727.html)
+来源：[IT之家](https://www.ithome.com/1/033/157.htm) · [B站·两个人在吃饭](https://www.bilibili.com/video/BV1pD1pziELM)
 
-### 商汤开源 SenseNova U1.6：人像与复杂布光的生图模型
+### 蚂蚁开源 Ming-Image-0.2-Design：6B 设计向生图模型登顶开放权重榜
 
-量子位实测集中在三类难题：刁钻机位的人像群像、毛毡玩偶的材质与表情一致性、风格跨度极大的插画。模型已上线小浣熊、Seko 与 ComfyUI。评测是媒体口径，尚无第三方基准。
+蚂蚁百灵开源 Ming-Image-0.2-Design，**6B** 参数的 DiT，MIT 许可。相比 0.1 版强化了复杂构图、光照与文字排版，可用于电商主图、UI 设计稿与空间渲染；这代还把上一代的分层分解细化到**角色部件**级别，方便下游编辑与动画。官方称 11 月 23 日的初步评测中，它在 Artificial Analysis 文生图总榜上是开放权重模型第一。配合 Ling-3.2-flash，可把设计概念直接转成可交互页面。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512748.html)
+来源：[HuggingFace](https://huggingface.co/inclusionAI/Ming-Image-0.2-Design) · [B站·AI日报](https://www.bilibili.com/video/BV1Yg1WzXEsH)
 
-### 智元发布 AIMA 生态，灵心平台一年孵化 3 万多个机器人智能体
+### 腾讯 AI for Science 登《Nature》：AI 从零设计双靶点多肽
 
-智元推出具身智能生态体系 AIMA 与「元苼」计划，五年投入不低于 20 亿元。灵心平台面向非专业开发者：自然语言创建智能体，配置知识库与技能，用 3D 空间仿真调试，再通过 SDK、MCP、Skill 连接外部系统。上线一年累计 2 万+ 用户、3 万+ 智能体、7 万+ 平台内容，落地案例包括北大人民医院导诊与横琴长隆的 IP 互动。
+腾讯生命科学实验室的成果 11 月 25 日以第一单位登上《Nature》主刊：用 AI 挑战高活性双靶点治疗性多肽的从头设计。平台 ORIDTP 把扩散生成、双目标强化学习、柔性多肽亲和力建模与湿实验串成闭环，每轮实验只需测试约 **15 条**多肽，把「大库盲筛」换成「小样本精准迭代」。已在一个方向验证：肿瘤免疫模型中候选分子使肿瘤体积较对照组减少 **94.2%**；减重降糖方向在低于对照药物摩尔剂量时观察到效果。仍处临床前阶段。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512715.html)
+来源：[IT之家](https://www.ithome.com/1/033/125.htm) · [Nature](https://www.nature.com/articles/s41586-026-11338-1)
 
-### 九章云极发布 Physical AI Factory：物理 AI 的算力工厂
+### Sand.ai 的 MAGI-2 登顶图生视频榜：480B 参数，每秒 5 毛
 
-在 2026 物理 AI 行业峰会上，九章云极把既有算力底座叠加物理 AI 工具栈，覆盖异构调度、弹性训练推理、强化学习环境与多阶段任务编排，串起「场景数据—训练—仿真验证—合成数据—真机反馈」闭环。会上引用的市场数据是：2026 年中国物理 AI 开发基础设施约 335 亿元，2030 年预计超 800 亿元，数据、仿真与验证贡献约 58% 的新增支出。
+量子位实测报道，Sand.ai 新发布的 **480B** 视频模型 MAGI-2 在 Artificial Analysis 图生视频榜登顶，单条 30 秒 1080p 原片生成成本约 15 元，定价约为同级闭源头部的**十分之一**。能力面：支持最长 2 万字符脚本、秒级切镜（12 次指定切镜全部命中，平均偏差 0.028 秒）、混合最多 20 份参考素材、局部定向修改。技术报告里还记录了一个「对齐税」现象：审美微调后成片更电影感，但预训练阶段的推理与泛化更难触发。官方称计划尽快开放权重。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512582.html)
+来源：[量子位](https://www.qbitai.com/2026/11/512916.html) · [Sand.ai](https://sand.ai/)
 
-### 逐际动力与商汤大装置合作：仿真训练交给 SenseCore
+### VAST 发布 Tripo H3.5 Preview：192 组盲评拿下 42.8% 第一
 
-商汤大装置将为逐际动力的机器人仿真、视觉策略训练与强化学习提供弹性算力，平台适配 20 余款国产芯片，并针对 OpenPI、WorldScape-Policy、OmniVLA 做专项优化。商汤称此前已支撑 ORCA 抓取基础模型用仿真替代 90% 的实体测试。
+3D 生成基座模型 **Tripo H3.5 Preview** 上线 Tripo Studio 国际版。统一输入与最高几何质量、剥离贴图与法线的条件下，资深 3D 美术师对 192 组素模盲评中它拿下 82 次第一（42.8%），胜率是第二名 2.3 倍；无贴图网格的浮雕文字识别率从 H3.1 的 46.1% 提升到 90.7%。卖点是「拆掉贴图仍然站得住」——细节必须由几何本身承载。
 
-来源：[量子位](https://www.qbitai.com/2026/11/512683.html)
+来源：[量子位](https://www.qbitai.com/2026/11/512981.html)
+
+### 蔚来发布世界模型 NWM 3.0 与 NOMI 4.0：训练提效 5 倍，控制时延降 50%
+
+在第三届 NIO IN 上，蔚来把 NOMI 的九年代码整体重构为原生智能体架构。世界模型 **NWM 3.0** 引入隐式世界模型与双闭环强化学习，综合训练效率提升 5 倍，整车控制时延平均降低 50%。座舱侧 NIM 为超千亿参数 MoE，配合近 3,000 项原子级信息的情境中枢与覆盖 22 个领域的工具中枢，典型车控任务完成率从 40% 多提升到 95.3%。企业侧已上线 7,500 余个应用，研发效率提升 35%。
+
+来源：[量子位](https://www.qbitai.com/2026/11/512897.html)
+
+### 商汤开源 SenseNova-RoboRSI-27B：同一份权重，模拟器和两台真机都能跑
+
+商汤开源的 **27B** 视觉语言模型，面向机器人操作：可向 VLA 策略请求动作、审阅轨迹，或用代码计算并执行夹爪目标位姿（Code as Policy），每次动作后用新的相机观测与机器人状态决定下一步。在 RoboDojo 模拟基准上平均分 34.7，此前的 Preview 为 10.0；同一个 checkpoint 可直接部署在两台真实机械臂上，无需真机数据做适配。
+
+来源：[HuggingFace](https://huggingface.co/sensenova/SenseNova-RoboRSI-27B) · [B站·海猫AI](https://www.bilibili.com/video/BV1Cc1EzWEmy)
+
+### 千问语音模型 Qwen-Audio-3.1 升级：识别 59 种语言、8 种方言（转述）
+
+据 B 站日报转述，通义 Qwen-Audio-3.1 将语音识别扩展到 **59 种语言 + 8 种方言**，语音合成覆盖 **65 种语言 + 6 种方言**。官方未发公告，条目为媒体转述。
+
+来源：[B站·海猫AI](https://www.bilibili.com/video/BV1Cc1EzWEmy)
+
+### 爆料：DeepSeek V4.1 Pro 12 月发布，重点在「不再依赖英伟达」（未证实）
+
+据驱动之家转述并经 B 站日报放大，DeepSeek V4.1 Pro 计划 12 月发布，重点不是参数量而是算力结构——训练侧转向国产芯片。另有传闻称其上一个版本已完成全昇腾训练。均无官方确认。
+
+来源：[B站·白光star](https://www.bilibili.com/video/BV1ug1JzTEkq)
 
 ---
 
 ## 海外大厂动态
 
-### 标普把英伟达列入负面信用观察：治理是最大隐忧
+### SAP 计划裁员 1 万人：占总员工 9%，为 AI 时代重构软件业务
 
-标普将英伟达「AA」发行人评级与高级无担保债务评级列入负面观察，管理与治理修正值从「正面」下调至「中性」。理由直指董事会独立性、关键人物风险与继任机制缺失，并称「先离职后复职」的安排没有回应董事会对高管行为准则的监督疑问。若 90 天内尽职调查后缺陷仍未解决，评级可能下调，通常幅度为一级。
+彭博报道，欧洲市值最高的软件公司 SAP 正筹备一项计划，裁减至少 **10,000 个**岗位、约占全球员工 9%，目标是把软件业务改造为 AI 原生的形态。这是本周第二家把「AI 转型」直接换算成裁员数字的大型企业软件厂商。
 
-来源：[IT之家](https://www.ithome.com/1/032/557.htm)
+来源：[Bloomberg](https://www.bloomberg.com/news/articles/2026-11-26/sap-weighs-cutting-at-least-10-000-positions-in-a) · [IT之家](https://www.ithome.com/1/033/137.htm)
 
-### 数千枚 B300 涌入转售市场，数据中心融资同步停摆
+### 英伟达付 2.9 亿美元和解：2018 年隐瞒加密挖矿营收占比
 
-CNBC 报道，11 月 16 日新规公布后，待售的高端英伟达 GPU 数量异常增长，已出现涉及数千枚 B300、正在寻找买家的交易意向；英伟达仍称整体需求大于供给。彭博同日报道，与字节、阿里、腾讯相关的数十亿美元数据中心贷款出现延迟。两条新闻指向同一件事：算力从「抢不到」转向「找下家」。
+英伟达同意支付 **2.9 亿美元**，了结 2018 年的股东集体诉讼。原告指控公司在那轮加密热潮中误导投资者，隐瞒了游戏显卡营收中来自挖矿的比例。这笔钱与本周标普的负面信用观察无关，但两条新闻共同指向「治理与披露」这个反复出现的软肋。
 
-来源：[IT之家](https://www.ithome.com/1/032/547.htm) · [CNBC](https://www.cnbc.com/2026/11/25/nvidia-china-ai-chip-remote-access.html)
+来源：[Reuters](https://www.reuters.com/legal/government/nvidia-agrees-settle-2018-us-investor-class-action-for-290-million-2026-11-25/)
 
-### 纽约州暂停 AI 聊天玩具销售五年
+### 戴尔单季 AI 服务器收入 220 亿美元，同比涨 291%
 
-州长 Hochul 签署法案，暂停具备联网与 AI 对话能力的玩具在该州制造、分销与销售，为期 5 年，违规厂商每日最高罚 **1.5 万美元**。立法理由集中在儿童与软件对话时「运行时安全管控极少」，支持方列举了不当对话与危险建议的案例。加州此前已签署四年禁令。
+戴尔披露 AI 服务器单季收入约 **220 亿美元**、同比增长 **291%**，积压订单达 **1,323 亿美元**。与英伟达被停发、被列入负面观察的叙事形成对照：需求侧的钱还在往前跑，卡在中间的是政策与交付路径。
 
-来源：[IT之家](https://www.ithome.com/1/032/540.htm) · [NBC News](https://www.nbcnews.com/tech/tech-news/new-york-governor-kathy-hochul-sign-ai-toy-ban-law-rcna610962)
+来源：[B站·一只childe](https://www.bilibili.com/video/BV1J81JzWEmw)
 
-### PrismML 三元量化把 27B 压到 5.9GB
+### 内存芯片短缺催生采购「战情室」，部分芯片一年涨 10 倍
 
-Ternary Bonsai 2.5 27B 基于 Qwen3.8-27B，每个权重只能是 −1、0、+1 三值（约 1.76 bit），显存从全精度约 54GB 降到 **5.9GB**。SWE-bench Verified 从上一代 60.8 提到 **75.6**（原模型 80.6），AppWorld 从 51.2 跳到 90.5。RTX 4090 上多 token 预测下约 204 tok/s，Apache 2.0，支持 llama.cpp 与 MLX。
+WSJ 报道，存储芯片短缺正迫使全球公司设立专门采购战情室，部分芯片价格一年内上涨 10 倍，并开始推高消费电子售价。AI 数据中心的 HBM 需求是主要拉力，供应链的瓶颈正从算力芯片转向上游存储。
 
-来源：[The Decoder](https://the-decoder.com/prismml-squeezes-an-agent-based-coding-model-with-27-billion-parameters-into-5-9-gb/)
+来源：[WSJ](https://www.wsj.com/tech/memory-chip-shortage-ai-electronics-prices-e58a065a)
 
-### Amazon 与 Meta 就 Muse 解封谈判
+### 42 州检察长联名：反对 Character.AI 破产期间拍卖 2,100 万账户聊天记录
 
-据 Fortune 报道，双方正谈把 Meta 的购物 agent Muse 接入亚马逊商城，结束此前的封锁；任何交易都需双方高层签字。这关系到 agent 购物是走平台自有入口还是外部代理，是今年电商与 agent 交界处最敏感的一处。
+Character.AI 10 月申请破产后计划出售用户聊天数据，42 位州检察长几乎同步发声明反对，称涉及 **2,100 万**美国账户、其中 **210 万**注册者为未成年人，且方案对用户无任何保护——不要求买家遵守原有隐私政策、没有删除通道、不限制二次转卖。首个竞标方 11 月 13 日才成立，无母公司或投资人信息。
 
-来源：[Fortune](https://fortune.com/2026/11/25/exclusive-amazon-meta-talks-deal-muse-ai-shopping-agent-blockade/) · [The Decoder](https://the-decoder.com/amazon-and-meta-are-in-talks-to-end-the-block-on-metas-ai-shopping-agent-muse-in-amazons-online-store/)
+来源：[The Verge](https://www.theverge.com/policy/1042620/character-ai-sale-state-ags-block-selling-users-chats)
 
-### 市场：纳指跌逾 4%，Anthropic 跌逾 9%
+### 瑞士五天发生五起 AI 智能体攻击，电力供水通信系统被入侵
 
-FT 报道，AI 交易继续回吐，纳斯达克 100 跌逾 **4%**，英伟达与 Anthropic 均跌逾 9%，博通跌 7%。Anthropic 前一日已跌破 83 美元发行价。（原文在付费墙内，仅据摘要）
+瑞士联邦网络安全局（BACS）通报，过去几天有五起攻击者使用 AI 智能体针对企业与关键基础设施发起的入侵，其中 4 起得手。受害方包含三家关键基础设施运营主体，据 SRF 报道分别为电力、供水与通信服务商。官方未披露幕后主体。
 
-来源：[FT](https://www.ft.com/content/705eb84c-801d-4a96-b908-e366511e886a)
+来源：[IT之家](https://www.ithome.com/1/033/131.htm)
+
+### a16z 拟募约 200 亿美元新基金，ElevenLabs 传 330 亿美元估值
+
+两笔融资信号：a16z 正就下一组基金募资约 **200 亿美元**（上一组今年 1 月宣布时为 150 亿以上并已增值）；ElevenLabs 在谈 2027 年的新一轮，目标估值 **330 亿美元**，较 9 月的 220 亿再上一档。同时机构投资者正在折价抛售 2021 年高峰期的老基金份额，转投新的 AI 基金。
+
+来源：[Axios](https://www.axios.com/pro/all-deals/2026/11/25/andreessen-horowitz-20b-fundraise) · [Bloomberg](https://www.bloomberg.com/news/articles/2026-11-25/elevenlabs-in-early-talks-for-2027-funding-at-33-billion-value) · [FT](https://www.ft.com/content/0278cbea-a0b6-4a30-80f2-f31ac6657f11)
+
+### MiniMax 数据被不明方访问，Talkie 因涉未成年人内容全球下架
+
+Dragos 研究称，有不明方访问了用户提交给 MiniMax 的机密数据，即便用户已要求不存储。更早一日，Apple 在全球 App Store 下架 MiniMax 的聊天应用 **Talkie**，此后有媒体出示其 AI 角色对儿童进行性化对话的证据。两条新闻叠加，构成国产出海应用在数据与内容安全上的双重压力。
+
+来源：[Reuters](https://www.reuters.com/world/data-chinese-ai-firm-minimax-accessed-by-unidentified-parties-researcher-says-2026-11-26/) · [The Bureau](https://www.thebureauinvestigates.com/stories/2026-11-24/talkie-china-chatbot-children)
 
 ---
 
@@ -280,30 +288,49 @@ FT 报道，AI 交易继续回吐，纳斯达克 100 跌逾 **4%**，英伟达�
 
 > 重要论文、技术突破
 
-### Loom Attention：让 Transformer 在每个 token 上重连电路
+### ⭐ 381 个 agent 直播攻关 P vs NP
 
-HF 11 月 25 日榜首（76 赞）。传统注意力里每个头只做横向的 token 间注意力；Loom 给每个头加一条纵向注意力，对先前各头的输出做压缩、门控的线性注意力，用来生成自己的 Q/K/V，并把这套 per-token 矩阵记忆当作第二条残差流。结果是 LoomFormer 把控制流与内容流拆成双流架构。这与近日 OpenAI Astra、智谱 GLM-5.4 的循环深度路线同源，都是「不堆参数、堆计算深度」。
+六条战线、30 个席位、红队与「墓地」；2,400 条引理通过，0 条指向 P=NP。[⭐ 深度推荐（详见深度阅读区）](#_2)
 
-来源：[arXiv:2611.30634](https://arxiv.org/abs/2611.30634)
+来源：[量子位](https://www.qbitai.com/2026/11/513021.html)
 
-### NightWatch：给电脑操作 agent 加一个常亮的感知层
+### Mixture-of-Loops Transformer：把 KV 当作跨层、跨循环的记忆
 
-HF 日榜 62 赞。视觉语言 computer-use agent 的痛点是界面在变、感知却按步采样；NightWatch 加一个轻量流式观察器，让感知与动态界面保持同步，减少延迟与浪费的步数，任务成功率持平或略升。
+字节 Seed 的 HF 日榜第三（56 赞）。循环 Transformer 复用共享层提升表达力但牺牲效率，这篇追问一个更基本的问题：相邻两轮循环之间到底该传什么？MoLT 的答案是「传 KV」——MoLA 让每个循环选择性复用前序深度与循环的 key/value 作为记忆。两种变体分别走「保留残差流 + 读局部 KV」与「从嵌入重启」两条路，U 形结构在预训练效率与推理延迟上都更好。
 
-来源：[arXiv:2611.28947](https://arxiv.org/abs/2611.28947)
+来源：[arXiv:2611.34923](https://arxiv.org/abs/2611.34923)
 
-### ACAP：把一台机器人拆成一支异步 agent 团队
+### Sage-Med：医学多模态模型的 scaling 规律长什么样
 
-面向机器人控制的异步框架：按控制组（机械臂+夹爪、躯干+底盘）给每个部件配一个常驻 agent，各自推理与执行互不阻塞，再靠协调机制处理物理依赖。与「一个 agent 管整机」相比，并行度更高。
+上海 AI Lab（81 赞）。先给一个反直觉结论：现有医学 MLLM 在多类任务上不如前沿通用 MLLM；单纯扩大规模主要提升文本能力而非多模态感知，开推理模式也补不上视觉差距。为此推出 Sage-Med-Preview，**35B** 总参数、**3B** 激活，用来实测「医学多模态智能在实践中如何扩展」。
 
-来源：[arXiv:2611.31205](https://arxiv.org/abs/2611.31205)
+来源：[arXiv:2611.34575](https://arxiv.org/abs/2611.34575)
+
+### Real2SimLab：给「真实到仿真」建一个统一考场
+
+北大团队（99 赞，今日榜首）。coding agent 已能从视频生成仿真程序，但每个基准都有自己的输入、产物与评分流程，评估 N 个方法 × M 个基准就要做 N×M 次集成。这个平台统一按「运行 agent 写出的程序」来打分，把矩阵压回一维。
+
+来源：[arXiv:2611.34849](https://arxiv.org/abs/2611.34849)
+
+### VibeVideoAgent：代码生成的视频，需要一个感知闭环
+
+快手 Kling（54 赞）。代码驱动视频生成能精确控制排版、图表、音频与多镜头，但程序正常退出也可能渲染出错位标签、跑偏的机位、断掉的物体交互——这些都不报错。把渲染帧回灌进编码会话会让长上下文爆炸，只看最终成片又太晚。这篇的做法是在中间加一层轻量感知反馈。
+
+来源：[arXiv:2611.34237](https://arxiv.org/abs/2611.34237)
+
+### PyRUA-Dex：不用示范数据，让 coding agent 自己写出灵巧操作策略
+
+北大 DA 组（43 赞）。灵巧操作卡在高质示范稀缺：视频重定向不准、遥操作没有力反馈、外骨骼难规模化。这篇直接绕开示范：多个 agent 并行探索技能与组合方式，再由一个蒸馏 agent 把成功片段凝成程序化策略，最后在仿真与真机上精修。
+
+来源：[arXiv:2611.33144](https://arxiv.org/abs/2611.33144)
 
 ### 今日论文速览
 
-- **Antom 3-in-1 Transformer**：蚂蚁国际的支付基础模型，7B 总参、每个任务路由激活约 1.7B，融合序列、表格与图三种表征，跨业务迁移比从零训练提升 34.5%。[arXiv:2611.25403](https://arxiv.org/abs/2611.25403)
-- **Embodied AI Fails the Mirror Test**：给机器人策略加一面普通镜子，失败率显著上升，说明现有 VLA 的空间推理缺了「镜像对称」这一层。[arXiv:2611.33010](https://arxiv.org/abs/2611.33010)
-- **LingSante MedGuard**：蚂蚁的医疗安全技术报告，面向健康问答的风险拦截。[arXiv:2611.25509](https://arxiv.org/abs/2611.25509)
-- **S-Mind**：把多视角几何内化进模型的空间智能路线，37 赞。[arXiv:2611.28649](https://arxiv.org/abs/2611.28649)
+- **I2VT**：用图像编辑器训练视频编辑器，无需成对视频即可扩展视频编辑任务，在 OpenVE-Bench 与 OpenVE++ 上 SOTA（CMU）。[arXiv:2611.34941](https://arxiv.org/abs/2611.34941)
+- **DyLoMo-DiT**：扩散 Transformer 的权重共享循环 + 动态 MoE，靠复用参数而非增加参数扩容量，38 赞。[arXiv:2611.30844](https://arxiv.org/abs/2611.30844)
+- **DocSEAM**：多页文档理解的双向跨页编码，在多页边界补齐视觉 token 的上下文（MMLab@NTU）。[arXiv:2611.34420](https://arxiv.org/abs/2611.34420)
+- **HOG-WAM**：给 world-action model 加未来 HOG 直方图做结构监督，提升视觉扰动下的鲁棒性。[arXiv:2611.34811](https://arxiv.org/abs/2611.34811)
+- **AIRIS**：以第一人称流式视频为场景的社会具身智能基准（腾讯）。[arXiv:2611.34347](https://arxiv.org/abs/2611.34347)
 
 ---
 
@@ -311,65 +338,65 @@ HF 日榜 62 赞。视觉语言 computer-use agent 的痛点是界面在变、�
 
 > KOL 重要推文、深度分析文章
 
-### Scott Aaronson：我们拿到的不再是零散答案，而是一整片新大陆
+### Jack Despain Zhou：AI 带来的第一后果是「去个体化」
 
-Aaronson 对这两天数学结果的评价被 Simon Willison 收录为引语：「显然我们将得到的不是这个或那个复杂度问题的孤立解，而是一整片数学真理的新大陆——此前只能透过迷雾窥见一角。」他把它比作列文虎克第一次把显微镜对准池水、伽利略第一次把望远镜对准星空。AINews 另给出一个量化视角：今年 64 项 AI 辅助数学突破里，11 月占了 20 项。
+Simon Willison 摘录的一段话被广泛转发：「AI 已有的众多后果里，有一项是巨大的去个体化。我打开 YouTube，听到的是 Claude；我坐在会议演讲现场，听到的是 Claude；我打开邮箱，看到那些挂着正经机构、正经履历的人发来的提案与文章——**我也看到 Claude**。」这段引语的价值在于它描述的是一种体感，而不是指标：当生成变便宜，最先被稀释的不是内容数量，而是「这是谁说的」。
 
-来源：[Simon Willison](https://simonwillison.net/2026/Nov/25/scott-aaronson/) · [AINews](https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-c)
+来源：[Simon Willison](https://simonwillison.net/2026/Nov/26/jack-despain-zhou/)
 
-### Thariq Shihipar：革命与文艺复兴，可以同时发生
+### Karpathy 用公开数据拼出一张「文明风」的美国地图
 
-刚宣布加盟 OpenAI 的 Thariq 在 Latent Space 长访谈里讲了他对 AI 编程的两套想象：一边是「软件便宜到可以一次做一千个」，另一边是「你有更多时间把一个东西做到对」。他演示了在游戏里改一个 /human 目录下的石头大小、立刻试投掷；也讲了「决策模型」——由设计者定义动作清单，模型只负责选择。他还有一个个人项目：做了一个 Mac Dock 切换模式，用了一阵后发现自己真正在意的是「何时被打断」。
+他把公开数据集叠成一张复古文明游戏风格的地图，展示如何用 LLM 辅助完成「数据整理—风格统一—渲染」这类过去需要几天的手工活。这类作品的传播点不在技术，而在于示范了「一个人 + 模型」能把什么样的兴趣项目做完。
 
-来源：[Latent Space](https://latent.space/p/the_revolution_vs_the_renaissance_thariq_shihip)
-
-### 预训练 loss 的下降斜率成为新战场
-
-METR 指出 OpenAI 公开了 GPT-3.5 以来所有前沿模型的对数困惑度，2026 年初以来 loss 的下降速度约为 2022–2025 年的 **7 倍**。质疑方认为测量对象只是一个小规模的留出代码语料，可能反映的是数据配比变化而非能力；支持方则强调这是少见的、可复现的原始信号。开源侧已有对应物：Pretraining Index v0 覆盖 27 个开源模型、约 260 个数据源。
-
-来源：[AINews](https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-c)
+来源：[X @karpathy](https://x.com/karpathy/status/2125779541952246039) · [B站·非常暴龙兽](https://www.bilibili.com/video/BV1T317zZErw)
 
 ---
 
 ## 值得关注的视频
 
-> YouTube 侧今天没有 24 小时内的新片；以下是 B 站与播客。
+> YouTube 侧 24 小时内无新片（OpenAI、Anthropic 官方频道与 No Priors、Lex Fridman 均无更新）。以下为 B 站与播客。
 
-### ⭐ Thariq Shihipar 在 Latent Space：革命 vs 文艺复兴
+### ⭐ Latent Space：Clay 的 GTM agent，一半流量已经不在自家 harness 里
 
-他加入 OpenAI 后的第一次长访谈，聊 coding agent 让他改变的看法、决策模型、以及「谁来决定哪些实验值得花算力」。推荐观看。
+Clay 的 AI 负责人 Jeff Barg 讲了几个可引用的数字：客户用 Clay 自带 agent 与把 Claude Code 指向 Clay，两种用法流量几乎 **50/50**；用 Jev 这类分类器把你理想的客户画像跑遍库里 **4,000 万家**公司，一次约 **1,500 美元**；Clay 从约 50 人长到 **600 人**，9 月以 71 亿美元估值融资 1.15 亿。他的判断是前沿模型的价值在编排与深度研究，而非打榜——「客户讨厌选模型，所以我们要替他们选」。推荐观看。
 
-来源：[Latent Space](https://latent.space/p/the_revolution_vs_the_renaissance_thariq_shihip)
+来源：[Latent Space](https://latent.space/p/how-clay-builds-gtm-agents-jeff-barg-head-of-ai/)
 
-### AI 日报 11.26：Opus 5.6 与 Sonnet 5.6 齐现身
+### 每日技术简报 11.27：四栏 40 条
 
-条目完整、附官方链接：Opus 5.6 灰度、Sonnet 5.6 承接流量、Qwen3.8-27B 压到 5.9GB 本地跑、小红书 3DCodeFactory、谷歌宣称改进 34 年前的整数分解界。另提到 Grok Bot 免费开放与抖音线下 AI 硬件「豆糕」，两条均为频道转述，未见官方说明。
+资讯 10 / 开源 10 / GitHub 10 / HF 论文 10，每条附原始出处，并在片尾逐条写出「口径与限制」——包括哪些是转述、哪些没拿到公司原始文件。今天最省事的一份当日索引。
 
-来源：[B站](https://www.bilibili.com/video/BV1C4ymzKE9F)
+来源：[B站](https://www.bilibili.com/video/BV1iP1WzoEEq)
 
-### 每日技术简报 11.26：四栏 40 条
+### 白光star 11-27 第 57 期：GLM-5.5 延期「是老外造谣」
 
-资讯栏含标普下调观察、FCC 批准轨道数据中心、1Password 内网被入侵；另有开源版本号、GitHub 日榜与 HF 论文日榜，口径与限制写得清楚。
+与路透报道正面对撞的一期：主张上万张国产卡进展顺利，延期说法来自外部媒体。作为对立信源值得一听，但通篇未给出可核验的国产卡部署证据。
 
-来源：[B站](https://www.bilibili.com/video/BV1idyyzUEsq)
+来源：[B站](https://www.bilibili.com/video/BV1ug1JzTEkq)
 
-### 今日羊报：闭源 agent 的基座是国产开源模型
+### Ba1ya 白鸦 2026-11-27：混元 DFly2、MiniMax H3、蚂蚁设计模型
 
-六条要点都带判断：Cognition SWE-2.1 在 Kimi K3 上做纯 RL、Install as app 三档权限、开源引擎 Strata 用动态稀疏专家卸载让 12GB 显存跑大 MoE、Ternary Bonsai 2.5、以及账号风控集中出现时的行动项。
+按章节切分，每节 30 秒左右，覆盖 GPT-6.2 计量纠正、DFly2 推理加速、MiniMax H3 产品线、Ming-Image-0.2-Design、LingBot-Navi 空间记忆导航与千问语音方言。信息密度高但均为转述。
 
-来源：[B站](https://www.bilibili.com/video/BV1P4ymzKENU)
+来源：[B站](https://www.bilibili.com/video/BV1HX1pzNEab)
 
-### Grok AI 日报 11.26：私有推理与 Rust 迁移
+### 大肥鱼 14 条：数字已联网核实
 
-按「事件 + 数字」组织，覆盖 Private Inference、Rust 迁移的 70%/20%、Gemini 4 Neon 在 Antigravity 的缓存优化（同等配额多完成 28% 任务）、以及矩阵乘法紧界主张，并声明保留原作者归属与评审状态。
+自述由 AI 自动剪辑生成，14 条覆盖 GPT-6.2 计费、英伟达停发、GLM-5.5 与 Kimi K4 延期、混元 DFly2、381 个 agent 攻 P vs NP、Tidal 清理 2900 万首 AI 歌。脚本里明确标注「以官方口径为准」。
 
-来源：[B站](https://www.bilibili.com/video/BV1LZyyz7Eau)
+来源：[B站](https://www.bilibili.com/video/BV1Vu1WzWEDH)
 
-### AI 接管中 Day 76：AI 发了 2700 万首歌，96% 没人听
+### 海猫 AI 日报 11-26：16 条，重点在中国模型
 
-用三个数字串起一天：MAGI-2 单次 30 秒 1080P 原生音频、定价 0.5 元/秒；Tidal 已标记 2700 万首纯 AI 曲目、占总曲库 6.3%；以及 AI 短剧的破亿率 0.47%。对「生成变便宜之后，注意力与责任怎么定价」给了一个可引用的切口。
+每条都标了信源性质（据路透 / 据 The Information / 未经官方证实），这种标注习惯值得保留。今天的增量是 DeepSeek 内部对差距「3–6 个月拉大到 9 个月」的估算、商汤 RoboRSI 开源、以及 OpenAI 研究员借 GPT-6 Astra 提量子引力方案（未经同行评审）。
 
-来源：[B站](https://www.bilibili.com/video/BV1MTyCzYE19)
+来源：[B站](https://www.bilibili.com/video/BV1Cc1EzWEmy)
+
+### 劝合 AI 晚报 11.26：8 条带原始链接
+
+每一条都挂 x.com 或一手媒体报道的链接，包括谷歌开源零依赖 AI 命令行、0.1% 投毒后门与 AI 写码返工、密态推理内测对撞 Character.AI 破产卖对话。适合当交叉核对的底稿。
+
+来源：[B站](https://www.bilibili.com/video/BV1W717z9Efp)
 
 ---
 
@@ -377,10 +404,10 @@ METR 指出 OpenAI 公开了 GPT-3.5 以来所有前沿模型的对数困惑度�
 
 > 以下是今日简报中值得进一步思考的灵感种子。
 
-**验证能力正在从工程细节变成可出售的资产。** Anthropic 把 700 个测试审计出 100 多处放宽断言、发现测试通过率 98% 而生产一致率只有 25%，然后花几个月把「什么算对」做成可比对的信号。这个信号一旦建成，迁移、重写、重构的边际成本都塌下来。顺着想：如果每家公司都要为自己的业务定义一套验证器，那么「验证器即服务」会不会成为比模型 API 更黏的一层基础设施？
+**延期的单位是季度，不是版本号。** 智谱从 11 月推到 2027 年一季度，月之暗面从 6 个月拉长到 12 个月——这些数字背后的共同变量不是「卡够不够」，而是「反馈信号从哪来」。反蒸馏切断了「拿别人模型输出当老师」这条低成本路径，逼所有实验室回到自建 RL 环境的高成本路线。顺着想：如果明年的模型档期普遍由数据管线而非算力决定，那么「谁能更快造出可信的合成任务」就会成为比 GPU 库存更早暴露的领先指标。
 
-**证明的可读性成了新的稀缺资源。** 黎曼证明从 1740 万行压到 7.6 万行，同时保留完整机检，这一步的技术含量不亚于证明本身——它把「机器能验」翻译成「人能读」。接下来的瓶颈会落在人类数学家的阅读速度与审稿产能上。可以观察的是：数学界会不会出现类似代码评审的分工，出现专门「读 AI 证明」的岗位与方法论。
+**下界正在变成一种公关资产。** 上界只能刷记录，下界才宣告天花板；而当每个宣称都自带 Lean 证书，公司连新闻稿都省了。Aaronson 的那句「他们干脆直接往 GitHub 传论文」，描述的是一种新的发布范式：可机检的证明让「我说我做到了」变成「你可以自己验」。值得跟踪的是，这套范式会不会溢出到模型能力宣称上——比如每一份 benchmark 成绩都附可复现的评测脚本与数据快照。
 
-**领域 agent 的正确形态更像技能包，而不是更大的模型。** 质谱技能让三款 Gemini 从不足 4% 到 97%，3DCodeFactory 让一个 9B 模型靠工具链与验收门控超过比自己大得多的系统。共同点是：模型不做它不擅长的计算，把确定性交给工具、数据库与测试，自己只负责调度与解释。这条经验可以直接迁移到法律、财务、医药注册这些「有权威数据库 + 有明确验收」的领域。
+**最便宜的加速来自「不要重复付费」。** DFly2 没换模型、没改输出、没加显存，只是让草稿模型复用目标模型已经算过的稀疏位置，就换来了最高 4.2 倍。这类优化的共性是把「两个组件各自维护一份状态」改成「共享一份已被支付过的状态」。同样的思路在缓存、检索、多智能体协作里都成立：先问一句「这份计算是不是已经有人付过钱了」。
 
-**管制正在把竞争从算力推向反馈数据。** 反蒸馏切断的不只是模型权重的流出，更是「用别人模型的输出当训练信号」这条低成本路径。DeepSeek 内部估算差距可能从 3–6 个月扩大到 9 个月，同时各家转向自建 RL 数据与国产芯片。值得跟踪的指标不是 GPU 数量，而是各实验室公开的 RL 环境数量与合成数据管线——那才是新一轮的护城河。
+**公开直播的科研流水线，可能是今年最可复用的组织发明。** 30 个席位、思考型与构建型分工、红队专职推翻、墓地归档失败路线、每条引理一个 PR 与超时。这套结构的价值不在 P vs NP 本身（它离解决还很远），而在于它证明：凡是能形式化验收的工作，都可以被拆成可并行、可审计、可回滚的流水线。下一个落点可能是芯片验证、合规审计、乃至教材编写的正确性检查。
